@@ -1,3 +1,24 @@
-.choice {
-  background-color: red;
+ul {
+  padding: 1%;
+  .routerLink {
+    list-style: none;
+    display: inline-flex;
+    padding: 0.5em 1em;
+
+    border: 1px solid black;
+    background-color: darkslategray;
+    color: ivory;
+
+    &:hover {
+      background-color: lightslategray;
+      cursor: pointer;
+    }
+
+    a {
+      text-decoration: none;
+      &:visited {
+        color: inherit;
+      }
+    }
+  }
 }

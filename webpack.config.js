@@ -7,7 +7,6 @@ module.exports = {
   // for production:
   // devtool: "source-map",
   mode: 'development',
-  watch: true,
   entry: path.join(SRC_DIR, 'index.jsx'),
   module: {
     rules: [
