@@ -1,0 +1,6 @@
+node_modules
+*.pem
+*.sh
+.env
+DS_Store
+bundle.js
