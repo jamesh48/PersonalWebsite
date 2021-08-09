@@ -8,7 +8,8 @@
     "git": "git add . && git commit -m",
     "postgit": "git push",
     "start": "nodemon ./server/index.js",
-    "build": "webpack serve"
+    "build": "webpack serve",
+    "database": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate"
   },
   "keywords": [],
   "author": "",
@@ -16,21 +17,26 @@
   "dependencies": {
     "@babel/core": "^7.14.6",
     "@babel/preset-react": "^7.14.5",
+    "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "pg": "^8.6.0",
     "pm2": "^5.1.0",
+    "postgres": "^1.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
     "sass-loader": "^12.1.0",
+    "sequelize": "^6.6.4",
     "webpack": "^5.40.0",
     "webpack-cli": "^4.7.2"
   },
   "devDependencies": {
     "css-loader": "^5.2.6",
     "node-sass": "^6.0.1",
+    "sequelize-cli": "^6.2.0",
     "style-loader": "^3.0.0",
     "webpack-dev-server": "^3.11.2"
   }

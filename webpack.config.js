@@ -20,7 +20,7 @@ module.exports = {
       },
       {
         test: /\.(css|scss)$/,
-        include: path.resolve('client/src/styles'),
+        include: path.resolve('client/src'),
         use: [
           {
             loader: 'style-loader',
@@ -60,7 +60,7 @@ module.exports = {
     },
     contentBase: path.resolve('client/public'),
     proxy: {
-      "/": "http://localhost:4300"
+      "*": "http://localhost:4300",
     },
   },
 

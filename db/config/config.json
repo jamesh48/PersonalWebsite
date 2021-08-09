@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "jameshrivnak",
+    "password": null,
+    "database": "Personal_Website",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "jameshrivnak",
+    "password": null,
+    "database": "Personal_Website",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "jameshrivnak",
+    "password": null,
+    "database": "Personal_Website",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}

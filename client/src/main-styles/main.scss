@@ -1,5 +1,4 @@
 ul {
-  padding: 1%;
   .routerLink {
     list-style: none;
     display: inline-flex;
@@ -11,7 +10,7 @@ ul {
 
     &:hover {
       background-color: lightslategray;
-      cursor: pointer;
+      // cursor: pointer;
     }
 
     a {

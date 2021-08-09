@@ -1,14 +1,40 @@
 <!DOCTYPE html>
 
 <html>
-  <header>
-    <meta charset="utf-8">
-    <title>James Hrivnak</title>
-  </header>
-  <body>
-    <div id='root'>
+<header>
+  <meta charset="utf-8">
+  <title>James Hrivnak</title>
+</header>
 
-    </div>
-    <script src = './bundle.js'></script>
-  </body>
+<body>
+  <img
+  id='cursor'
+  src="https://media.geeksforgeeks.org/wp-content/uploads/20200319212118/cursor2.png" width="15"
+  height="20">
+  </img>
+
+  <div id='root'>
+  </div>
+
+
+  <script src='./bundle.js'></script>
+
+  <script>
+    window.addEventListener("mousemove", function (e) {
+
+      let scrollYOffset = window.scrollY;
+      // Gets the x,y position of the mouse cursor
+      x = e.clientX;
+      y = e.clientY;
+
+      // sets the image cursor to new relative position
+      let cursor = document.getElementById('cursor');
+      cursor.style.left = x + 'px';
+      cursor.style.top =  (scrollYOffset + y) + "px";
+    });
+  </script>
+
+</body>
+
+
 </html>
