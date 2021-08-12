@@ -23,7 +23,7 @@ minesweeper.get('/topTimes', async ({ query: { skillLevel, username } }, res) =>
 });
 
 minesweeper.get('/validateUser', async ({query: {userName, userPass}}, res) => {
-  const test = await axios.get('https://beatminesweeper.app/validateUser', {params: {userName, userPass}});
+  const {data: test} = await axios.get('https://beatminesweeper.app/validateUser', {params: {userName, userPass}});
   res.send(test);
 });
 
@@ -33,7 +33,7 @@ minesweeper.post('/topTimes', async ({ query: { skillLevel, timerTime, solidUser
 })
 
 minesweeper.post('/createUser', async ({ query: { userName, userPass } }, res) => {
-  const posted = await axios.post('https://beatminesweeper.app/createUser', null, { params: { userName, userPass } });
+  const {data: posted} = await axios.post('https://beatminesweeper.app/createUser', null, { params: { userName, userPass } });
   res.send(posted);
 })
 

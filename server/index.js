@@ -13,8 +13,8 @@ app.use(cors());
 app.use(express.static(path.resolve('client/public')));
 
 
-// app.use(minesweeperRouter);
-app.use(localMinesweeper);
+app.use(minesweeperRouter);
+// app.use(localMinesweeper);
 
 app.use(resumeRouter);
 
