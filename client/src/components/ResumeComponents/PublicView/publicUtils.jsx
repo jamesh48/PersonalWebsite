@@ -7,11 +7,12 @@ const { publicContainerRow, publicParentContainerRow, publicChildContainerRow, p
 
 const handleDepthClassNames = (depth, mobileBrowser) => {
   let str = '';
-  if (mobileBrowser && depth === 0) {
-    str += responsiveMobileColumnContainer + ' ';
-  }
 
   str += depth === 0 ? publicColumnContainerTitle : depth === 1 ? publicColumnContainerSection : depth === 2 ? publicColumnContainerDetail : publicColumnContainer;
+
+  if (mobileBrowser && depth === 0) {
+    str += ' ' + responsiveMobileColumnContainer;
+  }
 
   return str;
 };
@@ -133,7 +134,7 @@ const recurseContainers = (inputArr, depth, hoverDepth, hoverBreadth, handleHove
         <div
           data-depth={depth}
 
-          onClick={() => {
+          onMouseUp={() => {
             if (!mobileBrowser) return;
             handleResumeClick(event);
           }}
