@@ -134,7 +134,7 @@ const recurseContainers = (inputArr, depth, hoverDepth, hoverBreadth, handleHove
         <div
           data-depth={depth}
 
-          onMouseUp={() => {
+          onMouseDown={() => {
             if (!mobileBrowser) return;
             handleResumeClick(event);
           }}
