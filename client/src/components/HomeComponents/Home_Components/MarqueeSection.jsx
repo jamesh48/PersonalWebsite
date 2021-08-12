@@ -10,18 +10,8 @@ export default ({ style: { marqueeContainer, aboutMeMarqueeDetails, aboutMeMarqu
         </p>
       </div>
 
-      <div className={smileContainer}
-      style={{
-        backgroundImage: `url(https://personal-website-1.s3.us-east-2.amazonaws.com/linkedin.jpg)`,
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        height: '27.5em'
-      }}
-      >
-        {/* <img src='https://personal-website-1.s3.us-east-2.amazonaws.com/linkedin.jpg'>
-
-        </img> */}
+      <div className={smileContainer}>
+        {/* Holds Image, see css for info */}
       </div>
     </div>
   )

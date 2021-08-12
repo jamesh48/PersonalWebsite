@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Mouse from './ResumeComponents/PublicView/mouseMove.jsx';
 
 import {
   BrowserRouter as Router,
@@ -9,7 +8,7 @@ import {
 } from "react-router-dom";
 
 import Home from './HomeComponents/Home.jsx';
-// import Blog from './BlogComponents/Blog.jsx';
+import Blog from './BlogComponents/Blog.jsx';
 import Contact from './ContactComponents/Contact.jsx';
 import Minesweeper from './MinesweeperComponents/Minesweeper_Proxy.jsx';
 import AdminForm from './AdminForm.jsx';

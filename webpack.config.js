@@ -53,15 +53,15 @@ module.exports = {
     path: DIST_DIR,
     filename: 'bundle.js',
   },
-  // devServer: {
-  //     port: 8000,
-  //     headers: {
-  //       'Access-Control-Allow-Origin': '*'
-  //     },
-  //     contentBase: path.resolve('client/public'),
-  //     proxy: {
-  //       "*": "http://localhost:4300",
-  //     },
-  //   },
+  devServer: {
+      port: 8000,
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      },
+      contentBase: path.resolve('client/public'),
+      proxy: {
+        "*": "http://localhost:4300",
+      },
+    },
 
 }

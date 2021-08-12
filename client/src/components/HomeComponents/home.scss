@@ -26,8 +26,11 @@
     justify-content: center;
     align-items: center;
     flex: 0.3;
-    height: auto;
     border-radius: 50%;
+    background-image: url(https://personal-website-1.s3.us-east-2.amazonaws.com/linkedin.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
 }
@@ -64,7 +67,7 @@
 
       .portfolioApplication {
         background-color: lightslategrey;
-        flex: 0.5;
+        flex: 1;
         display: flex;
         flex-direction: column;
         border: 1px solid darkblue;
@@ -78,12 +81,19 @@
 
         .applicationImgContainer {
           display: flex;
-          z-index: 1;
+          justify-content: center;
+          align-items: center;
+          flex: 1;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          min-height: 300px;
+
           &:hover {
             .nestedGithubLinks {
               background-color: white;
               opacity: 0.5;
-              z-index: 1;
+              z-index: 0;
             }
           }
             .nestedGithubLinks {

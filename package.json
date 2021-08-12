@@ -10,7 +10,8 @@
     "start": "nodemon ./server/index.js",
     "serve": "webpack serve",
     "build": "webpack",
-    "database": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate"
+    "database": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate",
+    "deploy": "pm2 deploy ./server/ecosystem.config.js production"
   },
   "keywords": [],
   "author": "",

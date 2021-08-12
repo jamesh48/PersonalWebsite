@@ -4,6 +4,8 @@ const useScript = url => {
   useEffect(() => {
     const script = document.createElement('script');
 
+    document.getElementById('cursor').style.zIndex = 1;
+
     script.src = url;
     script.async = true;
 

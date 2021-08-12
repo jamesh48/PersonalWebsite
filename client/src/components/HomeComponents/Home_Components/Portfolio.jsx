@@ -31,11 +31,11 @@ export default ({ style: { portfolioContainer, portfolioTitle, portfolioApplicat
                       <div className={applicationImgContainer}
                         onMouseLeave={() => { setHovered([null, null]) }}
                         style={{
-                          backgroundPosition: 'center',
+                        //   backgroundPosition: 'center',
                           backgroundImage: `url(${appData.imgUrl})`,
-                          backgroundRepeat: 'no-repeat',
-                          backgroundSize: 'cover',
-                          height: '500px',
+                        //   backgroundRepeat: 'no-repeat',
+                        //   backgroundSize: 'cover',
+                        //   height: '500px',
                         }}
                       >
 
@@ -55,11 +55,14 @@ export default ({ style: { portfolioContainer, portfolioTitle, portfolioApplicat
                       <div className={applicationImgContainer}
                         onMouseOver={() => { setHovered([rowIndex, columnIndex]) }}
                         style={{
-                          backgroundPosition: 'center',
+                              // display: 'flex',
+                        // flex: 1,
+                        //   backgroundPosition: 'center',
                           backgroundImage: `url(${appData.imgUrl})`,
-                          backgroundRepeat: 'no-repeat',
-                          backgroundSize: 'cover',
-                          height: '500px',
+                        //   backgroundRepeat: 'no-repeat',
+                        //   backgroundSize: 'cover',
+
+                        //   // height: '500px'
                         }}
                       >
                       </div>

@@ -3,12 +3,11 @@ import utils from './utils.js';
 const { getResume, patchResume, patchActiveResume, postResume } = utils;
 import AdminResume from './AdminView/AdminResumeView.jsx';
 import PublicResume from './PublicView/PublicResumeView.jsx';
-import Mouse from './PublicView/mouseMove.jsx';
 import Education from './children/Education.jsx';
 import WorkExperience from './children/WorkExperience.jsx';
 import style from './resume.scss';
 
-export default ({ globalStyles: { container }, admin }) => {
+export default ({ globalStyles: { container }, handleHover, handleResumeClick, hoverDepth, hoverBreadth, admin, mobileBrowser }) => {
   const [resume, setResume] = useState(null);
   const [resumeNames, setResumeNames] = useState([]);
   const mounted = useRef(true);
@@ -51,7 +50,7 @@ export default ({ globalStyles: { container }, admin }) => {
     if (!admin) {
       return resume?.resume_Name ? (
         // Public View
-        <PublicResume style={style} resume={resume} />
+        <PublicResume mobileBrowser={mobileBrowser} handleResumeClick={handleResumeClick} handleHover={handleHover} hoverDepth={hoverDepth} hoverBreadth={hoverBreadth} style={style} resume={resume} />
       ) : null;
     } else {
       return (

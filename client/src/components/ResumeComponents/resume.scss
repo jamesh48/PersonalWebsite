@@ -206,6 +206,16 @@
   }
 }
 
+.publicResponsiveRowX {
+  width: 30%;
+  .publicColumnContainerTitle {
+    width: 100%;
+  }
+  .publicColumnContainer {
+    width: 0;
+  }
+}
+
 .publicColumnContainer {
   display: flex;
   flex-direction: column;
@@ -217,7 +227,7 @@
 .publicColumnContainerSection,
 .publicColumnContainerDetail {
   display: flex;
-  width: 20%;
+  width: 25%;
   justify-content: center;
   h6 {
     display: flex;
@@ -298,8 +308,6 @@
 }
 
 .minorContainer {
-  // margin: 0 1%;
-  // padding: 1% 1%;
 
   .minorContainerTitle {
     text-decoration: underline;
@@ -324,6 +332,7 @@
 }
 .publicChildContainerRow {
   margin: 1%;
+  margin-bottom: 0;
   display: flex;
   flex-direction: column;
 }
@@ -410,50 +419,8 @@
   }
 }
 
-// @-moz-keyframes fadeOut {
-//   0% {
-//     opacity: 1;
-//   }
-//   100% {
-//     opacity: 0;
-//   }
-// }
-
-// @-webkit-keyframes fadeOut {
-//   0% {
-//     opacity: 1;
-//   }
-//   100% {
-//     opacity: 0;
-//   }
-// }
-
-// @-o-keyframes fadeOut {
-//   0% {
-//     opacity: 1;
-//   }
-//   100% {
-//     opacity: 0;
-//   }
-// }
-
-// @-ms-keyframes fadeOut {
-//   0% {
-//     opacity: 1;
-//   }
-//   100% {
-//     opacity: 0;
-//   }
-// }
-
-img {
-  pointer-events: none;
-  /* doing this makes sure .elementFromPoint
-  do not accquires theimage cursor object */
-  position: absolute;
-}
-/* makes the cursor invisible */
-
-* {
-  cursor: none;
+.responsiveMobileColumnContainer {
+  h6 {
+    width: 30%;
+  }
 }

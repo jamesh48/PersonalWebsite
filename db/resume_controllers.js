@@ -66,9 +66,6 @@ module.exports = {
     }
   },
 
-  // Technical SKills
-  // {front_End_Skills: [10], back_End_Skills: [10]}
-
   patchResume: async ({ patchers }) => {
     try {
     patchers = JSON.parse(patchers);

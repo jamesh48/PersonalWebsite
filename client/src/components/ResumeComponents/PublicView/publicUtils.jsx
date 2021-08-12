@@ -3,13 +3,24 @@ import PublicDisplayContainer from './PublicDisplayContainer.jsx';
 import style from '../resume.scss';
 
 
-const { publicContainerRow, publicParentContainerRow, publicChildContainerRow, publicFinalContainerRow, publicColumnContainer, publicColumnContainerTitle, publicColumnContainerSection, publicColumnContainerDetail, niceContainer, minorContainer, minorContainerTitle, minorHighlights, minorItem, fader, faderOuter, publicContainerRowX } = style;
+const { publicContainerRow, publicParentContainerRow, publicChildContainerRow, publicFinalContainerRow, publicColumnContainer, publicColumnContainerTitle, publicColumnContainerSection, publicColumnContainerDetail, niceContainer, minorContainer, minorContainerTitle, minorHighlights, minorItem, fader, faderOuter, publicContainerRowX, publicResponsiveRowX, responsiveMobileColumnContainer } = style;
 
-const handleFadingClassNames = (depth, hoverDepth, hoverBreadth, currentIndex) => {
+const handleDepthClassNames = (depth, mobileBrowser) => {
+  let str = '';
+  if (mobileBrowser && depth === 0) {
+    str += responsiveMobileColumnContainer + ' ';
+  }
+
+  str += depth === 0 ? publicColumnContainerTitle : depth === 1 ? publicColumnContainerSection : depth === 2 ? publicColumnContainerDetail : publicColumnContainer;
+
+  return str;
+};
+
+const handleFadingClassNames = (depth, hoverDepth, hoverBreadth, currentIndex, mobileBrowser) => {
   let test;
 
   if (hoverDepth === null) {
-    return publicContainerRow + ' ' + publicContainerRowX;
+    return publicContainerRow + ' ' + mobileBrowser ? publicResponsiveRowX  : publicContainerRowX;
   }
 
   if (hoverBreadth || hoverBreadth === 0) {
@@ -76,7 +87,8 @@ const highlightContainers = (highlightDetail, highlightTitle) => {
     ) : null
 }
 
-const recurseContainers = (inputArr, depth, hoverDepth, hoverBreadth, handleHover, prevIndex) => {
+const recurseContainers = (inputArr, depth, hoverDepth, hoverBreadth, handleHover, handleResumeClick, prevIndex, mobileBrowser) => {
+
   return inputArr.map((currentItem, currentIndex, currentArr) => {
     let currentContainerArr = [];
 
@@ -104,15 +116,15 @@ const recurseContainers = (inputArr, depth, hoverDepth, hoverBreadth, handleHove
 
     if (
       currentItem.detail &&
+      breadthArr?.length &&
       ((hoverDepth === depth && currentIndex === Number(breadthArr[breadthArr.length - 1])) ||
-      (hoverDepth > depth && currentIndex === Number(breadthArr[depth])))
+        (hoverDepth > depth && currentIndex === Number(breadthArr[depth])))
     ) {
       if (currentItem['highlightDetail']) {
         highlightDetails = highlightContainers(currentItem['highlightDetail'], currentItem['highlightDetail'][0]);
       };
 
-      // If its the last item of the
-      recursed = recurseContainers(currentItem.detail, depth + 1, hoverDepth, hoverBreadth, handleHover, !currentArr[currentIndex + 1] || currentIndex === 0 ? currentIndex : null);
+      recursed = recurseContainers(currentItem.detail, depth + 1, hoverDepth, hoverBreadth, handleHover, handleResumeClick, !currentArr[currentIndex + 1] || currentIndex === 0 ? currentIndex : null, mobileBrowser);
     }
 
     return [
@@ -120,42 +132,39 @@ const recurseContainers = (inputArr, depth, hoverDepth, hoverBreadth, handleHove
 
         <div
           data-depth={depth}
+
+          onClick={() => {
+            if (!mobileBrowser) return;
+            handleResumeClick(event);
+          }}
           onMouseOver={() => {
+            if (mobileBrowser) return;
             handleHover(event);
           }}
 
           onMouseLeave={() => {
+            if (mobileBrowser) return;
             if (
-              // Exiting from any Title entry exits
-              depth === 0 && hoverDepth === 0 ||
-              // Exiting upwards from the top-most section exits
-              (depth === 1 && hoverDepth === 1 && (prevIndex === 0 && currentIndex === 0)) ||
-              // Exiting downwards from the bottom-most details exits
-              ((depth === 1 && hoverDepth === 2) &&
-              (prevIndex && !currentArr[Number(hoverBreadth.split('_')[1]) + 1])
-              )
+              (
+                // If hovering downwards from one section to the next...
+                depth === 1 && hoverDepth === 2 && !currentArr[Number(hoverBreadth.split('_')[1]) + 1])
+              ||
+              // // This condition provides for the occasional case where the next section isn't triggered automatically by hovering downwards...
+              depth === 0 && hoverDepth === 1 && currentArr[Number(hoverBreadth.split('_')[0]) + 1]
               ) {
-              handleHover(event, 'exit')
-              return;
-            }
+              return handleHover(event, 'nextSection');
+            };
 
-
-            if (depth === 1 && hoverDepth === 2 && !currentArr[Number(hoverBreadth.split('_')[1]) + 1]) {
-              handleHover(event, 'nextSection');
-              return;
-            }
-
+            // This condition triggers the previous section if hovering upwards...
             if (depth === 1 && hoverDepth === 1 && currentIndex === 0) {
-              handleHover(event, 'prevSection');
-              return;
-            }
-
+              return handleHover(event, 'prevSection');
+            };
           }}
 
-          className={handleFadingClassNames(depth, hoverDepth, hoverBreadth, currentIndex)}
+          className={handleFadingClassNames(depth, hoverDepth, hoverBreadth, currentIndex, mobileBrowser)}
         >
           <div
-            className={depth === 0 ? publicColumnContainerTitle : depth === 1 ? publicColumnContainerSection : depth === 2 ? publicColumnContainerDetail : publicColumnContainer} data-depthman={depth}
+            className={handleDepthClassNames(depth, mobileBrowser)} data-depthman={depth}
           >
             {currentContainerArr}
           </div>
@@ -173,103 +182,10 @@ const recurseContainers = (inputArr, depth, hoverDepth, hoverBreadth, handleHove
   });
 }
 
-export default ({ resumeDetails }) => {
-  const [hoverDepth, setHoverDepth] = useState(null);
-  const [hoverBreadth, setHoverBreadth] = useState(null);
-
-  const handleHover = (event, exit) => {
-    if (exit === 'exit') {
-      console.log('exit')
-      setHoverDepth(null);
-      setHoverBreadth(null);
-      // setHoverDepth((existingHoverDepth) => {
-      //   if (existingHoverDepth === 0) {
-      //     return 0;
-      //   } else if (existingHoverDepth === 1) {
-      //     return 0;
-      //   } else if (existingHoverDepth === 2) {
-      //     return 1;
-      //   } else if (existingHoverDepth === 3) {
-      //     return 2;
-      //   }
-      //   return event.target.dataset.depthman
-      // });
-
-      return;
-    }
-
-    if (exit === 'prevSection') {
-      setHoverDepth(1);
-      setHoverBreadth((prevHoverBreadth) => {
-        let update = Number(prevHoverBreadth.split('_')[0]) - 1;
-        return `${update}_0`;
-      });
-    }
-
-    if (exit === 'nextSection') {
-      setHoverDepth(1);
-      setHoverBreadth((prevHoverBreadth) => {
-        let update = Number(prevHoverBreadth.split('_')[0]) + 1;
-        return `${update}_0`
-      })
-
-      return;
-    }
-
-    const { target: { dataset: { depth, breadth, name } } } = event;
-
-    if (depth) {
-      setHoverDepth(Number(depth));
-    }
-
-    // hoverBreadth
-    //Column One
-    if (depth === '0') {
-      setHoverBreadth(Number(breadth));
-    }
-
-    // Column Two
-    if (depth === '1') {
-      setHoverBreadth((prevHoverBreadth) => {
-        if (typeof prevHoverBreadth === 'number') {
-          return prevHoverBreadth + '_' + breadth;
-        } else {
-          let change = prevHoverBreadth.split('_');
-          if (change.length === 3) {
-            change.pop();
-          } else {
-            change.splice(1, 1, breadth)
-          }
-
-          return change.join('_');
-        }
-      })
-    }
-
-    if (depth === '2') {
-      setHoverBreadth((prevHoverBreadth) => {
-        let test = prevHoverBreadth.split('_');
-        if (test.length === 2) {
-          return prevHoverBreadth + '_' + breadth;
-        } else {
-          let change = prevHoverBreadth.split('_');
-          change.splice(depth, 1, breadth);
-          return change.join('_');
-        }
-
-      })
-    }
-    return Number(depth);
-  }
-
-  // let test = () => {
-  //   let result = recurseContainers(resumeDetails, 0, hoverDepth, hoverBreadth, handleHover, 0);
-  //   console.log(result.main)
-  //   return result.main;
-  // }
+export default ({ resumeDetails, handleHover, handleResumeClick, hoverDepth, hoverBreadth, mobileBrowser }) => {
   return (
     <div>
-      {recurseContainers(resumeDetails, 0, hoverDepth, hoverBreadth, handleHover, 0)}
+      {recurseContainers(resumeDetails, 0, hoverDepth, hoverBreadth, handleHover, handleResumeClick, 0, mobileBrowser)}
     </div>
   )
 }
