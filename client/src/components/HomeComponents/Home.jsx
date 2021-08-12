@@ -16,6 +16,9 @@ export default ({ globalStyles, globalStyles: { container }, admin }) => {
 
   useEffect(() => {
     const mobileBrowserTest = mobileBrowserFunction();
+    if (!!mobileBrowserTest) {
+      document.getElementById('cursor').remove();
+    }
     setMobileBrowser(!!mobileBrowserTest);
   }, []);
 
