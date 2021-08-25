@@ -22,18 +22,18 @@ minesweeper.get('/topTimes', async ({ query: { skillLevel, username } }, res) =>
   }
 });
 
-minesweeper.get('/validateUser', async ({query: {userName, userPass}}, res) => {
-  const {data: test} = await axios.get('https://beatminesweeper.app/validateUser', {params: {userName, userPass}});
+minesweeper.get('/validateUser', async ({ query: { userName, userPass } }, res) => {
+  const { data: test } = await axios.get('https://beatminesweeper.app/validateUser', { params: { userName, userPass } });
   res.send(test);
 });
 
 minesweeper.post('/topTimes', async ({ query: { skillLevel, timerTime, solidUserName } }, res) => {
-  await axios.post('https://beatminesweeeper.app/topTimes', null, {params: {skillLevel, timerTime, solidUserName}})
+  await axios.post('https://beatminesweeeper.app/topTimes', null, { params: { skillLevel, timerTime, solidUserName } })
   res.send('ok')
 })
 
 minesweeper.post('/createUser', async ({ query: { userName, userPass } }, res) => {
-  const {data: posted} = await axios.post('https://beatminesweeper.app/createUser', null, { params: { userName, userPass } });
+  const { data: posted } = await axios.post('https://beatminesweeper.app/createUser', null, { params: { userName, userPass } });
   res.send(posted);
 })
 

@@ -1,4 +1,4 @@
-require('dotenv').config({ path: __dirname + '/../../.env' });
+require('dotenv').config({ path: require('path').resolve('.env') });
 const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize(process.env.PGDATABASE, process.env.PGUSER, process.env.PGPASSWORD, {
@@ -24,6 +24,5 @@ const BlogPosts = require(`../models/blog_posts.js`)(sequelize, Sequelize.DataTy
 module.exports = (database) = {
   sequelize: sequelize,
   models: { ResumeDetails, BlogPosts},
-  // connect,
   model,
 };

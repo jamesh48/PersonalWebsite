@@ -15,8 +15,5 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     timestamps: false
   });
-
   return BlogPosts;
 };
-
-// npx sequelize-cli model:generate --name Resume --attributes resumeTitle:string

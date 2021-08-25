@@ -11,7 +11,8 @@ import Home from './HomeComponents/Home.jsx';
 import Blog from './BlogComponents/Blog.jsx';
 import Contact from './ContactComponents/Contact.jsx';
 import Minesweeper from './MinesweeperComponents/Minesweeper_Proxy.jsx';
-import AdminForm from './AdminForm.jsx';
+// Removed for now...
+// import AdminForm from './AdminForm.jsx';
 
 import '../main-styles/reset.scss';
 import '../main-styles/global.scss';
@@ -70,7 +71,8 @@ export default () => {
           </Route>
         </Switch>
 
-        <AdminForm handleAdminChange={handleAdminChange} handleAdminSubmit={handleAdminSubmit} admin={admin} adminPass={adminPass} />
+          {/* Removed for now */}
+        {/* <AdminForm handleAdminChange={handleAdminChange} handleAdminSubmit={handleAdminSubmit} admin={admin} adminPass={adminPass} /> */}
 
         {/* <Mouse mouseLocation={mousePosition} /> */}
       </Router>

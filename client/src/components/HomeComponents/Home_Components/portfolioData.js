@@ -8,7 +8,7 @@ module.exports = [
     },
     "github": [
       { title: 'Fjakeraven Proxy Server', link: 'https://github.com/rpt26-fec-tianwen/james-proxy-server' },
-      { title: 'test', link: 'https://www.google.com' }
+      { title: 'Product Details Service', link: 'https://github.com/rpt26-fec-tianwen/james-service-1' }
     ]
   },
   {
@@ -19,7 +19,22 @@ module.exports = [
     },
     "imgUrl": 'https://personal-website-1.s3.us-east-2.amazonaws.com/backendArchitecture.jpeg',
     "github": [
-      { title: 'Steammop.app Proxy Server', link: 'https://www.google.com' }
+      {
+        title: 'Steammop.app Proxy Server',
+        link: 'https://github.com/rpt26-sdc-prototype/tim-proxy'
+      },
+      {
+        title: 'Steammop.app Reviews Service',
+        link: 'https://github.com/rpt26-sdc-prototype/tim-review-service'
+      },
+      {
+        title: 'Steammop.app Reviews Database',
+        link: 'https://github.com/rpt26-sdc-prototype/sdc-reviews-db'
+      },
+      {
+        title: 'Steammop.app App Server',
+        link: 'https://github.com/rpt26-sdc-prototype/app-server-1'
+      },
     ],
   },
   {
@@ -32,6 +47,19 @@ module.exports = [
     "github": [
       { title: 'github', link: 'https://github.com/jamesh48/Strava-Report-Generator' },
     ],
-
+  },
+  {
+    "title": 'fullstackhrivnak.com',
+    "cssStyles": {
+      backgroundColor: 'ivory',
+      color: 'black'
+    },
+    "imgUrl": '',
+    "github": [
+      {
+        title: 'This website! (github)',
+        link: 'https://github.com/jamesh48/PersonalWebsite'
+      }
+    ]
   }
 ]
