@@ -11,15 +11,15 @@ export default () => {
           [
             {
               link: 'https://www.linkedin.com/in/james-hrivnak-a9a46943/',
-              imageUrl: 'images/linkedinicon.png',
+              imageUrl: 'https://personal-website-1.s3.us-east-2.amazonaws.com/linkedinicon.png',
             },
             {
               link: 'https://www.github.com/jamesh48',
-              imageUrl: 'images/githubicon.png',
+              imageUrl: 'https://personal-website-1.s3.us-east-2.amazonaws.com/githubicon.png',
             },
             {
               link: 'https://www.instagram.com/jameshrivnak',
-              imageUrl: 'images/instaicon.png'
+              imageUrl: 'https://personal-website-1.s3.us-east-2.amazonaws.com/instaicon.png'
             }
           ].map(({link, imageUrl}, index) => {
               return (
