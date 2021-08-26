@@ -18,7 +18,7 @@ import '../main-styles/reset.scss';
 import '../main-styles/global.scss';
 import style from '../main-styles/main.scss';
 import globalStyles from '../main-styles/global.scss';
-const { routerLink } = style;
+const { routerLink, headerNav } = style;
 
 export default () => {
 
@@ -42,7 +42,7 @@ export default () => {
     // <div onMouseMove={handleMouseMove}>
 
       <Router>
-        <nav>
+        <nav id={headerNav}>
           <ul>
             <Link className={routerLink} to='/'>Home</Link>
             {/* <Link className={routerLink} to='/blog'>Blog</Link> */}

@@ -1,0 +1,35 @@
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  #footerContainer {
+    color: ivory;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    #footerItemsContainer {
+      display: flex;
+      width: 75%;
+      background-color: rgb(255, 255, 240);
+      .footerItemContainer {
+        background-color: rgb(255, 255, 240);
+        display: flex;
+        justify-content: center;
+        flex: 1;
+        border: 1px solid ivory;
+        div {
+          background-size: cover;
+          opacity: 0.4;
+          padding: 5%;
+        }
+        &:hover {
+          background-color: rgba(225, 225, 240, 0.8);
+          outline-color: darkslategray;
+          z-index: 2;
+          outline-style: solid;
+          box-sizing: unset;
+        }
+      }
+    }
+  }
+}
