@@ -7,7 +7,7 @@ export default () => {
   return (
     <div id={footerContainer}>
       <div id={footerItemsContainer}>
-        {
+        {/* {
           [
             {
               link: 'https://www.linkedin.com/in/james-hrivnak-a9a46943/',
@@ -34,7 +34,7 @@ export default () => {
                 </span>
               )
             })
-        }
+        } */}
       </div>
     </div>
   )
