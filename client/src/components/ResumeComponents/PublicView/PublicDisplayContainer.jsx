@@ -21,6 +21,6 @@ export default ({ displayItem, depth, breadth, hoverDepth, handleHover, style })
   };
 
   return (
-      <h6 className={handleClassName(hoverDepth)} data-depth={depth} data-breadth={breadth}>{displayItem}</h6>
+    <h6 className={handleClassName(hoverDepth)} data-depth={depth} data-breadth={breadth}>{displayItem}</h6>
   )
 }

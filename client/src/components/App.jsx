@@ -41,41 +41,41 @@ export default () => {
   return (
     // <div onMouseMove={handleMouseMove}>
 
-      <Router>
-        <nav id={headerNav}>
-          <ul>
-            <Link className={routerLink} to='/'>Home</Link>
-            {/* <Link className={routerLink} to='/blog'>Blog</Link> */}
-            <Link className={routerLink} to='/minesweeper'>Minesweeper</Link>
-            <Link className={routerLink} to='/contact'>Contact</Link>
-          </ul>
-        </nav>
+    <Router>
+      <nav id={headerNav}>
+        <ul>
+          <Link className={routerLink} to='/'>Home</Link>
+          {/* <Link className={routerLink} to='/blog'>Blog</Link> */}
+          <Link className={routerLink} to='/minesweeper'>Minesweeper</Link>
+          <Link className={routerLink} to='/contact'>Contact</Link>
+        </ul>
+      </nav>
 
 
-        <Switch>
+      <Switch>
 
-          {/* <Route path='/blog'>
+        {/* <Route path='/blog'>
             <Blog globalStyles={globalStyles} />
           </Route> */}
 
-          <Route path='/minesweeper'>
-            <Minesweeper globalStyles={globalStyles} />
-          </Route>
+        <Route path='/minesweeper'>
+          <Minesweeper globalStyles={globalStyles} />
+        </Route>
 
-          <Route path='/contact'>
-            <Contact globalStyles={globalStyles} />
-          </Route>
+        <Route path='/contact'>
+          <Contact globalStyles={globalStyles} />
+        </Route>
 
-          <Route path='/'>
-            <Home globalStyles={globalStyles} admin={admin}/>
-          </Route>
-        </Switch>
+        <Route path='/'>
+          <Home globalStyles={globalStyles} admin={admin} />
+        </Route>
+      </Switch>
 
-          {/* Removed for now */}
-        {/* <AdminForm handleAdminChange={handleAdminChange} handleAdminSubmit={handleAdminSubmit} admin={admin} adminPass={adminPass} /> */}
+      {/* Removed for now */}
+      {/* <AdminForm handleAdminChange={handleAdminChange} handleAdminSubmit={handleAdminSubmit} admin={admin} adminPass={adminPass} /> */}
 
-        {/* <Mouse mouseLocation={mousePosition} /> */}
-      </Router>
+      {/* <Mouse mouseLocation={mousePosition} /> */}
+    </Router>
     // </div>
 
   )

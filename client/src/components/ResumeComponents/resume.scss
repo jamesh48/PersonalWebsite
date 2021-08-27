@@ -1,7 +1,16 @@
+.resumeContainer {
+  display: flex;
+  flex-direction: column;
+  .resumeContainerTitle {
+    align-self: center;
+  }
+  .resumeUIContainer {
+    margin: 3% 0;
+  }
+}
 .flexResumeContainer {
   display: flex;
   flex-direction: column;
-  // height: 1500px;
 }
 
 .flexResumeRow {

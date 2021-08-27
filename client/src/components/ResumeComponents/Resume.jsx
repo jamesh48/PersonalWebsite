@@ -7,7 +7,7 @@ import Education from './children/Education.jsx';
 import WorkExperience from './children/WorkExperience.jsx';
 import style from './resume.scss';
 
-export default ({ globalStyles: { container }, handleHover, handleResumeClick, hoverDepth, hoverBreadth, admin, mobileBrowser }) => {
+export default ({ globalStyles: { container }, handleHover, handleMobileResumeClick, hoverDepth, hoverBreadth, admin, mobileBrowser }) => {
   const [resume, setResume] = useState(null);
   const [resumeNames, setResumeNames] = useState([]);
   const mounted = useRef(true);
@@ -50,7 +50,7 @@ export default ({ globalStyles: { container }, handleHover, handleResumeClick, h
     if (!admin) {
       return resume?.resume_Name ? (
         // Public View
-        <PublicResume mobileBrowser={mobileBrowser} handleResumeClick={handleResumeClick} handleHover={handleHover} hoverDepth={hoverDepth} hoverBreadth={hoverBreadth} style={style} resume={resume} />
+        <PublicResume mobileBrowser={mobileBrowser} handleMobileResumeClick={handleMobileResumeClick} handleHover={handleHover} hoverDepth={hoverDepth} hoverBreadth={hoverBreadth} style={style} resume={resume} />
       ) : null;
     } else {
       return (
@@ -59,7 +59,7 @@ export default ({ globalStyles: { container }, handleHover, handleResumeClick, h
     }
   }
   return (
-    <div id='resume-root'>
+    <div>
       {handleView()}
     </div>
   )

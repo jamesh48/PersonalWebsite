@@ -13,6 +13,7 @@ export default ({ globalStyles, globalStyles: { container }, admin }) => {
   const [hoverDepth, setHoverDepth] = useState(null);
   const [hoverBreadth, setHoverBreadth] = useState(null);
   const [mobileBrowser, setMobileBrowser] = useState(false);
+  const [marqueeButtonsPlacement, setMarqueeButtonsPlacement] = useState('about-me-root');
 
   useEffect(() => {
     const mobileBrowserTest = mobileBrowserFunction();
@@ -21,6 +22,22 @@ export default ({ globalStyles, globalStyles: { container }, admin }) => {
     }
     setMobileBrowser(!!mobileBrowserTest);
   }, []);
+
+  // This useEffect moves the marqueebuttons depending on what element is in view.
+  useEffect(() => {
+    var observer = new IntersectionObserver(function (entries) {
+
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setMarqueeButtonsPlacement(entry.target.id)
+        }
+      });
+    }, { threshold: [1] });
+
+    observer.observe(document.querySelector('#about-me-root'));
+    observer.observe(document.querySelector("#resume-root"));
+    observer.observe(document.querySelector("#portfolio-root"));
+  })
 
   const handleMobileResumeClick = (event, indicator) => {
     if (indicator === 'exit') {
@@ -155,25 +172,48 @@ export default ({ globalStyles, globalStyles: { container }, admin }) => {
 
   return (
     <div>
-      <div className={container}>
-        <MarqueeContainer style={homeStyles} />
-        <MarqueeButtons style={homeStyles} />
-      </div>
-
-      <div onMouseLeave={() => {
-        if (mobileBrowser) {
-          handleMobileResumeClick(event, 'exit');
-        } else {
-          handleHover(event, 'exit')
+      <div id='about-me-root' className={container}>
+        <MarqueeContainer style={homeStyles} mobileBrowser={mobileBrowser} />
+        {
+          marqueeButtonsPlacement === 'about-me-root' ? (
+            <div className={homeStyles.fader}>
+              <MarqueeButtons style={homeStyles} container={container} />
+              <hr style={{ marginTop: 0 }} />
+            </div>
+          ) : null
         }
-      }}
-        className={container}>
-        <Resume mobileBrowser={mobileBrowser} handleResumeClick={handleMobileResumeClick} handleHover={handleHover} hoverDepth={hoverDepth} hoverBreadth={hoverBreadth} admin={admin} globalStyles={globalStyles} />
       </div>
 
-      <div className={container}>
-        <Portfolio style={homeStyles} />
+      <div id='resume-root'
+        className={container}>
+        <Resume mobileBrowser={mobileBrowser} handleMobileResumeClick={handleMobileResumeClick} handleHover={handleHover} hoverDepth={hoverDepth} hoverBreadth={hoverBreadth} admin={admin} globalStyles={globalStyles} />
+        {
+          marqueeButtonsPlacement === 'resume-root' ?
+            (
+              <div className={homeStyles.fader}>
+                <MarqueeButtons container={container} style={homeStyles} />
+                <hr style={{ marginTop: 0 }} />
+              </div>
+            ) : null
+        }
       </div>
+
+      <div className={container} id='portfolio-root'>
+        <Portfolio style={homeStyles} />
+        {marqueeButtonsPlacement === 'portfolio-root' ?
+          (
+            <div className={homeStyles.fader}>
+              <MarqueeButtons container={container} style={homeStyles} indicator={true} />
+              <hr style={{ marginTop: 0 }} />
+            </div>
+          ) : null
+        }
+      </div>
+
+
     </div>
+
+
+
   )
 }
