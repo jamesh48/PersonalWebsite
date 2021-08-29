@@ -7,3 +7,5 @@ bundle.js
 .DS_Store
 Login_Scripts
 db/config
+dist
+images

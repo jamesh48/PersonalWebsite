@@ -1,0 +1,21 @@
+.websiteMinesweeperAdjust {
+  font-family: "Courier New", Courier, monospace;
+  h5 {
+    font-size: 14px;
+  }
+
+  #total-board {
+    width: 45%;
+  }
+  #leaderboard {
+    width: 33.3%;
+    h3 {
+      margin-top: 2.5%;
+    }
+    .scores-list {
+      display: flex;
+      justify-content: center;
+      line-height: 1.8;
+    }
+  }
+}

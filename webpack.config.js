@@ -1,67 +1,73 @@
-const path = require('path');
-const SRC_DIR = path.resolve('client/src');
-const DIST_DIR = path.resolve('client/public');
+require('dotenv').config({path: './.env'})
+const nodeExternals = require("webpack-node-externals");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const Dotenv = require('dotenv-webpack');
+const path = require("path");
 
-module.exports = {
-  devtool: "eval-source-map",
-  // for production:
-  // devtool: "source-map",
-  mode: 'development',
-  entry: path.join(SRC_DIR, 'index.jsx'),
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        loader: "babel-loader",
-        options: {
-          presets: ["@babel/preset-react"]
-        },
-      },
-      {
-        test: /\.(css|scss)$/,
-        include: path.resolve('client/src'),
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              // discardDuplicates: true,
-              importLoaders: 1,
-              modules: {
-                localIdentName: '[name]__[local]___[hash:base64:5]',
-              },
-              sourceMap: process.env.NODE_ENV !== 'production',
-            },
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: process.env.NODE_ENV !== 'production',
-            },
-          },
-        ]
-      },
-    ],
+const css = {
+  test: /\.(css|scss)$/,
+  include: path.resolve(__dirname, 'src'),
+  exclude: /node_modules/,
+  use: [MiniCssExtractPlugin.loader, "css-loader", {
+    loader: "sass-loader"
+  }]
+}
+
+const js = {
+  test: /\.(js|jsx)$/,
+  exclude: /node_modules/,
+  use: {
+    loader: "babel-loader",
+    options: {
+      presets: ["@babel/preset-env", "@babel/preset-react"],
+    },
   },
-  resolve: {
-    extensions: ['*', '.js', '.jsx'],
+};
+
+const serverConfig = {
+  mode: "production",
+  target: "node",
+  plugins: [new Dotenv(), new MiniCssExtractPlugin()],
+  node: {
+    __dirname: false,
+  },
+  externals: [nodeExternals()],
+  entry: {
+    "index": path.resolve(__dirname, "src/server/index.js"),
+  },
+  module: {
+    rules: [js, css],
   },
   output: {
-    path: DIST_DIR,
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, "dist/server"),
+    filename: "[name].js",
   },
-  devServer: {
-      port: 8000,
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      },
-      contentBase: path.resolve('client/public'),
-      proxy: {
-        "*": "http://localhost:4300",
-      },
-    },
+};
 
-}
+const clientConfig = {
+  mode: "production",
+  target: "web",
+  plugins: [new Dotenv(), new MiniCssExtractPlugin()],
+  entry: {
+    "appRouter": path.resolve(
+      __dirname,
+      "src/public/appRouter.js"
+    ),
+    "footer": path.resolve(__dirname, "src/public/footer.js"),
+    "minesweeper": path.resolve(__dirname, "src/public/components/MinesweeperComponents/Minesweeper_Proxy.js")
+  },
+  module: {
+    rules: [js, css],
+  },
+  // optimization: {
+  //   splitChunks: {
+  //     chunks: "all",
+  //   },
+  // },
+  output: {
+    path: path.resolve(__dirname, "dist/public"),
+    filename: "[name].js",
+  },
+};
+
+module.exports = [serverConfig, clientConfig];

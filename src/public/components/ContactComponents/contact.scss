@@ -1,0 +1,11 @@
+.contactContainer {
+  border: 1px solid ivory;
+  .contactChildContainer {
+    display: flex;
+    .contactInput {
+      margin: 1% 0;
+    }
+  }
+}
+
+
