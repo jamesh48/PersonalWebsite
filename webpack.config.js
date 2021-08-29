@@ -1,7 +1,5 @@
-require('dotenv').config({path: './.env'})
 const nodeExternals = require("webpack-node-externals");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const Dotenv = require('dotenv-webpack');
 const path = require("path");
 
 const css = {
@@ -45,7 +43,8 @@ const serverConfig = {
 };
 
 const clientConfig = {
-  mode: "production",
+  mode: "development",
+  // Req by webpack 5/ala dotenv-environment variables
   resolve: {
     fallback: {
       "fs": false,

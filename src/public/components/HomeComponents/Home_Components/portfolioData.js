@@ -1,9 +1,10 @@
-require('dotenv').config({path: require('path').resolve('.env')});
+
+const CLOUDFRONTLINK = 'https://d1y3bjxf7c78hf.cloudfront.net'
 
 module.exports = [
   {
     "title": 'Fjakeraven.com',
-    "imgUrl": `${process.env.CLOUDFRONTLINK}/fec.png`,
+    "imgUrl": `${CLOUDFRONTLINK}/fec.png`,
     "cssStyles": {
       backgroundColor: 'ivory',
       color: 'black'
@@ -19,7 +20,7 @@ module.exports = [
       backgroundColor: 'black',
       color: 'ivory',
     },
-    "imgUrl": `${process.env.CLOUDFRONTLINK}/backendArchitecture.jpeg`,
+    "imgUrl": `${CLOUDFRONTLINK}/backendArchitecture.jpeg`,
     "github": [
       {
         title: 'Steammop.app Proxy Server',
@@ -45,7 +46,7 @@ module.exports = [
       backgroundColor: 'ivory',
       color: 'black'
     },
-    "imgUrl": `${process.env.CLOUDFRONTLINK}/Strava_Results_Generator.png`,
+    "imgUrl": `${CLOUDFRONTLINK}/Strava_Results_Generator.png`,
     "github": [
       { title: 'github', link: 'https://github.com/jamesh48/Strava-Report-Generator' },
     ],

@@ -4,7 +4,7 @@ import '../../main-styles/global.scss';
 import MarqueeContainer from './Home_Components/MarqueeSection.js';
 import MarqueeButtons from './Home_Components/MarqueeButtons.js';
 import Portfolio from './Home_Components/Portfolio.js';
-import Resume from '../ResumeComponents/Resume.jsx';
+import Resume from '../ResumeComponents/Resume.js';
 import mobileBrowserFunction from './mobileBrowserUtil.js';
 
 export default ({ resume, admin }) => {
