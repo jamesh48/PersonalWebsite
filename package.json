@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "git": "git add . && git commit -m",
     "postgit": "git push",
-    "start": "nodemon ./server/index.js",
+    "start": "nodemon ./src/server/index.js",
     "serve": "webpack serve",
     "build": "webpack",
     "database": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate",
