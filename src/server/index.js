@@ -12,7 +12,7 @@ import templates from './templates.js';
 const { htmlStart, htmlMid, htmlEnd } = templates;
 const app = express();
 import resumeRouter from './ResumeRoutes.js';
-import minesweeperRouter from './MinesweeperRoutes.js';
+import minesweeperRouter from './minesweeperRoutes.js';
 
 app.use(cors());
 
