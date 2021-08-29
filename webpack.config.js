@@ -1,7 +1,7 @@
 require('dotenv').config({path: './.env'})
 const nodeExternals = require("webpack-node-externals");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const Dotenv = require('dotenv-webpack');
+// const Dotenv = require('dotenv-webpack');
 const path = require("path");
 
 const css = {
@@ -27,7 +27,7 @@ const js = {
 const serverConfig = {
   mode: "production",
   target: "node",
-  plugins: [new Dotenv(), new MiniCssExtractPlugin()],
+  plugins: [new MiniCssExtractPlugin()],
   node: {
     __dirname: false,
   },
@@ -46,8 +46,15 @@ const serverConfig = {
 
 const clientConfig = {
   mode: "production",
+  resolve: {
+    fallback: {
+      "fs": false,
+      "path": false,
+      "os": false
+    }
+  },
   target: "web",
-  plugins: [new Dotenv(), new MiniCssExtractPlugin()],
+  plugins: [new MiniCssExtractPlugin()],
   entry: {
     "appRouter": path.resolve(
       __dirname,

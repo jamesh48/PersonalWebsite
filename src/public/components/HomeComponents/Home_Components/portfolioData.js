@@ -1,3 +1,5 @@
+require('dotenv').config({path: require('path').resolve('.env')});
+
 module.exports = [
   {
     "title": 'Fjakeraven.com',

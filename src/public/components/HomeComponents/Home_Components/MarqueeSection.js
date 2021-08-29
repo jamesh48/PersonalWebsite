@@ -1,4 +1,5 @@
 import React from 'react';
+require('dotenv').config({path: require('path').resolve('.env')});
 
 export default ({ mobileBrowser }) => {
   return (
