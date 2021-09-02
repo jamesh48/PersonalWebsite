@@ -19,7 +19,7 @@ module.exports = [
       backgroundColor: 'black',
       color: 'ivory',
     },
-    "imgUrl": `${CLOUDFRONTLINK}/backendArchitecture.jpg`,
+    "imgUrl": `${CLOUDFRONTLINK}/backendArchitecture.jpeg`,
     "github": [
       {
         title: 'Steammop.app Proxy Server',
