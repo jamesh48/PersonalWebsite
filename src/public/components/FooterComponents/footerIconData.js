@@ -5,10 +5,10 @@ module.exports = [
   },
   {
     iconLink: 'https://www.github.com/jamesh48',
-    imageUrl: 'https://d1y3bjxf7c78hf.cloudfront.net/githubicon.png',
+    imageUrl: 'https://d1y3bjxf7c78hf.cloudfront.net/githubicon.jpg',
   },
   {
     iconLink: 'https://www.instagram.com/jameshrivnak',
-    imageUrl: 'https://d1y3bjxf7c78hf.cloudfront.net/instaicon.png'
+    imageUrl: 'https://d1y3bjxf7c78hf.cloudfront.net/instaicon.jpg'
   }
 ];

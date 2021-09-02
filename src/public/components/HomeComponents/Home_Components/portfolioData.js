@@ -1,10 +1,9 @@
-
-const CLOUDFRONTLINK = 'https://d1y3bjxf7c78hf.cloudfront.net'
+const CLOUDFRONTLINK = 'https://d1y3bjxf7c78hf.cloudfront.net';
 
 module.exports = [
   {
     "title": 'Fjakeraven.com',
-    "imgUrl": `${CLOUDFRONTLINK}/fec.png`,
+    "imgUrl": `${CLOUDFRONTLINK}/fec.jpg`,
     "cssStyles": {
       backgroundColor: 'ivory',
       color: 'black'
@@ -20,7 +19,7 @@ module.exports = [
       backgroundColor: 'black',
       color: 'ivory',
     },
-    "imgUrl": `${CLOUDFRONTLINK}/backendArchitecture.jpeg`,
+    "imgUrl": `${CLOUDFRONTLINK}/backendArchitecture.jpg`,
     "github": [
       {
         title: 'Steammop.app Proxy Server',
@@ -46,7 +45,7 @@ module.exports = [
       backgroundColor: 'ivory',
       color: 'black'
     },
-    "imgUrl": `${CLOUDFRONTLINK}/Strava_Results_Generator.png`,
+    "imgUrl": `${CLOUDFRONTLINK}/Strava_Results_Generator.jpg`,
     "github": [
       { title: 'github', link: 'https://github.com/jamesh48/Strava-Report-Generator' },
     ],
