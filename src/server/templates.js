@@ -7,6 +7,8 @@ export default {
         <title>James Hrivnak</title>
         <link rel='stylesheet' href='/static/appRouter.css'/>
         <link rel='stylesheet' href='/static/footer.css'/>
+        <link rel='stylesheet' href='https://d1y3bjxf7c78hf.cloudfront.net/build/public/index.min.css'/>
+
       </head>
 
     <body>
@@ -43,7 +45,7 @@ export default {
 
   <script src="/static/appRouter.js"></script>
   <script src="/static/footer.js"></script>
-  <script src="/static/minesweeper.js"></script>
+  <script src='https://d1y3bjxf7c78hf.cloudfront.net/build/public/public-bundle.js'></script>
 </html>
 `,
 };

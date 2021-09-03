@@ -56,7 +56,7 @@ module.exports = [
       backgroundColor: 'ivory',
       color: 'black'
     },
-    "imgUrl": '',
+    "imgUrl": `${CLOUDFRONTLINK}/GES.jpg`,
     "github": [
       {
         title: 'This website! (github)',

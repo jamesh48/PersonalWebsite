@@ -5,7 +5,7 @@ import '../../main-styles/global.scss';
 import './minesweeperStyles.scss';
 
 export default () => {
-  useScript('https://beatminesweeper.app/bundle.js');
+  useScript('https://d1y3bjxf7c78hf.cloudfront.net/build/public/public-bundle.js');
   return (
     <div className={`${'container'} ${'websiteMinesweeperAdjust'}`} id='minesweeper-root'>
     </div>
