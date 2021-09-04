@@ -1,8 +1,10 @@
 module.exports = {
   apps: [{
     name: "Personal_Website",
-    script: "npm",
-    args: "run:dev start",
+    script: '/Users/jameshrivnak/.nvm/versions/node/v14.9.0/bin/grunt',
+    args: "['cssmin']",
+    // script: "npm",
+    // args: "run:dev start",
     env: {
       NODE_ENV: "development"
     },
