@@ -85,7 +85,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'End of day commit 1.1'
+          message: 'End of day commit 1.11'
         }
       }
     },

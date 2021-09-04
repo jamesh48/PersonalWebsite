@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import NestedGitHubLink from './NestedGitHubLink.js';
+import NestedGitHubLink from './NestedGithubLink.js';
 
 export default ({ setHovered, appData, rowIndex, columnIndex, nestedIndicator, hovered, mobileBrowser }) => {
 
