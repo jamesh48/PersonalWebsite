@@ -15,7 +15,7 @@
     "dev:start": "nodemon dist/server/index.js",
     "dev:build": "webpack && concurrently \"webpack --watch\" \"nodemon dist/server/index.js\""
   },
-  "keywords": [],
+  "keywords": ["fullstack", "fullstackhrivnak"],
   "author": "James Hrivnak",
   "license": "ISC",
   "dependencies": {

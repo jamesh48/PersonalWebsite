@@ -86,7 +86,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Setting up hydration for Resume Data'
+          message: 'Setting up Website Favicon'
         }
       }
     },
