@@ -86,7 +86,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Working on getting css right'
+          message: 'Opening admin resume view to enter data'
         }
       }
     },
@@ -103,7 +103,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-aws-s3');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-git');
-  grunt.loadNpmTasks('grunt-pm2-deploy')
+  grunt.loadNpmTasks('grunt-pm2-deploy');
 
   // grunt.registerTask('test', 'pm2deploy:dev')
   grunt.registerTask('bucketDeploy', 'aws_s3:dist');

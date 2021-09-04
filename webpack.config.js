@@ -42,7 +42,7 @@ const serverConfig = {
   },
   externals: [nodeExternals()],
   entry: {
-    "index": path.resolve(__dirname, "src/server/server.js"),
+    "index": path.resolve(__dirname, "src/server/index.js"),
   },
   module: {
     rules: [js, css],
@@ -55,7 +55,8 @@ const serverConfig = {
     alias: {
       PortfolioJSON: path.resolve('Data/PortfolioData.json'),
       FooterJSON: path.resolve('Data/FooterData.json'),
-      Database: path.resolve('db')
+      Database: path.resolve('db'),
+      Public: path.resolve('src/public')
     },
   }
 };

@@ -57,10 +57,10 @@ export default (props) => {
   return (
     <div>
       {
-        (!admin && resume?.resume_Name) ? (
+        (admin && resume?.resume_Name) ? (
           // Public View
           <PublicResume {...props} resume={resume} />
-        ) : admin ? (
+        ) : !admin ? (
           <AdminResume resumeNames={resumeNames} resume={resume} patchResumeCallback={patchResumeCallback} patchActiveResumeCallback={patchActiveResumeCallback} postResumeCallback={postResumeCallback} />
         ) : null
       }

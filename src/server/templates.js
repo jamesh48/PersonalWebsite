@@ -16,7 +16,7 @@ export default {
           <script>window.__INITIAL__DATA__=${JSON.stringify(data)}</script>
 
           <!-- For Dev Mode -->
-          <!-- <link rel='stylesheet' href='/static/appRouter.css'/> -->
+         <!--<link rel='stylesheet' href='/static/appRouter.css'/>-->
           <meta http-equiv="pragma" content="no-cache" />
         </head>
 
