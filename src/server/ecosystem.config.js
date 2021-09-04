@@ -1,7 +1,7 @@
 module.exports = {
   apps: [{
     name: 'Personal_Website',
-    script: './dist/server/index.js'
+    script: './dist/server/server.js'
   }],
   deploy: {
     production: {
