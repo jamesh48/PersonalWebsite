@@ -1,3 +1,4 @@
+const path = require('path');
 module.exports = function (grunt) {
   require('time-grunt')(grunt);
 
@@ -45,7 +46,7 @@ module.exports = function (grunt) {
           'dist/public/aws/appRouter-bundle.js': ['dist/public/appRouter.js'],
           'dist/public/aws/footer-bundle.js': ['dist/public/footer.js'],
           'dist/public/aws/minesweeper-bundle.js': ['dist/public/minesweeper.js'],
-          'dist/server/aws/server-bundle.js': ['dist/server/server.js']
+          'dist/server/aws/server-bundle.js': ['dist/server/index.js']
         }
       }
     },
@@ -85,11 +86,16 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'End of day commit 1.11'
+          message: 'Images should load now, had to change server.js to index.js'
         }
       }
     },
-    gitpush: { your_target: {} }
+    gitpush: { your_target: {} },
+    pm2deploy: {
+      options: {
+        ecosystemFile: path.resolve('src/server/ecosystem.config.js')
+      }
+    }
   });
 
   grunt.loadNpmTasks('grunt-webpack');
@@ -97,7 +103,9 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-aws-s3');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-git');
+  grunt.loadNpmTasks('grunt-pm2-deploy')
 
+  // grunt.registerTask('test', 'pm2deploy:dev')
   grunt.registerTask('bucketDeploy', 'aws_s3:dist');
   grunt.registerTask('build', 'webpack');
 
@@ -105,4 +113,6 @@ module.exports = function (grunt) {
   grunt.registerTask('deploy', ['build', 'uglify', 'cssmin', 'bucketDeploy']);
   // Push to Github
   grunt.registerTask('git', ['gitadd', 'gitcommit', 'gitpush']);
+  // Nuclear Option
+  grunt.registerTask('deploy-all', ['deploy', 'git']);
 };

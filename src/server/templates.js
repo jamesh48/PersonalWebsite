@@ -5,14 +5,15 @@ export default {
       <html>
         <head>
           <meta charset="utf-8">
+          <meta http-equiv="pragma" content="no-cache" />
           <title>James Hrivnak</title>
-          <link rel='stylesheet' href='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/appRouter.min.css'/>
+          <!-- <link rel='stylesheet' href='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/appRouter.min.css'/> -->
           <link rel='stylesheet' href='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/footer.min.css'/>
           <link rel='stylesheet' href='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/minesweeper.min.css'/>
           <link rel='stylesheet' href='https://d1y3bjxf7c78hf.cloudfront.net/mines/build/public/index.min.css'/>
 
           <!-- For Dev... -->
-          <!-- <link rel='stylesheet' href='/static/appRouter.css'/> -->
+          <link rel='stylesheet' href='/static/appRouter.css'/>
 
           <script>window.__INITIAL__DATA__=${JSON.stringify(data)}</script>
         </head>
@@ -50,13 +51,13 @@ export default {
 
   htmlEnd: `
   </footer>
-  <script src='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/appRouter-bundle.js'></script>
+  <!-- <script src='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/appRouter-bundle.js'></script> -->
   <script src='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/minesweeper-bundle.js'/></script>
   <script src='https://d1y3bjxf7c78hf.cloudfront.net/mines/build/public/public-bundle.js'></script>
   <script src='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/footer-bundle.js'></script>
 
   <!-- For Dev... -->
-  <!-- <script src='/static/appRouter.js'/></script> -->
+  <script src='/static/appRouter.js'/></script>
 
 </html>
 `,
@@ -66,10 +67,4 @@ export default {
 
 
 
-
-
-
-
-
-{/* <script src="/static/home.js"></script> */ }
 

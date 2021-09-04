@@ -33,7 +33,7 @@ export default (props) => {
     }, { threshold: [1] });
 
     observer.observe(document.querySelector('#about-me-root'));
-    // observer.observe(document.querySelector("#resume-root"));
+    observer.observe(document.querySelector("#resume-root"));
     observer.observe(document.querySelector("#portfolio-root"));
   })
 
@@ -193,7 +193,7 @@ export default (props) => {
           {...props}
         />
         {
-          marqueeButtonsPlacement === 'resume-root' && !mobileBroswer ?
+          marqueeButtonsPlacement === 'resume-root' && !mobileBrowser ?
             (
               <div className={'fader'}>
                 <MarqueeButtons />

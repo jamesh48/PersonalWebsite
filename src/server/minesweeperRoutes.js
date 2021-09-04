@@ -4,7 +4,7 @@ import axios from 'axios';
 
 minesweeper.get('/minesweeper-proxy', async (req, res) => {
   try {
-    const { data: bundle } = await axios('https://d1y3bjxf7c78hf.cloudfront.net/build/public/public-bundle.js');
+    const { data: bundle } = await axios('https://d1y3bjxf7c78hf.cloudfront.net/mines/build/public/public-bundle.js');
     res.send(bundle);
   } catch (err) {
     console.log(err);

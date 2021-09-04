@@ -184,8 +184,6 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
 
 
   const handleDisplayed = (inputArr) => {
-    // const { parentColumnRow, columnContainer, columnRow, columnContainerTitle, columnContainerSection, columnContainerDetail } = style;
-
     let temp = inputArr.slice(0);
 
     let createDepthData = (resultArr, temp) => {

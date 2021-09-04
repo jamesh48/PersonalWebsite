@@ -7,13 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "git": "git add . && git commit -m",
     "postgit": "git push",
-    "start": "nodemon dist/server/server.js",
+    "start": "nodemon dist/server/index.js",
     "serve": "webpack serve",
     "build": "webpack",
     "database": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate",
     "deploy": "pm2 deploy ./src/server/ecosystem.config.js production",
     "dev:start": "nodemon dist/server/index.js",
-    "dev:build": "webpack && concurrently \"webpack --watch\" \"nodemon dist/server/server.js\""
+    "dev:build": "webpack && concurrently \"webpack --watch\" \"nodemon dist/server/index.js\""
   },
   "keywords": [],
   "author": "James Hrivnak",
@@ -47,6 +47,7 @@
     "grunt-contrib-cssmin": "^4.0.0",
     "grunt-contrib-uglify": "^5.0.1",
     "grunt-git": "^1.1.1",
+    "grunt-pm2-deploy": "^0.2.0",
     "grunt-webpack": "^4.0.3",
     "mini-css-extract-plugin": "^2.2.0",
     "node-sass": "^6.0.1",
