@@ -25,7 +25,7 @@ module.exports = function (grunt) {
           {
             expand: true,
             cwd: 'dist/server/aws',
-            src: ['server.min.css', 'server-bundle.js'],
+            src: ['index.min.css', 'index-bundle.js'],
             dest: 'main/build/server'
           },
           {
@@ -46,7 +46,7 @@ module.exports = function (grunt) {
           'dist/public/aws/appRouter-bundle.js': ['dist/public/appRouter.js'],
           'dist/public/aws/footer-bundle.js': ['dist/public/footer.js'],
           'dist/public/aws/minesweeper-bundle.js': ['dist/public/minesweeper.js'],
-          'dist/server/aws/server-bundle.js': ['dist/server/index.js']
+          'dist/server/aws/index-bundle.js': ['dist/server/index.js']
         }
       }
     },
@@ -86,7 +86,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Attempting adding pm2 to grunt-2'
+          message: 'Working on getting css right'
         }
       }
     },
