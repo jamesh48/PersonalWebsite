@@ -1,14 +1,9 @@
 import path from 'path';
 import express from 'express';
-
-// const express = require('express');
 const resume = express.Router();
-// const axios = require('axios');
 import axios from 'axios';
-import resumePaths from '../../db/resume_controllers.js';
-const { getResume, patchResume, patchResumeX, patchActiveResume, postResume } = resumePaths;
 
-// const { getResume, patchResume, patchResumeX, patchActiveResume, postResume } = require('../db/resume_controllers.js');
+import { getResume, patchResume, patchResumeX, patchActiveResume, postResume } from 'Database/resume_controllers.js';
 
 resume.get('/resumeX', async (req, res) => {
   const resumeData = await getResume();

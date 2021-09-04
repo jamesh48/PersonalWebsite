@@ -61,15 +61,12 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
 
   const handleChange = ({ target: { parentNode: formNode, value, dataset: { parentdepth, parentbreadth, depth, breadth, temp } } }) => {
     const changeUpdate = new Node([], 'editing', value, []);
-    console.log("breadth-> " + breadth + " parent breadth-> " + parentbreadth);
-    console.log("depth-> " + depth)
     if (depth === '4' || depth === '5') {
       setEditInputs((prevEditInputs) => {
         let breadthArr = parentbreadth.split('_')
 
         prevEditInputs[breadthArr[0]].detail[breadthArr[1]].highlightDetail[Number(breadth)] = changeUpdate;
 
-        console.log(prevEditInputs[breadthArr[0]].detail[breadthArr[1]].highlightDetail)
         return [...prevEditInputs];
       })
       return;
@@ -179,7 +176,6 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
       }
       return [...prevEditInputs];
     })
-    // console.log(parentbreadth, breadth)
   }
 
 
@@ -197,7 +193,6 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
           if (temp[i].highlightDetail?.length) {
             currentObj.highlightDetail = [];
             for (let x = 0; x < temp[i].highlightDetail.length; x++) {
-              // console.log(temp[i].highlightDetail[x])
               currentObj.highlightDetail.push(
                 {
                   value: temp[i].highlightDetail[x].value,
@@ -312,9 +307,6 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
           recursed = recurseContainers(currentItem.detail, depth + 1, next);
         }
 
-        // if (currentItem.highlightDetail?.length) {
-        //   console.log(currentItem.highlightDetail?.length, currentItem)
-        // }
         return (
           <>
             <div className={depth !== 0 ? 'columnRow' : `${'columnRow'} ${'parentColumnRow'}`}>

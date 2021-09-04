@@ -5,7 +5,8 @@ import AdminResume from './AdminView/AdminResumeView.jsx';
 import PublicResume from './PublicView/PublicResumeView.jsx';
 import './resume.scss';
 
-export default ({ handleHover, handleMobileResumeClick, hoverDepth, hoverBreadth, admin, mobileBrowser }) => {
+export default (props) => {
+  const { admin } = props
   const [resume, setResume] = useState([]);
   const [resumeNames, setResumeNames] = useState('');
   const mounted = useRef(true);
@@ -45,21 +46,35 @@ export default ({ handleHover, handleMobileResumeClick, hoverDepth, hoverBreadth
   }
 
   const handleView = () => {
-    if (!admin) {
-      // console.log(hoverDepth, hoverBreadth);
-      return resume?.resume_Name ? (
-        // Public View
-        <PublicResume mobileBrowser={mobileBrowser} handleMobileResumeClick={handleMobileResumeClick} handleHover={handleHover} hoverDepth={hoverDepth} hoverBreadth={hoverBreadth} resume={resume} />
-      ) : null
-    } else {
-      return (
-        <AdminResume resumeNames={resumeNames} resume={resume} patchResumeCallback={patchResumeCallback} patchActiveResumeCallback={patchActiveResumeCallback} postResumeCallback={postResumeCallback} />
-      )
-    }
-  }
+    return (!admin && resume?.resume_Name) ? (
+      // Public View
+      <PublicResume {...props} resume={resume} />
+    ) : admin ? (
+      <AdminResume resumeNames={resumeNames} resume={resume} patchResumeCallback={patchResumeCallback} patchActiveResumeCallback={patchActiveResumeCallback} postResumeCallback={postResumeCallback} />
+    ) : null;
+  };
+
   return (
     <div>
-      {handleView()}
-    </div>
-  )
+      {
+        (!admin && resume?.resume_Name) ? (
+          // Public View
+          <PublicResume {...props} resume={resume} />
+        ) : admin ? (
+          <AdminResume resumeNames={resumeNames} resume={resume} patchResumeCallback={patchResumeCallback} patchActiveResumeCallback={patchActiveResumeCallback} postResumeCallback={postResumeCallback} />
+        ) : null
+      }
+    </div>)
 }
+
+
+    // if (!admin) {
+    //   return resume?.resume_Name ? (
+    //     // Public View
+    //     <PublicResume mobileBrowser={mobileBrowser} handleMobileResumeClick={handleMobileResumeClick} handleHover={handleHover} hoverDepth={hoverDepth} hoverBreadth={hoverBreadth} resume={resume} />
+    //   ) : null
+    // } else {
+    //   return (
+    //     <AdminResume resumeNames={resumeNames} resume={resume} patchResumeCallback={patchResumeCallback} patchActiveResumeCallback={patchActiveResumeCallback} postResumeCallback={postResumeCallback} />
+    //   )
+    // }

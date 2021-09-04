@@ -86,7 +86,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Images should load now, had to change server.js to index.js'
+          message: 'Setting up hydration for Resume Data'
         }
       }
     },

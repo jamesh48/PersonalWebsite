@@ -68,7 +68,7 @@ const highlightContainers = (...args) => args[0].length ? <HighlightContainer hi
 
 const recurseContainers = ({ resumeDetails, mobileBrowser, hoverDepth, hoverBreadth, handleHover, handleMobileResumeClick, depth, prevIndex }) => {
 
-  return resumeDetails.map((currentItem, currentIndex, currentArr) => {
+  return resumeDetails?.map((currentItem, currentIndex, currentArr) => {
     let currentContainerArr = [];
 
     currentContainerArr.push(
@@ -157,10 +157,14 @@ const recurseContainers = ({ resumeDetails, mobileBrowser, hoverDepth, hoverBrea
 }
 
 export default (props) => {
+  // SSR
+  const test = props.resumeData[0][0].resume_Details;
+  // CSR
+  // const test = props.resume.resume_Details;
   const { handleHover, handleMobileResumeClick, mobileBrowser } = props;
   return (
     <div className='resumeUIContainer' onMouseLeave={_ => mobileBrowser ? handleMobileResumeClick(event, 'exit') : handleHover(event, 'exit')}>
-      {recurseContainers({ ...props, resumeDetails: props.resume.resume_Details, depth: 0, prevIndex: 0 })}
+      {recurseContainers({ ...props, resumeDetails: test, depth: 0, prevIndex: 0 })}
     </div>
   )
 }

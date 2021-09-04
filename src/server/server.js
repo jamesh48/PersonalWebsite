@@ -9,7 +9,7 @@ import AppRouter from '../public/components/AppRouter.js';
 import Minesweeper from '../public/components/MinesweeperComponents/Minesweeper_Proxy.js';
 import Footer from '../public/components/FooterComponents/Footer.js';
 import templates from './templates.js';
-
+import { getResume } from 'Database/resume_controllers.js';
 import portfolioJSON from 'PortfolioJSON';
 import footerJSON from 'FooterJSON';
 
@@ -27,14 +27,15 @@ app.use(/(resume)?/, resumeRouter);
 app.use(/(minesweeper)?/, minesweeperRouter);
 
 app.get("/", async (req, res) => {
+  const activeResume = await getResume();
+
   const appStream = ReactDOMServer.renderToNodeStream(
     <Router >
       <AppRouter />
     </Router>
   );
-
   const footerStream = ReactDOMServer.renderToNodeStream(<Footer />);
-  res.write(htmlStart({ portfolioJSON: portfolioJSON, footerJSON: footerJSON }));
+  res.write(htmlStart({ portfolioJSON: portfolioJSON, footerJSON: footerJSON, resumeData: activeResume }));
   appStream.pipe(res, { end: false });
   appStream.on("end", () => {
     res.write(htmlMid);
@@ -57,7 +58,7 @@ app.get("/fullstack*", (req, res) => {
   const footerStream = ReactDOMServer.renderToNodeStream(
     <Footer />
   );
-  res.write(htmlStart({portfolioJSON: portfolioJSON, footerJSON: footerJSON}));
+  res.write(htmlStart({ portfolioJSON: portfolioJSON, footerJSON: footerJSON }));
   appStream.pipe(res, { end: false });
   appStream.on("end", () => {
     res.write(htmlMid);

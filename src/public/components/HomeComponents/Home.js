@@ -12,19 +12,22 @@ export default (props) => {
   const [hoverBreadth, setHoverBreadth] = useState(null);
   const [mobileBrowser, setMobileBrowser] = useState(false);
   const [marqueeButtonsPlacement, setMarqueeButtonsPlacement] = useState('about-me-root');
+  const [cursor, setCursor] = useState(true);
+
+  useEffect(() => {
+    if (mobileBrowser && document.getElementById('cursor')) {
+      document.getElementById('cursor').remove();
+    }
+  }, [mobileBrowser])
 
   useEffect(() => {
     const mobileBrowserTest = mobileBrowserFunction();
-    if (!!mobileBrowserTest && document.getElementById('cursor')) {
-      document.getElementById('cursor').remove();
-    }
     setMobileBrowser(!!mobileBrowserTest);
   }, []);
 
   // This useEffect moves the marqueebuttons depending on what element is in view.
   useEffect(() => {
     var observer = new IntersectionObserver(function (entries) {
-
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setMarqueeButtonsPlacement(entry.target.id)
@@ -35,7 +38,7 @@ export default (props) => {
     observer.observe(document.querySelector('#about-me-root'));
     observer.observe(document.querySelector("#resume-root"));
     observer.observe(document.querySelector("#portfolio-root"));
-  })
+  }, [])
 
   const handleMobileResumeClick = (event, indicator) => {
     if (indicator === 'exit') {

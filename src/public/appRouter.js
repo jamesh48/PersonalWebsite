@@ -8,6 +8,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 // );
 ReactDOM.hydrate(
   <Router >
-    <AppRouter portfolioJSON={window.__INITIAL__DATA__.portfolioJSON} />
+    <AppRouter resumeData={window.__INITIAL__DATA__.resumeData} portfolioJSON={window.__INITIAL__DATA__.portfolioJSON} />
   </Router>, document.getElementById("root")
 );

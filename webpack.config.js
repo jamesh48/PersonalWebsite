@@ -54,7 +54,8 @@ const serverConfig = {
   resolve: {
     alias: {
       PortfolioJSON: path.resolve('Data/PortfolioData.json'),
-      FooterJSON: path.resolve('Data/FooterData.json')
+      FooterJSON: path.resolve('Data/FooterData.json'),
+      Database: path.resolve('db')
     },
   }
 };

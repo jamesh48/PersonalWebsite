@@ -5,17 +5,18 @@ export default {
       <html>
         <head>
           <meta charset="utf-8">
-          <meta http-equiv="pragma" content="no-cache" />
           <title>James Hrivnak</title>
           <!-- <link rel='stylesheet' href='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/appRouter.min.css'/> -->
           <link rel='stylesheet' href='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/footer.min.css'/>
           <link rel='stylesheet' href='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/minesweeper.min.css'/>
           <link rel='stylesheet' href='https://d1y3bjxf7c78hf.cloudfront.net/mines/build/public/index.min.css'/>
 
-          <!-- For Dev... -->
-          <link rel='stylesheet' href='/static/appRouter.css'/>
-
+          <!-- Server Side Rendering of Page Data -->
           <script>window.__INITIAL__DATA__=${JSON.stringify(data)}</script>
+
+          <!-- For Dev Mode -->
+          <link rel='stylesheet' href='/static/appRouter.css'/>
+          <meta http-equiv="pragma" content="no-cache" />
         </head>
 
       <body>
