@@ -86,7 +86,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Different color, also attempting adding pm2 to grunt'
+          message: 'Attempting adding pm2 to grunt-2'
         }
       }
     },
