@@ -1,30 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import PublicDisplayContainer from './PublicDisplayContainer.jsx';
+import HighlightContainer from './HighlightContainer.js';
 import '../resume.scss';
-
-
-
-// const { resumeUIContainer, publicContainerRow, publicParentContainerRow, publicChildContainerRow, publicFinalContainerRow, publicColumnContainer, publicColumnContainerTitle, publicColumnContainerSection, publicColumnContainerDetail, niceContainer, minorContainer, minorContainerTitle, minorHighlights, minorItem, fader, faderOuter, publicContainerRowX, publicResponsiveRowX, responsiveMobileColumnContainer } = style;
 
 
 const handleDepthClassNames = (depth, mobileBrowser) => {
   let str = '';
-
   str += depth === 0 ? 'publicColumnContainerTitle' : depth === 1 ? 'publicColumnContainerSection' : depth === 2 ? 'publicColumnContainerDetail' : 'publicColumnContainer';
-
-  if (mobileBrowser && depth === 0) {
-    str += ' ' + 'responsiveMobileColumnContainer';
-  }
-
-  return str;
+  return (mobileBrowser && depth === 0) ? str += ' responsiveMobileColumnContainer' : str;
 };
 
 const handleFadingClassNames = (depth, hoverDepth, hoverBreadth, currentIndex, mobileBrowser) => {
   let test;
 
-  if (hoverDepth === null) {
-    return 'publicContainerRow' + ' ' + mobileBrowser ? 'publicResponsiveRowX' : 'publicContainerRowX';
-  }
+  if (hoverDepth === null) return 'publicContainerRow' + ' ' + mobileBrowser ? 'publicResponsiveRowX' : 'publicContainerRowX';
 
   if (hoverBreadth || hoverBreadth === 0) {
     test = typeof hoverBreadth === 'number' ? hoverBreadth : hoverBreadth.split('_');
@@ -75,46 +64,27 @@ const handleFadingClassNames = (depth, hoverDepth, hoverBreadth, currentIndex, m
   }
 }
 
-const highlightContainers = (highlightDetail, highlightTitle) => {
-  return highlightDetail.length ?
-    (
-      <div className={'minorContainer'}>
-        <h5 className={'minorContainerTitle'}>{highlightTitle.title}</h5>
+const highlightContainers = (...args) => args[0].length ? <HighlightContainer highlights={args} /> : null;
 
-        <div className={'minorHighlights'}>
-          {highlightDetail.map(({title}, index) => {
-            return (<span key={index} className={'minorItem'}>{title}</span>)
-          }).slice(1)}
-        </div>
-      </div>
-    ) : null
-}
+const recurseContainers = ({ resumeDetails, mobileBrowser, hoverDepth, hoverBreadth, handleHover, handleMobileResumeClick, depth, prevIndex }) => {
 
-const recurseContainers = (inputArr, depth, hoverDepth, hoverBreadth, handleHover, handleMobileResumeClick, prevIndex, mobileBrowser) => {
-
-  return inputArr.map((currentItem, currentIndex, currentArr) => {
+  return resumeDetails.map((currentItem, currentIndex, currentArr) => {
     let currentContainerArr = [];
 
     currentContainerArr.push(
       <PublicDisplayContainer
-        handleHover={handleHover}
-        hoverDepth={hoverDepth}
         key={currentIndex}
-        displayItem={currentItem.title}
         depth={depth}
         breadth={currentIndex}
+        displayItem={currentItem.title}
       />
     );
 
-    let highlightDetails = [];
-    let recursed;
 
-    let breadthArr;
-    if (typeof hoverBreadth !== 'number') {
-      breadthArr = hoverBreadth?.split('_');
-    } else {
-      breadthArr = [hoverBreadth];
-    }
+    const breadthArr = typeof hoverBreadth !== 'number' ? hoverBreadth?.split('_') : [hoverBreadth];
+
+    let highlightDetails = [];
+    let recursed = [];
 
     if (
       currentItem.detail &&
@@ -122,27 +92,32 @@ const recurseContainers = (inputArr, depth, hoverDepth, hoverBreadth, handleHove
       ((hoverDepth === depth && currentIndex === Number(breadthArr[breadthArr.length - 1])) ||
         (hoverDepth > depth && currentIndex === Number(breadthArr[depth])))
     ) {
-      if (currentItem['highlightDetail']) {
-        highlightDetails = highlightContainers(currentItem['highlightDetail'], currentItem['highlightDetail'][0]);
+
+      highlightDetails = currentItem['highlightDetail'] ? highlightContainers(currentItem['highlightDetail'], currentItem['highlightDetail'][0]) : null
+
+
+      const nextProps = {
+        resumeDetails: currentItem.detail,
+        depth: depth + 1,
+        hoverDepth: hoverDepth,
+        hoverBreadth: hoverBreadth,
+        handleHover: handleHover,
+        handleMobileResumeClick: handleMobileResumeClick,
+        prevIndex: !currentArr[currentIndex + 1] || currentIndex === 0 ? currentIndex : null,
+        mobileBrowser: mobileBrowser
       };
 
-      recursed = recurseContainers(currentItem.detail, depth + 1, hoverDepth, hoverBreadth, handleHover, handleMobileResumeClick, !currentArr[currentIndex + 1] || currentIndex === 0 ? currentIndex : null, mobileBrowser);
-    }
+      recursed = recurseContainers(nextProps);
+    };
 
     return [
-      <div key ={currentIndex} className={'niceContainer'}>
+      <div key={currentIndex} className='resumeParentContainer'>
 
         <div
           data-depth={depth}
 
-          onMouseDown={() => {
-            if (!mobileBrowser) return;
-            handleMobileResumeClick(event);
-          }}
-          onMouseOver={() => {
-            if (mobileBrowser) return;
-            handleHover(event);
-          }}
+          onMouseDown={_ => mobileBrowser ? handleMobileResumeClick(event) : null}
+          onMouseOver={_ => !mobileBrowser ? handleHover(event) : null}
 
           onMouseLeave={() => {
             if (mobileBrowser) return;
@@ -158,44 +133,34 @@ const recurseContainers = (inputArr, depth, hoverDepth, hoverBreadth, handleHove
             };
 
             // This condition triggers the previous section if hovering upwards...
-            if (depth === 1 && hoverDepth === 1 && currentIndex === 0) {
-              return handleHover(event, 'prevSection');
-            };
+            if (depth === 1 && hoverDepth === 1 && currentIndex === 0) return handleHover(event, 'prevSection');
           }}
-
           className={handleFadingClassNames(depth, hoverDepth, hoverBreadth, currentIndex, mobileBrowser)}
         >
           <div
-            className={handleDepthClassNames(depth, mobileBrowser)} data-depthman={depth}
+            className={handleDepthClassNames(depth, mobileBrowser)}
           >
             {currentContainerArr}
           </div>
 
-          {depth < 2 ?
-            <div className={'publicColumnContainer'}>
-              {recursed}
-            </div> : null
+          {
+            depth < 2 ?
+              <div className='publicColumnContainer'>
+                {recursed}
+              </div> : null
           }
           {highlightDetails}
-
         </div>
       </div>
     ];
   });
 }
 
-export default ({ resumeDetails, handleHover, handleMobileResumeClick, hoverDepth, hoverBreadth, mobileBrowser }) => {
+export default (props) => {
+  const { handleHover, handleMobileResumeClick, mobileBrowser } = props;
   return (
-    <div className={'resumeUIContainer'}
-      onMouseLeave={() => {
-        if (mobileBrowser) {
-          handleMobileResumeClick(event, 'exit');
-        } else {
-          handleHover(event, 'exit')
-        }
-      }}
-    >
-      {recurseContainers(resumeDetails, 0, hoverDepth, hoverBreadth, handleHover, handleMobileResumeClick, 0, mobileBrowser)}
+    <div className='resumeUIContainer' onMouseLeave={_ => mobileBrowser ? handleMobileResumeClick(event, 'exit') : handleHover(event, 'exit')}>
+      {recurseContainers({ ...props, resumeDetails: props.resume.resume_Details, depth: 0, prevIndex: 0 })}
     </div>
   )
 }

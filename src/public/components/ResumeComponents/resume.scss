@@ -24,6 +24,7 @@
   background-color: cadetblue;
   height: 100%;
   width: 100%;
+  justify-content: center;
 }
 
 .flexRowSmallTitle {
@@ -178,9 +179,9 @@
 }
 
 .titles {
-  display: flex;
-  align-self: center;
-  margin: auto !important;
+  // display: flex;
+  // align-self: center;
+  // margin: auto !important;
 }
 
 // Public View
@@ -343,7 +344,7 @@
   flex-direction: column;
 }
 
-.niceContainer {
+.resumeParentContainer {
   display: flex;
   flex: 1;
   flex-direction: column;

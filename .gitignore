@@ -9,3 +9,4 @@ Login_Scripts
 db/config
 dist
 images
+aws-keys.json

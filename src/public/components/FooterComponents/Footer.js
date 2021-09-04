@@ -1,13 +1,13 @@
 import React from 'react';
-import footerIconData from './footerIconData.js';
+// import footerIconData from './footerIconData.js';
 import './footerStyles.scss';
 
-export default () => {
+export default ({ footerJSON }) => {
   return (
     <div id={'footerContainer'}>
       <div id={'footerItemsContainer'}>
         {
-          footerIconData.map(({ iconLink, imageUrl }, index) => {
+          footerJSON?.map(({ iconLink, imageUrl }, index) => {
             return (
               <span key={index} className={'footerItemContainer'}
                 onClick={() => { window.open(iconLink) }}

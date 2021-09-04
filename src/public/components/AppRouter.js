@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StaticRouter as Router,
   Link,
@@ -14,8 +14,7 @@ import '../main-styles/reset.scss';
 import '../main-styles/global.scss';
 import '../main-styles/main.scss';
 
-export default () => {
-
+export default (props) => {
   const [admin, setAdmin] = useState(false);
   const [adminPass, setAdminPass] = useState('');
 
@@ -26,7 +25,6 @@ export default () => {
   const handleAdminChange = () => {
     setAdminPass(event.target.value);
   }
-
   return (
     <>
       <nav id='headerNav'>
@@ -37,7 +35,7 @@ export default () => {
         </ul>
       </nav>
 
-      <Route exact path="/" component={Home} />
+      <Route exact path="/" render={() => (<Home {...props}/>)} />
       <Route path="/fullstack/minesweeper" component={Minesweeper} />
       <Route path="/fullstack/contact" component={Contact} />
     </>

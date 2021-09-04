@@ -10,51 +10,29 @@ import ResumeNameLI from './ActiveResumeLI.jsx'
 
 let exports = {}
 
-exports.ResumeNameUL = ({ resume, name, resumeNames, patchActiveResumeCallback, postResumeCallback, style, style: { resumeNameUL } }) => {
+exports.ResumeNameUL = ({ resume, name, resumeNames, patchActiveResumeCallback, postResumeCallback }) => {
 
   const handleResumeNameLIS = () => {
     if (resumeNames.length) {
       return resumeNames.map((resumeName, index) => {
-        return <ResumeNameLI key={index} style={style} resume={resume} resumeName={resumeName} resumeCallback={patchActiveResumeCallback} />
+        return <ResumeNameLI key={index} resume={resume} resumeName={resumeName} resumeCallback={patchActiveResumeCallback} />
       });
     }
   }
 
   return (
     <ul className={'resumeNameUL'} key={0}>
-      <ResumeNameLI style={style} resumeName={'Post New Resume'} resumeCallback={postResumeCallback} />
+      <ResumeNameLI resumeName={'Post New Resume'} resumeCallback={postResumeCallback} />
       {handleResumeNameLIS()}
     </ul>
   )
 };
 
-exports.AdminEditContainer = ({ currentInputEl, index, style, breadth, depth, placeholder, temp, handleChange, handleSubmit, parentBreadth, parentDepth }) => {
-  const { titleRow, sectionRow, detailRow, minorRow, highlightsRow, flexRowContainer, editingInputs, inputForm } = style;
+exports.AdminEditContainer = ({ currentInputEl, index, breadth, depth, placeholder, temp, handleChange, handleSubmit, parentBreadth, parentDepth }) => {
+  // const { titleRow, sectionRow, detailRow, minorRow, highlightsRow, flexRowContainer, editingInputs, inputForm } = style;
 
   const handleDepthPlaceholder = (depth) => {
-    if (depth === 0) {
-      return 'New Title';
-    }
-
-    if (depth === 1) {
-      return 'New Section';
-    }
-
-    if (depth === 2) {
-      return 'New Detail';
-    }
-
-    if (depth === 3) {
-      return 'New Minor Detail'
-    }
-
-    if (depth === 4) {
-      return 'Highlights Title'
-    }
-
-    if (depth === 5) {
-      return 'Highlights Detail'
-    }
+    return depth === 0 ? 'New Title' : depth === 1 ? 'New Section' : depth === 3 ? 'New Minor Detail' : depth === 4 ? 'Highlights Title' : depth === 5 ? 'Highlights Detail' : null;
   }
 
   return (
@@ -67,14 +45,10 @@ exports.AdminEditContainer = ({ currentInputEl, index, style, breadth, depth, pl
   )
 };
 
-exports.AdminDisplayContainer = ({ containerRef, index, depth, handleClick, displayItem, style, breadth, parentBreadth }) => {
+exports.AdminDisplayContainer = ({ containerRef, index, depth, handleClick, displayItem, breadth, parentBreadth }) => {
 
   const handleClassName = (depth) => {
-    if (depth === 0) {
-      return `${'flexRowTitle'} ${'flexRowSmallTitle'}`;
-    } else {
-      return 'flexRowTitle';
-    }
+      return depth === 0 ? `${'flexRowTitle'} ${'flexRowSmallTitle'}` : `flexRowTitle`
   }
 
   return (

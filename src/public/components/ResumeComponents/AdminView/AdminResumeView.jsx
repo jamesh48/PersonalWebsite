@@ -11,9 +11,9 @@ class Node {
   }
 }
 
-export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCallback, resume, resumeNames, style,
+export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCallback, resume, resumeNames,
 
-  style: { flexResumeContainer, flexResumeRow, solo, resumeNameUL, adminChildSection, adminResumeChildContainer, adminResumeChildSectionContainer, adminResumeChildDetailContainer, resumeClickers, resumeSectionHeader, resumeChildLabel, adminHighlightsRow, hollywoodHighlights }
+  // style: { flexResumeContainer, flexResumeRow, solo, resumeNameUL, adminChildSection, adminResumeChildContainer, adminResumeChildSectionContainer, adminResumeChildDetailContainer, resumeClickers, resumeSectionHeader, resumeChildLabel, adminHighlightsRow, hollywoodHighlights }
 
 }) => {
   const [editInputs, setEditInputs] = useState([]);
@@ -55,7 +55,6 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
           });
         }
       }
-      // console.log(prevEditInputs)
       return prevEditInputs;
     });
   }, [resume])
@@ -99,7 +98,6 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
             prevEditInputs[breadthArr[0]].detail[breadth].shown = 'editing';
             prevEditInputs[breadthArr[0]].detail[breadth].value = value;
           }
-          console.log(prevEditInputs)
           // Detail
         } else if (breadthArr.length === 2) {
 
@@ -150,9 +148,8 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
         }).filter((x) => { return x && x.title })
       };
     });
-    console.log(patch)
     return patchResumeCallback(patch);
-  }
+  };
 
   const handleClick = ({ target: { parentNode: { dataset: { breadth, depth, parentbreadth } } } }) => {
     setEditInputs((prevEditInputs) => {
@@ -161,7 +158,7 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
         return [...prevEditInputs];
       }
 
-      let breadthArr = parentbreadth.split('_');
+      const breadthArr =  typeof parentbreadth === 'string' ? parentbreadth.split('_') : null;
 
       if (depth === '1') {
         prevEditInputs[parentbreadth].detail[breadth].shown = 'editing';
@@ -187,7 +184,7 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
 
 
   const handleDisplayed = (inputArr) => {
-    const { parentColumnRow, columnContainer, columnRow, columnContainerTitle, columnContainerSection, columnContainerDetail } = style;
+    // const { parentColumnRow, columnContainer, columnRow, columnContainerTitle, columnContainerSection, columnContainerDetail } = style;
 
     let temp = inputArr.slice(0);
 
@@ -227,7 +224,6 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
       return currentContainerData.length ? currentContainerData.map((currentItem, currentIndex, inputArr) => {
         let currentContainerArr = [];
         let next;
-        // carePackage.push(<div>Hello</div>)
         // Push in the Displayed Item
         if (currentItem.shown === true) {
           currentContainerArr.push(
@@ -237,7 +233,6 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
               parentBreadth={prevBreadth}
               handleClick={handleClick}
               displayItem={currentItem.value}
-              style={style}
             />
           )
         } else if (currentItem.shown === 'editing') {
@@ -247,7 +242,6 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
               depth={depth}
               parentBreadth={prevBreadth}
               breadth={currentItem.breadth}
-              style={style}
               handleChange={handleChange}
               handleSubmit={handleSubmit}
             />
@@ -277,7 +271,6 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
                 depth={depth}
                 parentBreadth={parentBreadth}
                 breadth={currentItem.breadth + 1}
-                style={style}
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
               />
@@ -288,7 +281,6 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
                 depth={depth}
                 parentBreadth={parentBreadth}
                 breadth={currentItem.breadth + 1}
-                style={style}
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
               />
@@ -302,27 +294,18 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
         // If there are no children add an edit input in the depth + 1 field
         if (!currentItem.detail || !currentItem.detail.length) {
           if (depth < 2) {
-            let parentBreadth;
+            const parentBreadth = (depth + 1 === 1) ? currentItem.breadth : `${prevBreadth}_${currentItem.breadth}`;
 
-            if (depth + 1 === 1) {
-              parentBreadth = currentItem.breadth;
-            } else if (depth + 1 === 2) {
-              parentBreadth = prevBreadth + '_' + currentItem.breadth;
-            } else {
-              parentBreadth = prevBreadth + '_' + currentItem.breadth;
-            }
             if (currentItem.shown !== 'editing') {
               recursed.push(
                 <AdminEditContainer
-                  style={style}
                   parentBreadth={parentBreadth}
                   depth={depth + 1}
                   breadth={0}
                   handleChange={handleChange}
                   handleSubmit={handleSubmit}
                 />
-              )
-
+              );
             }
           }
         } else {
@@ -336,13 +319,13 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
         // }
         return (
           <>
-            <div className={depth !== 0 ? columnRow : `${columnRow} ${parentColumnRow}`}>
+            <div className={depth !== 0 ? 'columnRow' : `${'columnRow'} ${'parentColumnRow'}`}>
 
-              <div className={`${columnContainer} ${depth === 0 ? columnContainerTitle : depth === 1 ? columnContainerSection : depth === 2 ? columnContainerDetail : null}`}>
+              <div className={`${'columnContainer'} ${depth === 0 ? 'columnContainerTitle' : depth === 1 ? 'columnContainerSection' : depth === 2 ? 'columnContainerDetail' : null}`}>
                 {currentContainerArr}
               </div>
               {recursed.length > 0 ?
-                <div className={`${columnContainer}`}>
+                <div className={`${'columnContainer'}`}>
                   {recursed}
                 </div> : null
               }
@@ -360,24 +343,22 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
                       parentBreadth={prevBreadth + '_' + currentItem.breadth}
                       handleClick={handleClick}
                       displayItem={currentItem.highlightDetail[0].value}
-                      style={style}
                     />
                   )
                   : inputArr[currentIndex + 1] || inputArr[currentIndex].shown === true ?
-                  // :
+                    // :
                     (
                       <AdminEditContainer
                         depth={4}
                         parentBreadth={prevBreadth + '_' + currentItem.breadth}
                         breadth={0}
-                        style={style}
                         handleChange={handleChange}
                         handleSubmit={handleSubmit}
                       />
                     )
-                     : null
+                    : null
                 }
-                <div className={adminHighlightsRow}>
+                <div className={`adminHighlightsRow`}>
                   {
                     currentItem.highlightDetail?.length > 1 ?
                       currentItem.highlightDetail?.slice(1).map((highlights, highlightIndex, highlightArr) => {
@@ -393,13 +374,11 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
                                   parentBreadth={prevBreadth + '_' + currentItem.breadth}
                                   handleClick={handleClick}
                                   displayItem={highlights.value}
-                                  style={style}
                                 />,
                                 <AdminEditContainer
                                   depth={5}
                                   parentBreadth={prevBreadth + '_' + currentItem.breadth}
                                   breadth={highlightIndex + 2}
-                                  style={style}
                                   handleChange={handleChange}
                                   handleSubmit={handleSubmit}
                                 />
@@ -412,7 +391,6 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
                                     parentBreadth={prevBreadth + '_' + currentItem.breadth}
                                     handleClick={handleClick}
                                     displayItem={highlights.value}
-                                    style={style}
                                   />
                                   :
                                   // There is a highlight set to editing
@@ -423,7 +401,6 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
                                       temp={highlights.value}
                                       parentBreadth={prevBreadth + '_' + currentItem.breadth}
                                       breadth={highlightIndex + 1}
-                                      style={style}
                                       handleChange={handleChange}
                                       handleSubmit={handleSubmit}
                                     />
@@ -434,14 +411,12 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
                                       temp={highlights.value}
                                       parentBreadth={prevBreadth + '_' + currentItem.breadth}
                                       breadth={highlightIndex + 1}
-                                      style={style}
                                       handleChange={handleChange}
                                       handleSubmit={handleSubmit}
                                     />
                             }
                           </>
-                        )
-                        // ) : null
+                        );
                       })
                       : currentItem.highlightDetail?.length === 1 && currentItem.highlightDetail[0].shown === true ?
                         <AdminEditContainer
@@ -449,7 +424,6 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
                           // temp={highlights.value}
                           parentBreadth={prevBreadth + '_' + currentItem.breadth}
                           breadth={1}
-                          style={style}
                           handleChange={handleChange}
                           handleSubmit={handleSubmit}
                         />
@@ -459,16 +433,12 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
                             // temp={highlights.value}
                             parentBreadth={prevBreadth + '_' + currentItem.breadth}
                             breadth={1}
-                            style={style}
                             handleChange={handleChange}
                             handleSubmit={handleSubmit}
                           />
                           : null
                   }
-
-
                 </div>
-
               </div>
               : null
             }
@@ -512,7 +482,6 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
           <AdminEditContainer
             depth={0}
             breadth={0}
-            style={style}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
           />
@@ -527,8 +496,8 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
 
   return (
     <div>
-      <ResumeNameUL resume={resume} postResumeCallback={postResumeCallback} patchActiveResumeCallback={patchActiveResumeCallback} resumeNames={resumeNames} style={style} />
-      <div className={flexResumeContainer}>
+      <ResumeNameUL resume={resume} postResumeCallback={postResumeCallback} patchActiveResumeCallback={patchActiveResumeCallback} resumeNames={resumeNames} />
+      <div className={'flexResumeContainer'}>
         {handleDisplayed(editInputs)}
       </div>
     </div>

@@ -69,7 +69,7 @@ module.exports = {
   patchResume: async ({ patchers }) => {
     try {
     patchers = JSON.parse(patchers);
-      console.log(patchers)
+
     // // Updating General
     // try {
     const { ResumeDetails } = sequelize.models;

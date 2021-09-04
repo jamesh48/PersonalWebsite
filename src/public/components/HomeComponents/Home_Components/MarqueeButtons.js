@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
 
-export default ({ indicator, container }) => {
+export default ({ indicator }) => {
   const [triggers, setTriggers] = useState([]);
 
   useEffect(() => {
-    let triggerContainers = document.querySelectorAll('.' + container)
+    let triggerContainers = document.querySelectorAll('.container')
     let triggerArr = [];
-    console.log(triggerContainers);
     triggerContainers.forEach(({ id, dataset: { name } }, index) => {
       const y = document.getElementById(id);
       triggerArr.push([y, name]);

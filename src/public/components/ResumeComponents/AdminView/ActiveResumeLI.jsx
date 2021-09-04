@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 
 
-export default ({ index, style, resumeName, resumeCallback, patchActiveResumeCallback, resume }) => {
-  const { resumeListLI, activeResumeListLI, resumeClickers } = style;
+export default ({ index, resumeName, resumeCallback, patchActiveResumeCallback, resume }) => {
   const handleClick = ({ target: { value } }) => {
     if (value === 'Post New Resume') {
       const resume_Name = window.prompt('Enter New Resume Name');
@@ -24,7 +23,7 @@ export default ({ index, style, resumeName, resumeCallback, patchActiveResumeCal
       <li>
         <input
           type='button'
-          className={resumeName === resume?.resume_Name ? `${resumeListLI} ${activeResumeListLI}` : `${resumeListLI}`}
+          className={resumeName === resume?.resume_Name ? `resumeListLI activeResumeListLI` : `resumeListLI`}
           value={resumeName}
           onClick={handleClick}
         >

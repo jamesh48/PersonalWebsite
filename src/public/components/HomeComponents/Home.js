@@ -7,7 +7,7 @@ import Portfolio from './Home_Components/Portfolio.js';
 import Resume from '../ResumeComponents/Resume.js';
 import mobileBrowserFunction from './mobileBrowserUtil.js';
 
-export default ({ resume, admin }) => {
+export default (props) => {
   const [hoverDepth, setHoverDepth] = useState(null);
   const [hoverBreadth, setHoverBreadth] = useState(null);
   const [mobileBrowser, setMobileBrowser] = useState(false);
@@ -15,7 +15,7 @@ export default ({ resume, admin }) => {
 
   useEffect(() => {
     const mobileBrowserTest = mobileBrowserFunction();
-    if (!!mobileBrowserTest) {
+    if (!!mobileBrowserTest && document.getElementById('cursor')) {
       document.getElementById('cursor').remove();
     }
     setMobileBrowser(!!mobileBrowserTest);
@@ -33,7 +33,7 @@ export default ({ resume, admin }) => {
     }, { threshold: [1] });
 
     observer.observe(document.querySelector('#about-me-root'));
-    observer.observe(document.querySelector("#resume-root"));
+    // observer.observe(document.querySelector("#resume-root"));
     observer.observe(document.querySelector("#portfolio-root"));
   })
 
@@ -173,10 +173,10 @@ export default ({ resume, admin }) => {
       <div id='about-me-root' data-name='About Me' className={'container'}>
         <MarqueeContainer mobileBrowser={mobileBrowser} />
         {
-          marqueeButtonsPlacement === 'about-me-root' ? (
+          marqueeButtonsPlacement === 'about-me-root' && !mobileBrowser ? (
             <div className={'fader'}>
-              <MarqueeButtons container={'container'} />
-              <hr style={{ marginTop: 0 }} />
+              <MarqueeButtons />
+              <hr className='marqueeButtonsHR' />
             </div>
           ) : null
         }
@@ -190,31 +190,31 @@ export default ({ resume, admin }) => {
           handleHover={handleHover}
           hoverDepth={hoverDepth}
           hoverBreadth={hoverBreadth}
-          resume={resume}
-          admin={admin} />
+          {...props}
+        />
         {
-          marqueeButtonsPlacement === 'resume-root' ?
+          marqueeButtonsPlacement === 'resume-root' && !mobileBroswer ?
             (
               <div className={'fader'}>
-                <MarqueeButtons container={'container'} />
-                <hr style={{ marginTop: 0 }} />
+                <MarqueeButtons />
+                <hr className='marqueeButtonsHR' />
               </div>
             ) : null
         }
       </div>
 
-      <div data-name='Portfolio' className={'container'} id='portfolio-root'>
-        <Portfolio />
-        {marqueeButtonsPlacement === 'portfolio-root' ?
+      <div data-name='Portfolio' className='container' id='portfolio-root'>
+        <Portfolio {...props} mobileBrowser={mobileBrowser} />
+        {marqueeButtonsPlacement === 'portfolio-root' && !mobileBrowser ?
           (
             <div className={'fader'}>
-              <MarqueeButtons container={'container'} indicator={true} />
-              <hr style={{ marginTop: 0 }} />
+              <MarqueeButtons indicator={true} />
+              <hr className='marqueeButtonsHR' />
             </div>
           ) : null
         }
       </div>
 
-    </div>
+    </div >
   );
 }

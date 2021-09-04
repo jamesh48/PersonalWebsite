@@ -9,6 +9,10 @@ import AppRouter from '../public/components/AppRouter.js';
 import Minesweeper from '../public/components/MinesweeperComponents/Minesweeper_Proxy.js';
 import Footer from '../public/components/FooterComponents/Footer.js';
 import templates from './templates.js';
+
+import portfolioJSON from 'PortfolioJSON';
+import footerJSON from 'FooterJSON';
+
 const { htmlStart, htmlMid, htmlEnd } = templates;
 const app = express();
 import resumeRouter from './ResumeRoutes.js';
@@ -24,13 +28,13 @@ app.use(/(minesweeper)?/, minesweeperRouter);
 
 app.get("/", async (req, res) => {
   const appStream = ReactDOMServer.renderToNodeStream(
-    <Router>
+    <Router >
       <AppRouter />
     </Router>
   );
+
   const footerStream = ReactDOMServer.renderToNodeStream(<Footer />);
-  // <script>window.__INITIAL__DATA__=${JSON.stringify({ name })}</script>
-  res.write(htmlStart);
+  res.write(htmlStart({ portfolioJSON: portfolioJSON, footerJSON: footerJSON }));
   appStream.pipe(res, { end: false });
   appStream.on("end", () => {
     res.write(htmlMid);
@@ -53,7 +57,7 @@ app.get("/fullstack*", (req, res) => {
   const footerStream = ReactDOMServer.renderToNodeStream(
     <Footer />
   );
-  res.write(htmlStart);
+  res.write(htmlStart({portfolioJSON: portfolioJSON, footerJSON: footerJSON}));
   appStream.pipe(res, { end: false });
   appStream.on("end", () => {
     res.write(htmlMid);

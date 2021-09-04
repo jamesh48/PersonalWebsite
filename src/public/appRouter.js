@@ -3,10 +3,11 @@ import ReactDOM from "react-dom";
 import AppRouter from './components/AppRouter.js';
 import { BrowserRouter as Router } from "react-router-dom";
 
-const App = () => (
-  <Router>
-    <AppRouter />
-  </Router>
-);
+// const App = () => (
 
-ReactDOM.hydrate(<App />, document.getElementById("root"));
+// );
+ReactDOM.hydrate(
+  <Router >
+    <AppRouter portfolioJSON={window.__INITIAL__DATA__.portfolioJSON} />
+  </Router>, document.getElementById("root")
+);
