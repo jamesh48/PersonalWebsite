@@ -10,9 +10,11 @@ const css = {
   exclude: /node_modules/,
   use: [MiniCssExtractPlugin.loader, "css-loader", {
     loader: "sass-loader",
-    options: {
-      additionalData: process.env.CloudfrontCSS
-    }
+    // options: {
+    //   additionalData: process.env.CloudfrontCSS
+    // }
+// CloudfrontCSS=$Cloudfront: "https://d1y3bjxf7c78hf.cloudfront.net/main/main-images/linkedin.jpg"
+
   }]
 }
 

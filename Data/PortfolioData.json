@@ -1,7 +1,7 @@
 [
   {
     "title": "Fjakeraven.com",
-    "imgUrl": "https://d1y3bjxf7c78hf.cloudfront.net/fec.jpg",
+    "imgUrl": "https://d1y3bjxf7c78hf.cloudfront.net/main/main-images/fec.jpg",
     "cssStyles": {
       "backgroundColor": "ivory",
       "color": "black"
@@ -23,7 +23,7 @@
       "backgroundColor": "black",
       "color": "ivory"
     },
-    "imgUrl": "https://d1y3bjxf7c78hf.cloudfront.net/backendArchitecture.jpeg",
+    "imgUrl": "https://d1y3bjxf7c78hf.cloudfront.net/main/main-images/backendArchitecture.jpeg",
     "github": [
       {
         "title": "Steammop.app Proxy Server",
@@ -49,7 +49,7 @@
       "backgroundColor": "ivory",
       "color": "black"
     },
-    "imgUrl": "https://d1y3bjxf7c78hf.cloudfront.net/Strava_Results_Generator.jpg",
+    "imgUrl": "https://d1y3bjxf7c78hf.cloudfront.net/main/main-images/Strava_Results_Generator.jpg",
     "github": [
       {
         "title": "github",
@@ -63,7 +63,7 @@
       "backgroundColor": "ivory",
       "color": "black"
     },
-    "imgUrl": "https://d1y3bjxf7c78hf.cloudfront.net/GES.jpg",
+    "imgUrl": "https://d1y3bjxf7c78hf.cloudfront.net/main/main-images/GES.jpg",
     "github": [
       {
         "title": "This website! (github)",
