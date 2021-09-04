@@ -37,6 +37,7 @@ const serverConfig = {
   //   "process.env": JSON.stringify(json)
   // })
 ],
+devtool: "source-map",
   node: {
     __dirname: false,
   },

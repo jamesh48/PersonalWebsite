@@ -14,9 +14,9 @@ exports.ResumeNameUL = ({ resume, name, resumeNames, patchActiveResumeCallback, 
 
   const handleResumeNameLIS = () => {
     if (resumeNames.length) {
-      return resumeNames.map((resumeName, index) => {
+      return resumeNames.length ? resumeNames?.map((resumeName, index) => {
         return <ResumeNameLI key={index} resume={resume} resumeName={resumeName} resumeCallback={patchActiveResumeCallback} />
-      });
+      }) : null
     }
   }
 

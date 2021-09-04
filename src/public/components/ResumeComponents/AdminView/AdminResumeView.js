@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, Fragment } from 'react';
-import exports from './domHandlers.jsx';
+import exports from './domHandlers.js';
 const { ResumeNameUL, AdminEditContainer, AdminDisplayContainer } = exports;
 
 class Node {
@@ -11,14 +11,37 @@ class Node {
   }
 }
 
-export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCallback, resume, resumeNames,
-
-  // style: { flexResumeContainer, flexResumeRow, solo, resumeNameUL, adminChildSection, adminResumeChildContainer, adminResumeChildSectionContainer, adminResumeChildDetailContainer, resumeClickers, resumeSectionHeader, resumeChildLabel, adminHighlightsRow, hollywoodHighlights }
-
+export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCallback,
+  resumeData
 }) => {
   const [editInputs, setEditInputs] = useState([]);
+  const [resume, setResume] = useState([]);
+  const [resumeNames, setResumeNames] = useState([])
   const currentInputEl = useRef(null);
+  console.log(resumeData)
+  // const resume = resume;
+  // let test;
+  // const test = resumeData[0][0].resume_Details;
+  // let [resumeX, resumeNamesX] = resumeData;
+  // resumeX = resume.resume_Details;
+  // console.log(resumeX)
 
+  const mounted = useRef(true);
+
+  useEffect(() => {
+    // if (!resumeData) return;
+    if (mounted.current) {
+      setResume(resumeData[0][0]);
+      setResumeNames(resumeData[1]);
+    }
+
+    return () => mounted.current = false;
+  }, []);
+  // let resume;
+  // if (resumeData) {
+  //   resume = resumeData[0][0].resume_Details;
+  //   console.log(resume)
+  // };
   // This sets state when a new or updated resume is pulled down
   useEffect(() => {
     setEditInputs((prevEditInputs) => {
@@ -155,7 +178,7 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
         return [...prevEditInputs];
       }
 
-      const breadthArr =  typeof parentbreadth === 'string' ? parentbreadth.split('_') : null;
+      const breadthArr = typeof parentbreadth === 'string' ? parentbreadth.split('_') : null;
 
       if (depth === '1') {
         prevEditInputs[parentbreadth].detail[breadth].shown = 'editing';

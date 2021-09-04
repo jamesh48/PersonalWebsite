@@ -15,7 +15,7 @@ module.exports = {
       raw: true,
       order: ['id']
     });
-    resumeNames = resumeNames.map((resume) => resume.resume_Name);
+    resumeNames = resumeNames?.map((resume) => resume.resume_Name);
 
     return [resume, resumeNames];
   },

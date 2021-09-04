@@ -53,20 +53,17 @@ export default {
 
   htmlEnd: `
   </footer>
-  <script src='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/appRouter-bundle.js'></script>
-  <script src='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/minesweeper-bundle.js'/></script>
-  <script src='https://d1y3bjxf7c78hf.cloudfront.net/mines/build/public/public-bundle.js'></script>
-  <script src='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/footer-bundle.js'></script>
 
-  <!-- For Dev... -->
-  <!-- <script src='/static/appRouter.js'/></script> -->
+    <script src='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/appRouter-bundle.js'></script>
+
+    <script src='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/minesweeper-bundle.js'/></script>
+    <script src='https://d1y3bjxf7c78hf.cloudfront.net/mines/build/public/public-bundle.js'></script>
+    <script src='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/footer-bundle.js'></script>
 
 </html>
 `,
 };
 
 
-
-
-
-
+// <!-- For Dev... -->
+{/* <script src='/static/appRouter.js'/></script> */}

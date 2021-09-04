@@ -86,7 +86,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Opening admin resume view to enter data'
+          message: 'Haggardly trying to send admin view live'
         }
       }
     },
