@@ -15,7 +15,7 @@ import '../main-styles/global.scss';
 import '../main-styles/main.scss';
 
 export default (props) => {
-  const [admin, setAdmin] = useState(true);
+  const [admin, setAdmin] = useState(false);
   const [adminPass, setAdminPass] = useState('');
 
   const handleAdminSubmit = () => {
