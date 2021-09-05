@@ -37,6 +37,18 @@ module.exports = function (grunt) {
         ]
       }
     },
+    cloudfront_invalidate: {
+      options: {
+        accessKeyId: '<%= aws.AWSAccessKeyId %>',
+        secretAccessKey: '<%= aws.AWSSecretKey %>',
+        distributionId: '<%= aws.AWSDistributionID %>',
+        path: '/*',
+        // debug: true
+      },
+      your_target: {
+        //   // Target-specific file lists and/or options go here.
+      },
+    },
     webpack: {
       myConfig: require('./webpack.config.js')
     },
@@ -103,16 +115,22 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-aws-s3');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-git');
+  grunt.loadNpmTasks('grunt-cloudfront-invalidate');
   grunt.loadNpmTasks('grunt-pm2-deploy');
 
-  // grunt.registerTask('test', 'pm2deploy:dev')
+
+  grunt.registerTask('test', 'pm2deploy:production')
+  grunt.registerTask('cf_invalidate', 'cloudfront_invalidate');
   grunt.registerTask('bucketDeploy', 'aws_s3:dist');
   grunt.registerTask('build', 'webpack');
+  grunt.loadNpmTasks('grunt-uncss');
 
   // Deploy To AWS First
-  grunt.registerTask('deploy', ['build', 'uglify', 'cssmin', 'bucketDeploy']);
+  grunt.registerTask('deploy', ['build', 'uglify', 'cssmin', 'bucketDeploy', 'cf_invalidate']);
   // Push to Github
   grunt.registerTask('git', ['gitadd', 'gitcommit', 'gitpush']);
   // Nuclear Option
   grunt.registerTask('deploy-all', ['deploy', 'git']);
 };
+
+// https://github.com/uncss/grunt-uncss

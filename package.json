@@ -15,7 +15,10 @@
     "dev:start": "nodemon dist/server/index.js",
     "dev:build": "webpack && concurrently \"webpack --watch\" \"nodemon dist/server/index.js\""
   },
-  "keywords": ["fullstack", "fullstackhrivnak"],
+  "keywords": [
+    "fullstack",
+    "fullstackhrivnak"
+  ],
   "author": "James Hrivnak",
   "license": "ISC",
   "dependencies": {
@@ -44,10 +47,12 @@
     "dotenv-webpack": "^7.0.3",
     "grunt": "^1.4.1",
     "grunt-aws-s3": "^2.0.2",
+    "grunt-cloudfront-invalidate": "^1.0.1",
     "grunt-contrib-cssmin": "^4.0.0",
     "grunt-contrib-uglify": "^5.0.1",
     "grunt-git": "^1.1.1",
     "grunt-pm2-deploy": "^0.2.0",
+    "grunt-uncss": "^0.10.1",
     "grunt-webpack": "^4.0.3",
     "mini-css-extract-plugin": "^2.2.0",
     "node-sass": "^6.0.1",
