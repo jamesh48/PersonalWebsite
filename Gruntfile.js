@@ -86,7 +86,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Improved the visual aspects of the Admin Resume Controls'
+          message: 'Refined handleSubmit in admin resume view so that it filters all empty values'
         }
       }
     },

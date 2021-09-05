@@ -144,7 +144,12 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
 
   }
 
-  const handleSubmit = ({ target: { parentNode: formNode, dataset: { parentbreadth, parentdepth, depth, breadth, name } } }) => {
+  const handleSubmit = ({
+    target: {
+      parentNode: formNode,
+      dataset: { parentbreadth, parentdepth, depth, breadth, name }
+    }
+  }) => {
     event.preventDefault();
 
     const patch = editInputs.map((input) => {
@@ -154,10 +159,10 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
           return {
             "title": section.value,
             "highlightDetail": section?.highlightDetail?.map((highlightDetail, highlightIndex) => {
-              return highlightDetail.value.trim() !== '' ? {
+              return highlightDetail.value ? {
                 "title": highlightDetail.value
               } : null
-            }).filter((x) => { return x && x.title }),
+            }).filter((x) => x && x.title.trim().length),
             "detail": section.detail.map((detail) => {
               return {
                 "title": detail.value,
@@ -168,16 +173,23 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
                 //     "detail": []
                 //   }
                 // }).filter((x) => { return x && x.title })
-              }
-            })
-          }
-        }).filter((x) => { return x && x.title })
+              };
+            }).filter((x) => x && x.title.trim().length)
+          };
+        }).filter((x) => x && x.title.trim().length)
       };
-    });
+    }).filter((x) => x && x.title.trim().length);
+
     return patchResumeCallback(patch);
   };
 
-  const handleClick = ({ target: { parentNode: { dataset: { breadth, depth, parentbreadth } } } }) => {
+  const handleClick = ({
+    target: {
+      parentNode: {
+        dataset: { breadth, depth, parentbreadth }
+      }
+    }
+  }) => {
     setEditInputs((prevEditInputs) => {
       if (depth === '0') {
         prevEditInputs[breadth].shown = 'editing';
@@ -406,7 +418,7 @@ export default ({ patchResumeCallback, patchActiveResumeCallback, postResumeCall
                                       handleClick={handleClick}
                                       displayItem={highlights.value}
                                     />
-                                    <br/>
+                                    <br />
                                     <AdminEditContainer
                                       depth={5}
                                       parentBreadth={prevBreadth + '_' + currItemBreadth}
