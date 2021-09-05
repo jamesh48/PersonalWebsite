@@ -16,7 +16,7 @@ export default {
           <script>window.__INITIAL__DATA__=${JSON.stringify(data)}</script>
 
           <!-- For Dev Mode -->
-         <!--<link rel='stylesheet' href='/static/appRouter.css'/>-->
+         <!-- <link rel='stylesheet' href='/static/appRouter.css'/> -->
           <meta http-equiv="pragma" content="no-cache" />
         </head>
 
@@ -54,7 +54,6 @@ export default {
   </footer>
 
     <script src='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/appRouter-bundle.js'></script>
-
     <script src='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/minesweeper-bundle.js'/></script>
     <script src='https://d1y3bjxf7c78hf.cloudfront.net/mines/build/public/public-bundle.js'></script>
     <script src='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/footer-bundle.js'></script>
@@ -63,6 +62,7 @@ export default {
 `,
 };
 
-
+// Live
+{/* <script src='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/appRouter-bundle.js'></script> */ }
 // <!-- For Dev... -->
-{/* <script src='/static/appRouter.js'/></script> */}
+{/* <script src='/static/appRouter.js'/></script> */ }

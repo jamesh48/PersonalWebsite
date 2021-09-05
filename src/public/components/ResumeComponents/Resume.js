@@ -61,7 +61,7 @@ export default (props) => {
         //   // Public View
         //   <PublicResume {...props} resume={resume} />
         // ) : admin ? (
-          <AdminResume resumeNames={resumeNames} resume={resume} patchResumeCallback={patchResumeCallback} patchActiveResumeCallback={patchActiveResumeCallback} postResumeCallback={postResumeCallback} resumeData={props.resumeData} />
+          <AdminResume resumeNames={resumeNames} resumeX={resume} patchResumeCallback={patchResumeCallback} patchActiveResumeCallback={patchActiveResumeCallback} postResumeCallback={postResumeCallback} resumeData={props.resumeData} />
         // ) : null
       }
     </div>)
