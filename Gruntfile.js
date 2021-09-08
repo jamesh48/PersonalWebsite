@@ -98,7 +98,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Switching back to public resume for the night'
+          message: 'End of day commit, lots of progress, began working on an UI for portfolio containers'
         }
       }
     },

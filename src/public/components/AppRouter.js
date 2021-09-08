@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
 import {
-  StaticRouter as Router,
+  BrowserRouter as Router,
   Link,
-  Route
+  Route,
+  Switch,
+  useHistory
 } from "react-router-dom";
 
 import Contact from './ContactComponents/Contact.js';
@@ -21,23 +24,28 @@ export default (props) => {
   const handleAdminSubmit = () => {
     event.preventDefault();
     setAdmin(true)
-  }
+  };
+
   const handleAdminChange = () => {
     setAdminPass(event.target.value);
-  }
+  };
+
   return (
     <>
       <nav id='headerNav'>
         <ul>
           <Link className='routerLink' to="/">Home</Link>
-          <Link className='routerLink' to="/fullstack/minesweeper">Minesweeper</Link>
+          <a className='routerLink' href="/fullstack/minesweeper">Minesweeper</a>
           <Link className='routerLink' to="/fullstack/contact">Contact</Link>
         </ul>
       </nav>
 
-      <Route exact path="/" render={() => (<Home {...props}/>)} />
-      <Route path="/fullstack/minesweeper" component={Minesweeper} />
-      <Route path="/fullstack/contact" component={Contact} />
+      <Switch>
+        <Route exact path="/" render={() => (<Home {...props} />)} />
+        <Route path="/fullstack/minesweeper" component={Minesweeper} />
+        <Route path="/fullstack/contact" component={Contact} />
+      </Switch>
+
     </>
   );
 };

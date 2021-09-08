@@ -1,0 +1,73 @@
+.adminPortfolioContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  form {
+    display: flex;
+    border: 1px solid ivory;
+    margin: 1% 0;
+    flex-direction: column;
+    padding: 0 1.5%;
+
+    .innerInputForm {
+      margin: 2% 0;
+      .labelDiv {
+        display: flex;
+        justify-content: center;
+        background-color: darkblue;
+        color: ivory;
+        border: 1px solid ivory;
+        label {
+          padding: 0.75% 0;
+          justify-content: center;
+        }
+      }
+      .nestedStylesContainer {
+        display: flex;
+        justify-content: center;
+        .adminPortfolioInput {
+          flex: 0.5;
+        }
+      }
+      .adminPortfolioInput {
+        display: flex;
+        flex-direction: column;
+        background-color: ivory;
+        input {
+          text-align: center;
+          padding: 1.5% 0;
+        }
+      }
+      .githubAdminContainer {
+        display: flex;
+        flex-direction: column;
+        .nestedAdminGithubContainer {
+          display: flex;
+          justify-content: center;
+          .titleAndLinkContainer {
+            display: flex;
+            flex: 0.5;
+            input {
+              flex: 0.5;
+              &:focus {
+                flex: 1;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .portfolioSubmitButton {
+      background-color: lightgoldenrodyellow;
+      padding: 0.5%;
+      width: 100%;
+      margin: 2% auto;
+      border: 1px solid ivory;
+      &:hover {
+        background-color: green;
+        color: ivory;
+      }
+    }
+  }
+}

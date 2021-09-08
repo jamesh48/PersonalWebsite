@@ -3,11 +3,29 @@ import './home.scss';
 import '../../main-styles/global.scss';
 import MarqueeContainer from './Home_Components/MarqueeSection.js';
 import MarqueeButtons from './Home_Components/MarqueeButtons.js';
-import Portfolio from './Home_Components/Portfolio.js';
+import Portfolio from '../PortfolioComponents/PublicView/Portfolio.js';
+import AdminPortfolio from '../PortfolioComponents/AdminView/AdminPortfolio.js';
 import Resume from '../ResumeComponents/Resume.js';
 import mobileBrowserFunction from './mobileBrowserUtil.js';
 
+
+function debounce(fn, ms) {
+  let timer
+  return _ => {
+    clearTimeout(timer)
+    timer = setTimeout(_ => {
+      timer = null
+      fn.apply(this, arguments)
+    }, ms)
+  };
+}
+
+
 export default (props) => {
+  const [dimensions, setDimensions] = useState({
+    height: null,
+    width: null
+  })
   const [hoverDepth, setHoverDepth] = useState(null);
   const [hoverBreadth, setHoverBreadth] = useState(null);
   const [mobileBrowser, setMobileBrowser] = useState(false);
@@ -18,7 +36,26 @@ export default (props) => {
     if (mobileBrowser && document.getElementById('cursor')) {
       document.getElementById('cursor').remove();
     }
-  }, [mobileBrowser])
+  }, [mobileBrowser]);
+
+  useEffect(() => {
+    const debouncedHandleResize = debounce(() => {
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth
+      })
+    }, 500);
+
+    window.addEventListener('resize', debouncedHandleResize);
+
+    return _ => {
+      window.removeEventListener('resize', debouncedHandleResize)
+    }
+  })
+
+  useEffect(() => {
+    setMobileBrowser(() => dimensions.width >= 1150 ? false : true)
+  }, [dimensions]);
 
   useEffect(() => {
     const mobileBrowserTest = mobileBrowserFunction();
@@ -33,7 +70,7 @@ export default (props) => {
           setMarqueeButtonsPlacement(entry.target.id)
         }
       });
-    }, { threshold: [1] });
+    }, { threshold: [.8] });
 
     observer.observe(document.querySelector('#about-me-root'));
     observer.observe(document.querySelector("#resume-root"));
@@ -198,7 +235,7 @@ export default (props) => {
         {
           marqueeButtonsPlacement === 'resume-root' && !mobileBrowser ?
             (
-              <div className={'fader'}>
+              <div className='fader'>
                 <MarqueeButtons />
                 <hr className='marqueeButtonsHR' />
               </div>
@@ -207,7 +244,14 @@ export default (props) => {
       </div>
 
       <div data-name='Portfolio' className='container' id='portfolio-root'>
-        <Portfolio {...props} mobileBrowser={mobileBrowser} />
+        {
+          !props.admin ?
+            <Portfolio {...props} mobileBrowser={mobileBrowser} />
+            : <AdminPortfolio {...props} />
+
+        }
+
+
         {marqueeButtonsPlacement === 'portfolio-root' && !mobileBrowser ?
           (
             <div className={'fader'}>

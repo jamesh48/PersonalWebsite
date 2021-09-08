@@ -8,63 +8,64 @@ import { StaticRouter as Router } from "react-router-dom";
 import AppRouter from 'Public/components/AppRouter.js';
 import Minesweeper from 'Public/components/MinesweeperComponents/Minesweeper_Proxy.js';
 import Footer from 'Public/components/FooterComponents/Footer.js';
-import templates from './templates.js';
+import templates from 'Server/templates.js';
 import { getResume } from 'Database/resume_controllers.js';
+import { getTopTimes } from 'Minesweeper/minesweeperControllers.js';
+import { getAllPortfolioItems } from 'Database/controllers/portfolio_controllers.js';
 import portfolioJSON from 'PortfolioJSON';
 import footerJSON from 'FooterJSON';
 
 const { htmlStart, htmlMid, htmlEnd } = templates;
 const app = express();
-import resumeRouter from './ResumeRoutes.js';
-import minesweeperRouter from './minesweeperRoutes.js';
+
+import staticRouter from './staticRoutes.js';
+import resumeRouter from './resumeRoutes.js';
+import portfolioRouter from './portfolioRoutes.js';
+import minesweeperRouter from 'Minesweeper/minesweeperRoutes.js';
 
 app.use(cors());
+
+app.use('*', (req, res, next) => {
+  console.log(req.method, req.originalUrl)
+  next();
+})
 
 // --> serves the Dist/Public Folder
 app.use("/static", express.static(path.resolve(__dirname, "../public")));
 
+// app.use('/static', staticRouter);
 app.use(/(resume)?/, resumeRouter);
 app.use(/(minesweeper)?/, minesweeperRouter);
+app.use(/(portfolio)?/, portfolioRouter);
 
-app.get("/", async (req, res) => {
-  const activeResume = await getResume();
+app.get("*", async (req, res) => {
+  const context = {};
 
+  const minesweeperTopTimes = req.url.indexOf('minesweeper') > -1 ? await getTopTimes() : null;
+
+  const activeResume = req.url === '/' ? await getResume() : null;
+  // const portfolioJSON = req.url === '/' ? await getAllPortfolioItems() : null;
   const appStream = ReactDOMServer.renderToNodeStream(
-    <Router >
+    <Router location={req.url} context={context}>
       <AppRouter />
     </Router>
   );
   const footerStream = ReactDOMServer.renderToNodeStream(<Footer />);
-  res.write(htmlStart({ portfolioJSON: portfolioJSON, footerJSON: footerJSON, resumeData: activeResume }));
+
+  res.write(htmlStart({
+    portfolioJSON: portfolioJSON,
+    footerJSON: footerJSON,
+    topTimes: minesweeperTopTimes,
+    resumeData: activeResume
+  }));
+
   appStream.pipe(res, { end: false });
   appStream.on("end", () => {
     res.write(htmlMid);
     footerStream.pipe(res, { end: false });
     footerStream.on('end', () => {
       res.write(htmlEnd)
-      res.end();
-    });
-  });
-});
 
-app.get("/fullstack*", (req, res) => {
-  const context = {};
-  const appStream = ReactDOMServer.renderToNodeStream(
-    <Router location={req.url} context={context}>
-      <AppRouter />
-    </Router>
-  );
-
-  const footerStream = ReactDOMServer.renderToNodeStream(
-    <Footer />
-  );
-  res.write(htmlStart({ portfolioJSON: portfolioJSON, footerJSON: footerJSON }));
-  appStream.pipe(res, { end: false });
-  appStream.on("end", () => {
-    res.write(htmlMid);
-    footerStream.pipe(res, { end: false });
-    footerStream.on("end", () => {
-      res.write(htmlEnd);
       if (context.url) {
         res.writeHead(301, { Location: context.url });
         res.end();

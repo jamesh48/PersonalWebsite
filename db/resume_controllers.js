@@ -37,7 +37,7 @@ module.exports = {
 
       return created;
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
       return err;
     }
   },
@@ -86,8 +86,10 @@ module.exports = {
 
       let existing_Resume = await ResumeDetails.findOne(
         { where: { active: true } }
-      )
+      );
+
       const { resume_Details } = existing_Resume;
+
       if (resume_Details === null) {
         existing_Resume.set({ "resume_Details": patchers })
         const { dataValues: patched } = await existing_Resume.save();
@@ -99,7 +101,7 @@ module.exports = {
         return patched;
       }
     } catch (err) {
-      console.log(err)
+      console.log(err.message)
       throw err;
     }
     //   Object.keys(new_Technical_Skills).forEach((skill) => {

@@ -13,7 +13,7 @@ const css = {
     // options: {
     //   additionalData: process.env.CloudfrontCSS
     // }
-// CloudfrontCSS=$Cloudfront: "https://d1y3bjxf7c78hf.cloudfront.net/main/main-images/linkedin.jpg"
+    // CloudfrontCSS=$Cloudfront: "https://d1y3bjxf7c78hf.cloudfront.net/main/main-images/linkedin.jpg"
 
   }]
 }
@@ -33,11 +33,11 @@ const serverConfig = {
   mode: "development",
   target: "node",
   plugins: [new MiniCssExtractPlugin(),
-  //   new webpack.DefinePlugin({
-  //   "process.env": JSON.stringify(json)
-  // })
-],
-devtool: "source-map",
+    //   new webpack.DefinePlugin({
+    //   "process.env": JSON.stringify(json)
+    // })
+  ],
+  devtool: "source-map",
   node: {
     __dirname: false,
   },
@@ -57,7 +57,9 @@ devtool: "source-map",
       PortfolioJSON: path.resolve('Data/PortfolioData.json'),
       FooterJSON: path.resolve('Data/FooterData.json'),
       Database: path.resolve('db'),
-      Public: path.resolve('src/public')
+      Public: path.resolve('src/public'),
+      Server: path.resolve('src/server'),
+      Minesweeper: path.resolve('src/server/Minesweeper'),
     },
   }
 };
@@ -71,14 +73,13 @@ const clientConfig = {
       "fs": false,
       "path": false,
       "os": false
-    },
-
+    }
   },
   target: "web",
   plugins: [new MiniCssExtractPlugin(),
-  //   new webpack.DefinePlugin({
-  //   "process.env": JSON.stringify(json)
-  // })
+    //   new webpack.DefinePlugin({
+    //   "process.env": JSON.stringify(json)
+    // })
   ],
   entry: {
     "appRouter": path.resolve(

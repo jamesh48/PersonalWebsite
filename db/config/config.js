@@ -20,9 +20,10 @@ const model = name => database.models[name];
 
 const ResumeDetails = require(`../models/resume.js`)(sequelize, Sequelize.DataTypes);
 const BlogPosts = require(`../models/blog_posts.js`)(sequelize, Sequelize.DataTypes);
+const PortfolioItems = require('../models/portfolio_items.js')(sequelize, Sequelize.DataTypes);
 
 module.exports = (database) = {
   sequelize: sequelize,
-  models: { ResumeDetails, BlogPosts},
+  models: { ResumeDetails, BlogPosts, PortfolioItems},
   model,
 };

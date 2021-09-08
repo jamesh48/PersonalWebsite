@@ -46,9 +46,8 @@ export default ({ setHovered, appData, rowIndex, columnIndex, nestedIndicator, h
                       nestedGithub={nestedGithub}
                       appData={appData}
                     />
-                  )
+                  );
                 })}
-
               </div>
             )
           })

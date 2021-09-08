@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PublicContainers from './publicUtils.jsx';
+import PublicContainers from './publicUtils.js';
 
 
 export default (props) => {

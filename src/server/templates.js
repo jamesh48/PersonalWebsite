@@ -1,16 +1,22 @@
+import path from 'path';
+import env from 'dotenv';
+env.config({ path: path.resolve('.env') });
+const { CLOUDFRONTLINK: cFLink } = process.env;
+
 export default {
-  htmlStart: (data) => {
-    return (
-      `<!DOCTYPE HTML>
-      <html>
-        <head>
+  htmlStart: (data, minesweeperGame) => {
+    const startingSection = //html
+      `
+      <!DOCTYPE HTML>
+        <html>
+          <head>
           <meta charset="utf-8">
           <title>James Hrivnak</title>
-          <link rel='stylesheet' href='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/appRouter.min.css'/>
-          <link rel="icon" type="image/png" href='https://d1y3bjxf7c78hf.cloudfront.net/main/main-images/ges-favicon-3.png'/>
-          <link rel='stylesheet' href='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/footer.min.css'/>
-          <link rel='stylesheet' href='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/minesweeper.min.css'/>
-          <link rel='stylesheet' href='https://d1y3bjxf7c78hf.cloudfront.net/mines/build/public/index.min.css'/>
+          <link rel='stylesheet' href='${cFLink}/main/build/public/appRouter.min.css'/>
+          <link rel="icon" type="image/png" href='${cFLink}/main/main-images/ges-favicon-3.png'/>
+          <link rel='stylesheet' href='${cFLink}/main/build/public/footer.min.css'/>
+          <link rel='stylesheet' href='${cFLink}/main/build/public/minesweeper.min.css'/>
+          <link rel='stylesheet' href='${cFLink}/mines/build/public/index.min.css'/>
 
           <!-- Server Side Rendering of Page Data -->
           <script>window.__INITIAL__DATA__=${JSON.stringify(data)}</script>
@@ -40,25 +46,29 @@ export default {
         });
       </script>
       <div id="root">
-      `
-    );
+      `;
+    return startingSection;
   },
-  htmlMid: `
+  htmlMid: /* html */
+    `
       </div>
 
     </body>
   <footer id='footerroot'>
     `,
 
-  htmlEnd: `
+  htmlEnd: /* html */
+    `
   </footer>
+    <script src='/static/appRouter.js'/></script>
+    <!-- <script src='${cFLink}/main/build/public/appRouter-bundle.js'></script> -->
 
-    <script src='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/appRouter-bundle.js'></script>
-    <script src='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/minesweeper-bundle.js'/></script>
-    <script src='https://d1y3bjxf7c78hf.cloudfront.net/mines/build/public/public-bundle.js'></script>
-    <script src='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/footer-bundle.js'></script>
+    <script src='${cFLink}/mines/build/public/public-bundle.js'></script>
 
-</html>
+    <!-- <script src='${cFLink}/main/build/public/minesweeper-bundle.js'/></script> -->
+
+    <script src='${cFLink}/main/build/public/footer-bundle.js'></script>
+  </html>
 `,
 };
 
