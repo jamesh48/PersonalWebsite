@@ -32,9 +32,10 @@
     .smileContainer {
       flex: .5;
       align-self: center;
-      min-height: 25rem;
+      min-height: 30rem;
       border: 1px solid ivory;
-      background-position: center;
+      background-position-y: 25%;
+      background-position-x: 75%;
       background-repeat: no-repeat;
       border-radius: 50%;
       background-image: url(https://d1y3bjxf7c78hf.cloudfront.net/main/main-images/linkedin.jpg);
@@ -47,15 +48,24 @@
     flex-direction: column;
     margin-bottom: 10%;
     text-align: center;
-    .marqueeContents {
-      display: flex;
-      flex-direction: column;
-      .marqueeParagraphs {
-        text-align: center;
-        .smileContainer {
-          margin: 2.5% auto;
-          width: 0;
-          padding: 20%;
+    .aboutMeMarqueeDetails {
+      .aboutMeMarqueeTitle {
+        font-size: 4.5em;
+      }
+      .marqueeContents {
+        display: flex;
+        flex-direction: column;
+        .marqueeParagraphs {
+          text-align: center;
+          .aboutMeMarqueeDescription {
+            font-size: 1.9em;
+          }
+          .smileContainer {
+            margin: 2.5% auto;
+            min-height: 25rem;
+            width: 50%;
+            padding: 0;
+          }
         }
       }
     }

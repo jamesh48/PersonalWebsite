@@ -42,11 +42,11 @@ exports.AdminEditContainer = ({ currentInputEl, index, breadth, depth, placehold
 
   return (
     <div className={
-      depth === 0 ? `${'titleRow'}`
-        : depth === 1 ? `${'sectionRow'}`
-          : depth === 2 ? `${'detailRow'}`
-            : depth === 3 ? `${'minorRow'}`
-              : (depth === 4 || depth === 5) ? `${'highlightsRow'}`
+      depth === 0 ? 'titleRow'
+        : depth === 1 ? 'sectionRow'
+          : depth === 2 ? 'detailRow'
+            : depth === 3 ? 'minorRow'
+              : (depth === 4 || depth === 5) ? 'highlightsRow'
                 : null
     }>
       <form

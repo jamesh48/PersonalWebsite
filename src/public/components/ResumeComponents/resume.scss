@@ -7,6 +7,106 @@
   .resumeUIContainer {
     margin: 3% 0;
   }
+  &--Mobile {
+    text-rendering: geometricPrecision;
+
+    .resumeContainerTitle {
+      font-size: 4em;
+      margin-bottom: 5%;
+    }
+
+    .resumeUIContainer {
+      margin: 5% 0;
+
+      .resumeParentContainer {
+        // Default View (nothing highlighted)
+        .publicResponsiveRowX {
+          text-align: center;
+          // width: 15%;
+          .publicColumnContainerTitle {
+            h6 {
+              font-size: 2em;
+              padding: 25% 0;
+              line-height: 1.5;
+            }
+          }
+        }
+
+        .publicContainerRow {
+          .responsiveMobileColumnContainer {
+            width: 25%;
+            text-align: center;
+          }
+          .publicColumnContainerTitle {
+            h6 {
+              font-size: 2em;
+              padding: 50% 0;
+              line-height: 1.5;
+            }
+          }
+
+          .publicColumnContainer {
+            flex: 1;
+            .resumeParentContainer {
+              .publicChildContainerRow {
+                margin: 0;
+                .publicColumnContainerSection,
+                .publicColumnContainerDetail {
+                  margin: 2%;
+                }
+                .publicColumnContainerSection {
+                  h6 {
+                    font-size: 2em;
+                  }
+                }
+
+                .publicColumnContainerDetail {
+                  font-size: 1.65em;
+                  line-height: 2;
+                }
+                .minorContainer {
+                  border-top: 1px solid ivory;
+                  border-bottom: 1px solid ivory;
+                  width: 90%;
+                  padding: 5% 0;
+                  align-self: center;
+                  text-align: center;
+                  .minorContainerTitle {
+                    padding: 2% 0;
+                    font-size: 2em;
+                    text-decoration: none;
+                    margin-bottom: 2.5%;
+                  }
+                  .minorHighlights {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    font-size: 1.5em;
+                    line-height: 2;
+                    list-style: circle;
+                    .minorItem {
+                      display: list-item;
+                      padding: 1.5% 0;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          // Parent is highlighted
+          &:hover {
+            .publicColumnContainerTitle {
+              h6 {
+                padding: 100% 10%;
+              }
+            }
+            .publicColumnContainer {
+            }
+          }
+        }
+      }
+    }
+  }
 }
 .flexResumeContainer {
   display: flex;

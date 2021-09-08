@@ -4,7 +4,7 @@ env.config({ path: path.resolve('.env') });
 const { CLOUDFRONTLINK: cFLink } = process.env;
 
 export default {
-  htmlStart: (data, minesweeperGame) => {
+  htmlStart: (data, handleMouseMove) => {
     const startingSection = //html
       `
       <!DOCTYPE HTML>
@@ -27,24 +27,7 @@ export default {
         </head>
 
       <body>
-        <script>
-        window.addEventListener("mousemove", function (e) {
-          if(!document.getElementById('cursor')) {
-            const newCursor = document.createElement('div');
-            newCursor.id = 'cursor';
-            document.querySelector('body').appendChild(newCursor);
-          };
-          let scrollYOffset = window.scrollY;
-          // Gets the x,y position of the mouse cursor
-          x = e.clientX;
-          y = e.clientY;
 
-          // sets the image cursor to new relative position
-          let cursor = document.getElementById('cursor');
-          cursor.style.left = x + 'px';
-          cursor.style.top = (scrollYOffset + y) + "px";
-        });
-      </script>
       <div id="root">
       `;
     return startingSection;
@@ -60,7 +43,7 @@ export default {
   htmlEnd: /* html */
     `
   </footer>
-    <script src='/static/appRouter.js'/></script>
+    <script src='/static/appRouter.js'></script>
     <!-- <script src='${cFLink}/main/build/public/appRouter-bundle.js'></script> -->
 
     <script src='${cFLink}/mines/build/public/public-bundle.js'></script>

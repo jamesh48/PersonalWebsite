@@ -14,7 +14,7 @@ import { getTopTimes } from 'Minesweeper/minesweeperControllers.js';
 import { getAllPortfolioItems } from 'Database/controllers/portfolio_controllers.js';
 import portfolioJSON from 'PortfolioJSON';
 import footerJSON from 'FooterJSON';
-
+import handleMouseMove from '../public/Utils.js';
 const { htmlStart, htmlMid, htmlEnd } = templates;
 const app = express();
 
@@ -57,7 +57,7 @@ app.get("*", async (req, res) => {
     footerJSON: footerJSON,
     topTimes: minesweeperTopTimes,
     resumeData: activeResume
-  }));
+  }, handleMouseMove));
 
   appStream.pipe(res, { end: false });
   appStream.on("end", () => {

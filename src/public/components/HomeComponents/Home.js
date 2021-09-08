@@ -5,20 +5,10 @@ import MarqueeContainer from './Home_Components/MarqueeSection.js';
 import MarqueeButtons from './Home_Components/MarqueeButtons.js';
 import Portfolio from '../PortfolioComponents/PublicView/Portfolio.js';
 import AdminPortfolio from '../PortfolioComponents/AdminView/AdminPortfolio.js';
+import Utils from '../../Utils.js';
+const { handleMouseMove, mobileBrowserFunction, debounce } = Utils;
 import Resume from '../ResumeComponents/Resume.js';
-import mobileBrowserFunction from './mobileBrowserUtil.js';
-
-
-function debounce(fn, ms) {
-  let timer
-  return _ => {
-    clearTimeout(timer)
-    timer = setTimeout(_ => {
-      timer = null
-      fn.apply(this, arguments)
-    }, ms)
-  };
-}
+// import mobileBrowserFunction from './mobileBrowserUtil.js';
 
 
 export default (props) => {
@@ -30,15 +20,20 @@ export default (props) => {
   const [hoverBreadth, setHoverBreadth] = useState(null);
   const [mobileBrowser, setMobileBrowser] = useState(false);
   const [marqueeButtonsPlacement, setMarqueeButtonsPlacement] = useState('about-me-root');
-  const [cursor, setCursor] = useState(true);
 
-  useEffect(() => {
-    if (mobileBrowser && document.getElementById('cursor')) {
-      document.getElementById('cursor').remove();
-    }
+  cursor: useEffect(() => {
+    if (mobileBrowser) {
+      window.removeEventListener("mousemove", handleMouseMove, true);
+      // If it exists remove it, if it doesn't exist (initial page load), skip...
+      if (document.getElementById('cursor')) {
+        document.getElementById('cursor').remove();
+      }
+    } else {
+      window.addEventListener("mousemove", handleMouseMove, true);
+    };
   }, [mobileBrowser]);
 
-  useEffect(() => {
+  debounce: useEffect(() => {
     const debouncedHandleResize = debounce(() => {
       setDimensions({
         height: window.innerHeight,
@@ -53,17 +48,17 @@ export default (props) => {
     }
   })
 
-  useEffect(() => {
+  window_resize: useEffect(() => {
     setMobileBrowser(() => dimensions.width >= 1150 ? false : true)
   }, [dimensions]);
 
-  useEffect(() => {
+  set_mobile_browser: useEffect(() => {
     const mobileBrowserTest = mobileBrowserFunction();
     setMobileBrowser(!!mobileBrowserTest);
   }, []);
 
   // This useEffect moves the marqueebuttons depending on what element is in view.
-  useEffect(() => {
+  set_marquee_buttons: useEffect(() => {
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
