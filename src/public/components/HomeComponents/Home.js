@@ -20,6 +20,7 @@ export default (props) => {
   })
   const [hoverParams, setHoverParams] = useState([null, null]);
   const [mobileBrowser, setMobileBrowser] = useState(false);
+  const [smallWindow, setSmallWindow] = useState(false);
   const [marqueeButtonsPlacement, setMarqueeButtonsPlacement] = useState('about-me-root');
 
   cursor: useEffect(() => {
@@ -36,6 +37,7 @@ export default (props) => {
 
   debounce: useEffect(() => {
     const debouncedHandleResize = debounce(() => {
+
       setDimensions({
         height: window.innerHeight,
         width: window.innerWidth
@@ -47,10 +49,12 @@ export default (props) => {
     return _ => {
       window.removeEventListener('resize', debouncedHandleResize)
     }
-  })
+  }, [])
 
   window_resize: useEffect(() => {
-    setMobileBrowser(() => dimensions.width >= 1150 ? false : true)
+    if (dimensions.width) {
+      setSmallWindow(() => dimensions.width >= 1150 ? false : true)
+    }
   }, [dimensions]);
 
   set_mobile_browser: useEffect(() => {
@@ -81,10 +85,13 @@ export default (props) => {
   return (
     <div>
       <div id='about-me-root' data-name='About Me' className={'container'}>
-        <MarqueeContainer mobileBrowser={mobileBrowser} />
+        <MarqueeContainer
+          smallWindow={smallWindow}
+          mobileBrowser={mobileBrowser}
+        />
         {
           marqueeButtonsPlacement === 'about-me-root' && !mobileBrowser ? (
-            <div className={'fader'}>
+            <div className='fader'>
               <MarqueeButtons />
               <hr className='marqueeButtonsHR' />
             </div>
@@ -95,6 +102,7 @@ export default (props) => {
       <div data-name='Resume' id='resume-root'
         className={'container'}>
         <Resume
+          smallWindow={smallWindow}
           mobileBrowser={mobileBrowser}
           handleMobileResumeClick={test}
           handleHover={test}

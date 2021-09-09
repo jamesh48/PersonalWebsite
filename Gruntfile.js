@@ -28,12 +28,12 @@ module.exports = function (grunt) {
             src: ['index.min.css', 'index-bundle.js'],
             dest: 'main/build/server'
           },
-          {
-            expand: true,
-            cwd: 'src/images',
-            src: ['*.png', '*.jpg', '*.jpeg'],
-            dest: 'main/main-images'
-          }
+          // {
+          //   expand: true,
+          //   cwd: 'src/images',
+          //   src: ['*.png', '*.jpg', '*.jpeg'],
+          //   dest: 'main/main-images'
+          // }
         ]
       }
     },
@@ -98,7 +98,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Made Progress on making a better UX for resume mobile view part 2'
+          message: 'A little more progress on mobile responsiveness'
         }
       }
     },
