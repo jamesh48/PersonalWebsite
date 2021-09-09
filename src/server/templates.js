@@ -12,7 +12,7 @@ export default {
           <head>
           <meta charset="utf-8">
           <title>James Hrivnak</title>
-          <link rel='stylesheet' href='${cFLink}/main/build/public/appRouter.min.css'/>
+          <!-- <link rel='stylesheet' href='${cFLink}/main/build/public/appRouter.min.css'/> -->
           <link rel="icon" type="image/png" href='${cFLink}/main/main-images/ges-favicon-3.png'/>
           <link rel='stylesheet' href='${cFLink}/main/build/public/footer.min.css'/>
           <link rel='stylesheet' href='${cFLink}/main/build/public/minesweeper.min.css'/>

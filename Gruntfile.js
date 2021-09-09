@@ -98,7 +98,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Made Progress on making a better UX for resume mobile view'
+          message: 'Made Progress on making a better UX for resume mobile view part 2'
         }
       }
     },

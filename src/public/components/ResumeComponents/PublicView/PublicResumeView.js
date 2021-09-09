@@ -5,7 +5,7 @@ import PublicContainers from './publicUtils.js';
 export default (props) => {
   return (
     <div className={props.mobileBrowser ? `resumeContainer resumeContainer--Mobile` : `resumeContainer`}>
-      <h4 className={'resumeContainerTitle'}>Resume {/*resume.resume_Name*/}</h4>
+      <h4 className='resumeContainerTitle'>Resume {/*resume.resume_Name*/}</h4>
       <PublicContainers {...props}/>
     </div>
   )

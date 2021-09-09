@@ -1,5 +1,5 @@
 const sequelize = require('../config/config.js');
-const Promise = require('Bluebird');
+const Promise = require('bluebird');
 module.exports = {
   addPortfolioItem: () => {
 

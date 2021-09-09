@@ -6,7 +6,121 @@
   }
   .resumeUIContainer {
     margin: 3% 0;
+    .resumeParentContainer {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+
+      .publicColumnContainerTitle,
+      .publicColumnContainerSection,
+      .publicColumnContainerDetail {
+        display: flex;
+        width: 25%;
+        justify-content: center;
+        h6 {
+          display: flex;
+          justify-content: center;
+          margin: 0 auto;
+          flex: 1;
+          align-self: center;
+        }
+      }
+
+      // Default View
+      .publicResponsiveRowX {
+        width: 35%;
+        .publicColumnContainerTitle {
+          width: 100%;
+          h6 {
+            // line-height: 3;
+            padding: 5% 0;
+          }
+        }
+      }
+      // View when Being Hovered
+      .publicContainerRow {
+        display: flex;
+        &:hover .publicColumnContainerTitle {
+          // height: 100%;
+          border: 1px solid lightslategray;
+          background-color: ivory;
+          h6 {
+            padding: 100% 0;
+            color: darkslategray;
+          }
+        }
+        .publicColumnContainerTitle {
+          padding: 2% 0;
+          h6 {
+            color: ivory;
+          }
+        }
+        .publicColumnContainer {
+          width: 0;
+          display: flex;
+          flex-direction: column;
+          // border: 1px solid white;
+          width: 100%;
+          .resumeParentContainer {
+            .publicChildContainerRow {
+              margin: 0 1%;
+              display: flex;
+              flex-direction: column;
+              &:hover .publicColumnContainerSection {
+                border: 1px solid lightslategrey;
+                h6 {
+                  line-height: 3;
+                  background-color: ivory;
+                  color: darkslategrey;
+                }
+              }
+              .publicColumnContainerSection {
+                // height: 100%;
+                width: 100%;
+                h6 {
+                  display: flex;
+                  justify-content: center;
+                  align-items: middle;
+                  font-size: 20px;
+                  padding: 1% 0;
+                }
+              }
+              .publicColumnContainer {
+                .resumeParentContainer {
+                  .publicColumnContainerDetail {
+                    width: 100%;
+                    text-align: center;
+                    // margin-bottom: 1%;
+                    h6 {
+                      line-height: 1.5;
+                    }
+                  }
+                }
+              }
+              .minorContainer {
+                .minorContainerTitle {
+                  text-decoration: underline;
+                }
+                .minorHighlights {
+                  margin: 0 1%;
+                  .minorItem {
+                    display: inline-flex;
+                    margin: 0 1%;
+                    color: ivory;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .publicParentContainerRow {
+        display: flex;
+        height: auto;
+      }
+    }
   }
+
   &--Mobile {
     text-rendering: geometricPrecision;
 
@@ -32,7 +146,19 @@
           }
         }
 
+        // Mobile View when being hovered...
         .publicContainerRow {
+          display: flex;
+
+          // Default Settings, negating the settings caused by browser view
+          &:hover .publicColumnContainerTitle {
+            background-color: transparent;
+            border: none;
+            h6 {
+              color: ivory;
+            }
+          }
+
           .responsiveMobileColumnContainer {
             width: 25%;
             text-align: center;
@@ -40,7 +166,7 @@
           .publicColumnContainerTitle {
             h6 {
               font-size: 2em;
-              padding: 50% 0;
+              padding: 100% 0;
               line-height: 1.5;
             }
           }
@@ -50,9 +176,10 @@
             .resumeParentContainer {
               .publicChildContainerRow {
                 margin: 0;
+
                 .publicColumnContainerSection,
                 .publicColumnContainerDetail {
-                  margin: 2%;
+                  margin: 0 2%;
                 }
                 .publicColumnContainerSection {
                   h6 {
@@ -91,6 +218,16 @@
                   }
                 }
               }
+              .cool {
+                .publicColumnContainerSection {
+                  border: 1px solid lightslategrey;
+                  h6 {
+                    line-height: 3;
+                    background-color: ivory !important;
+                    color: darkslategrey;
+                  }
+                }
+              }
             }
           }
           // Parent is highlighted
@@ -104,10 +241,20 @@
             }
           }
         }
+        .cool {
+          .publicColumnContainerTitle {
+            border: 1px solid lightslategrey;
+            background-color: ivory !important;
+            h6 {
+              color: darkslategrey !important;
+            }
+          }
+        }
       }
     }
   }
 }
+
 .flexResumeContainer {
   display: flex;
   flex-direction: column;
@@ -224,12 +371,6 @@
   }
 }
 
-// .sectionRow > form {
-//   margin: 1% 0;
-//   display: flex;
-//   justify-content: end;
-// }
-
 .sectionRow,
 .detailRow,
 .minorRow,
@@ -282,6 +423,7 @@
   }
 }
 
+// Admin columnContainer
 .columnContainer {
   display: flex;
   flex-direction: column;
@@ -328,24 +470,9 @@
 }
 
 // Public View
-.publicParentContainerRow {
-  display: flex;
-  height: auto;
-}
 
 .publicFinalContainerRow {
   background-color: red;
-}
-
-.publicContainerRow {
-  display: flex;
-  &:hover .publicColumnContainerTitle {
-    // height: 100%;
-    border: 1px solid lightslategray;
-    h6 {
-      padding: 100% 0;
-    }
-  }
 }
 
 .publicContainerRowX {
@@ -358,98 +485,6 @@
   }
 }
 
-.publicResponsiveRowX {
-  width: 35%;
-  .publicColumnContainerTitle {
-    width: 100%;
-  }
-  .publicColumnContainer {
-    width: 0;
-  }
-}
-
-.publicColumnContainer {
-  display: flex;
-  flex-direction: column;
-  // border: 1px solid white;
-  width: 100%;
-}
-
-.publicColumnContainerTitle,
-.publicColumnContainerSection,
-.publicColumnContainerDetail {
-  display: flex;
-  width: 25%;
-  justify-content: center;
-  h6 {
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
-    flex: 1;
-    align-self: center;
-  }
-}
-
-.publicColumnContainerTitle,
-.publicColumnContainerSection {
-  h6:hover {
-    display: flex;
-    background-color: ivory;
-    color: darkslategray;
-    align-items: stretch;
-    align-self: center;
-  }
-}
-
-.publicColumnContainerTitle {
-  h6 {
-    line-height: 3;
-  }
-}
-
-.publicColumnContainerDetail {
-  h6 {
-    line-height: 1.5;
-  }
-}
-
-.publicColumnContainerSection {
-  // height: 100%;
-  width: 100%;
-
-  h6 {
-    // background-color: blue;
-    display: flex;
-    justify-content: center;
-    align-items: middle;
-    font-size: 20px;
-    padding: 1% 0;
-    // &:hover {
-    //   padding: 1.5% 0;
-    //   border: 1px solid lightslategray;
-
-    // }
-  }
-}
-
-.publicChildContainerRow {
-  display: flex;
-  &:hover .publicColumnContainerSection {
-    border: 1px solid lightslategrey;
-    h6 {
-      line-height: 3;
-      background-color: ivory;
-      color: darkslategrey;
-    }
-  }
-}
-
-.publicColumnContainerDetail {
-  width: 100%;
-  text-align: center;
-  margin-bottom: 1%;
-}
-
 .publicColumnContainerMinor {
   background-color: blue;
 }
@@ -458,37 +493,11 @@
   background-color: deeppink;
 }
 
-.minorContainer {
-  .minorContainerTitle {
-    text-decoration: underline;
-  }
-  .minorHighlights {
-    margin: 0 1%;
-    .minorItem {
-      display: inline-flex;
-      margin: 0 1%;
-      color: ivory;
-    }
-  }
-}
-
 .hollywoodHighlights {
   margin: 2% 0;
   margin-bottom: 0;
   overflow: auto;
   background-color: cornflowerblue;
-}
-.publicChildContainerRow {
-  margin: 1%;
-  margin-bottom: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.resumeParentContainer {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
 }
 
 // fade in
@@ -567,6 +576,6 @@
   }
 }
 
-.responsiveMobileColumnContainer {
-  width: 35%;
-}
+// .responsiveMobileColumnContainer {
+//   width: 35%;
+// }

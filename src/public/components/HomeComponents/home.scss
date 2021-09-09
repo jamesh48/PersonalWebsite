@@ -51,6 +51,9 @@
     .aboutMeMarqueeDetails {
       .aboutMeMarqueeTitle {
         font-size: 4.5em;
+        &:active{
+          background-color: red;
+        }
       }
       .marqueeContents {
         display: flex;

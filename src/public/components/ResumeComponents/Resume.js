@@ -65,16 +65,4 @@ export default (props) => {
         ) : null
       }
     </div>)
-}
-
-
-    // if (!admin) {
-    //   return resume?.resume_Name ? (
-    //     // Public View
-    //     <PublicResume mobileBrowser={mobileBrowser} handleMobileResumeClick={handleMobileResumeClick} handleHover={handleHover} hoverDepth={hoverDepth} hoverBreadth={hoverBreadth} resume={resume} />
-    //   ) : null
-    // } else {
-    //   return (
-    //     <AdminResume resumeNames={resumeNames} resume={resume} patchResumeCallback={patchResumeCallback} patchActiveResumeCallback={patchActiveResumeCallback} postResumeCallback={postResumeCallback} />
-    //   )
-    // }
+};
