@@ -30,6 +30,11 @@ app.use('*', (req, res, next) => {
   next();
 })
 
+// app.use(function (req, res, next) {
+//   res.set('Cache-control', 'public, max-age=300')
+//   next();
+// });
+
 // --> serves the Dist/Public Folder
 app.use("/static", express.static(path.resolve(__dirname, "../public")));
 

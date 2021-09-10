@@ -5,6 +5,7 @@ const isEqual = (prevProps, nextProps) => {
   }
 };
 export default React.memo(({ index, appData: { cssStyles }, nestedGithub: { link, title },  mobileBrowser, setNestedHovered, nestedHovered, appRowIndex }) => {
+
   const [doubleClicked, setDoubleClicked] = useState(null);
   useEffect(() => {
     if (mobileBrowser && doubleClicked) {

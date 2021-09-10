@@ -23,7 +23,8 @@ export default {
 
           <!-- For Dev Mode -->
           <link rel='stylesheet' href='/static/appRouter.css'/>
-          <meta http-equiv="pragma" content="no-cache" />
+          <!-- <meta http-equiv="pragma" content="no-cache" /> -->
+           <!-- <meta http-equiv="Cache-control" content="public"> -->
         </head>
 
       <body>

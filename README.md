@@ -1,35 +1,14 @@
 ## PersonalWebsite
 
-### Latest Commit/Push 8/28/21
+Latest Updates on the Personal Website journey include work on Mobile View User Experience- I made it so that the text is larger and the UI more simple on the phone. In general columns seem to be the way to go~ Also the image of me has been a curious rabbit hole, i'll get it to work on my computer but then it will be skewed on my phone, so I got it to work on phone, ipad, and computer but then it was severely skewed on my large monitor- in the end I settled for SCSS media queries which would have likely been the simpilest solution from the start.
 
-[ X ] Researched Code Splitting in Webpack
-    - Researched Webpack splitChunks API
-    - Looked at React code Splitting which lead to loadable
-    - Researched Loadable, cloned an example package
-    - Nothing actionable, yet.
+***
 
-[ X ] Make the default location of the mouse the correct location
-    - Best I could do was append the cursor div to the document on initial mouse move, and track location from there- Much better than the mouse starting in a static position at top: 0, left: 0.
+I've also begun to make a UI for Admin View for portfolio, have improved the UI for the Admin View of Resume and will eventually make an Admin View for the Marquee Container Paragraphs- All with server and Database integrations, Although no one else will see these features except for me, at least my site will be completely (not) hardcoded!
 
-[ X ] Started Optimization of Image Loading from s3
-    - Moved s3 bucket location from Ohio to N. California and connected with Amazon AWS Cloudfront and changed image URLs accordingly. Image urls as environment variables.
-    - Reduced size on main image of me from 1.5GB to 50kb, made it progressive, but still seems to load slow...
-    - Hosted minesweeper images on AWS Cloudfront as well
+***
 
-[ X ] Migrate Existing Server routes for Minesweeper and Resume to SSR Server
-    - Changed minesweeper API routes to use 'minesweeper-' prefix for easier routing.
-
-[ X ] Improved Marquee Section- Image and Paragraphs
-    - text-rendering: gemetric-percision on the paragraph text, played around with trying to get second paragraph of text to wrap around the image of me, settled for pretty good.
-
-[ X ] Deleted unneeded folders and files
-[ X ] Commit, push and Deploy- Goodnight!
-
-...Next
-[ ] Research if better to load react from a cdn or node_modules
-[ ] Continue learning about code splitting
-
-
+I'm also learning about how to make my App more performant with using the React.memo and useCallback APIs, in general- not everything has to be rerendered on an unrelated state change but at the same time, this kind of optimization isn't always necessary. This was a huge discovery and fix with the minesweeper app as the clock setInterval runs and sets state every 10ms- so the whole board was rerendering every 10ms!  I was able to employ a custom useInterval hook to move away from setInterval, and combine with React.memo/useCallback to stop this behavior.
 
 ### Technologies used
 * Front-end
@@ -38,16 +17,24 @@
 * Server
   - Express
 * Database
-  - PostgreSQL/Sequelize, data is stored as nested JSONB
+  - PostgreSQL/Sequelize, Resume and Portfolio data is stored as nested JSONB
 * Deployment
   - Github
-  - PM2, Amazon AWS (ec2 & s3), NGINX
+  - PM2, NGINX
+  - Google Domain for Hosting
+  - Amazon Web Services (AWS)
+    * EC2 Microservice
+    * s3 and Cloudfront CDN for serving static content- images and bundles.
+* Dev
+  - Webpack (SSR)
+  - Grunt - Uglify & cssmin for compacting code, aws s3 upload, cloudfront invalidate for aws, and github intergrations as well. Still looking for away to integrate pm2 deploy script.
 
 ### Features
 
 * Server-Side Rendering
-  - General Logic- in Progress
-  - Code-Splitting- In Progress
+  - General Logic- complete.
+    * React.hydrate now takes in data from Resume, Portfolio Data and Footer Data, as well as the minesweeper app and renders immediately on page load.
+    * I'm 90% finished with integrating my portfolio data with the database, but for now its hard coded. Once thats done I'll be able to hydrate with that particular data from the database.
 
 * Resume View
   - Made from scratch.

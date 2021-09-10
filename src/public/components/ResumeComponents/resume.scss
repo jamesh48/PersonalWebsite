@@ -1,4 +1,6 @@
 .resumeContainer {
+  text-rendering: geometricPrecision;
+  font-weight: 250;
   display: flex;
   flex-direction: column;
   .resumeContainerTitle {
@@ -83,6 +85,7 @@
                   align-items: middle;
                   font-size: 20px;
                   padding: 1% 0;
+                  color: ivory;
                 }
               }
               .publicColumnContainer {
@@ -90,9 +93,10 @@
                   .publicColumnContainerDetail {
                     width: 100%;
                     text-align: center;
-                    // margin-bottom: 1%;
+                    padding: 4.5% 0;
                     h6 {
                       line-height: 1.5;
+                      // font-weight: 200;
                     }
                   }
                 }
@@ -122,8 +126,6 @@
   }
 
   &--Mobile {
-    text-rendering: geometricPrecision;
-
     .resumeContainerTitle {
       font-size: 4em;
       margin-bottom: 5%;
@@ -173,9 +175,22 @@
 
           .publicColumnContainer {
             flex: 1;
+
+
             .resumeParentContainer {
+              &:last-child .publicContainerRow {
+                padding-bottom: 0;
+              }
               .publicChildContainerRow {
                 margin: 0;
+
+                &:hover .publicColumnContainerSection {
+                  border: none;
+                  h6 {
+                    background-color: transparent;
+                    color: ivory;
+                  }
+                }
 
                 .publicColumnContainerSection,
                 .publicColumnContainerDetail {
@@ -184,6 +199,9 @@
                 .publicColumnContainerSection {
                   h6 {
                     font-size: 2em;
+                    color: ivory;
+                    // Test
+                    padding-bottom: 7.5%;
                   }
                 }
 
@@ -213,18 +231,20 @@
                     list-style: circle;
                     .minorItem {
                       display: list-item;
-                      padding: 1.5% 0;
+                      padding: 1% 0;
                     }
                   }
                 }
               }
-              .cool {
+              .activeHighlightedContainer {
+                padding-bottom: 7.5%;
                 .publicColumnContainerSection {
                   border: 1px solid lightslategrey;
                   h6 {
+                    padding: 0 0;
                     line-height: 3;
                     background-color: ivory !important;
-                    color: darkslategrey;
+                    color: darkslategrey !important;
                   }
                 }
               }
@@ -241,7 +261,7 @@
             }
           }
         }
-        .cool {
+        .activeHighlightedContainer {
           .publicColumnContainerTitle {
             border: 1px solid lightslategrey;
             background-color: ivory !important;
@@ -578,4 +598,15 @@
 
 // .responsiveMobileColumnContainer {
 //   width: 35%;
+// }
+
+// .publicColumnContainer .resumeParentContainer:first-of-type .publicChildContainerRow .publicColumnContainerSection h6 {
+  // margin-bottom: 5% !important;
+  // padding-bottom: 0 !important;
+  // padding-top: 0 !important;
+// }
+
+// .resumeParentContainer:last-child .publicContainerRow {
+//   padding-bottom: 0;
+//   background-color: red;
 // }

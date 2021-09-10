@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import ApplicationImgContainer from './ApplicationImgContainer.js';
+import ApplicationImgContainer from './test.js';
 
 export default ({ portfolioJSON, mobileBrowser }) => {
   const [hovered, setHovered] = useState([null, null]);
 
   const portfolioRowJSON = portfolioJSON?.reduce((total, item, index) => {
+    if (mobileBrowser) {
+      total.push([item])
+      return total;
+    }
     if (index % 2 === 0) {
       total.push([item])
     } else {
@@ -18,9 +22,9 @@ export default ({ portfolioJSON, mobileBrowser }) => {
   }, [hovered]);
 
   return (
-    <div className={'portfolioContainer'}>
-      <h4 className={'portfolioTitle'}>Software Engineering Applications</h4>
-      <div className={'portfolioApplicationContainer'}>
+    <div className='portfolioContainer'>
+      <h4 className='portfolioTitle'>Software Engineering Applications</h4>
+      <div className='portfolioApplicationContainer'>
         {
           portfolioRowJSON?.map((portfolioRow, rowIndex) => {
             return (<div key={rowIndex} className={'portfolioApplicationRow'}> {
@@ -46,6 +50,7 @@ export default ({ portfolioJSON, mobileBrowser }) => {
 
 
       </div>
+
     </div >
   )
 };

@@ -1,9 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 export default ({ mobileBrowser, smallWindow }) => {
-  useEffect(() => {
-    console.log(mobileBrowser, smallWindow)
-  })
+
   return (
     <div className={(mobileBrowser || smallWindow) ? `marqueeContainer marqueeContainer--Mobile` : 'marqueeContainer'}>
       <div className='aboutMeMarqueeDetails'>

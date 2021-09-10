@@ -98,7 +98,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'A little more progress on mobile responsiveness'
+          message: 'Improvements made to browser view portfolio, images now only load one time.'
         }
       }
     },

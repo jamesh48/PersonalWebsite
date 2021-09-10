@@ -49,13 +49,13 @@ const handleFadingClassNames = (depth, hoverDepth, hoverBreadth, currentIndex, m
     let className = (depth === 0 || depth === 1) ? `${'publicContainerRow'} ${'fader'}` : 'fader';
 
     if (depth === 0) {
-      className += ' ' + 'publicParentContainerRow ' + 'cool';
+      className += ' ' + 'publicParentContainerRow ' + 'activeHighlightedContainer';
     }
 
     if (depth === 1) {
       className += ' ' + 'publicChildContainerRow';
       if (typeof hoverBreadth === 'string') {
-        className += ' ' + 'cool';
+        className += ' ' + 'activeHighlightedContainer';
       }
     }
 
