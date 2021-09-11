@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useReducer } from 'react';
 import './home.scss';
 import '../../main-styles/global.scss';
 import MarqueeContainer from './Home_Components/MarqueeSection.js';
@@ -8,20 +8,43 @@ import AdminPortfolio from '../PortfolioComponents/AdminView/AdminPortfolio.js';
 import Utils from '../../Utils.js';
 const { handleMouseMove, mobileBrowserFunction, debounce } = Utils;
 import Resume from '../ResumeComponents/Resume.js';
-import UtilsTest from './utils/utils.js';
-const { handleHover } = UtilsTest;
-// import mobileBrowserFunction from './mobileBrowserUtil.js';
-
+import HomeUtils from './utils/utils.js';
+const { handleHover } = HomeUtils;
 
 export default (props) => {
+
+  const hoverParamsReducer = (state, action) => {
+    switch (action.type) {
+      case 'full':
+        return action.payload;
+      default:
+        throw new Error();
+    }
+  };
+
   const [dimensions, setDimensions] = useState({
     height: null,
     width: null
-  })
-  const [hoverParams, setHoverParams] = useState([null, null]);
-  const [mobileBrowser, setMobileBrowser] = useState(false);
-  const [smallWindow, setSmallWindow] = useState(false);
+  });
+
+  const [hoverParams, dispatchHoverParams] = useReducer(hoverParamsReducer, [null, null]);
+  const [mobileBrowser, setMobileBrowser] = useState(null);
+  const [smallWindow, setSmallWindow] = useState(null);
   const [marqueeButtonsPlacement, setMarqueeButtonsPlacement] = useState('about-me-root');
+
+  initial_page_render: useEffect(() => {
+    // Initial Page Render is correct and doesn't wait for a resize to adjust.
+    if (mobileBrowser === null) {
+      // setDimensions({ height: window.innerHeight, width: window.innerWidth })
+      setSmallWindow(() => window.innerWidth >= 1150 ? false : true)
+    };
+  }, []);
+
+  set_mobile_browser: useEffect(() => {
+    const mobileBrowserTest = mobileBrowserFunction();
+    setMobileBrowser(!!mobileBrowserTest);
+  }, []);
+
 
   cursor: useEffect(() => {
     if (mobileBrowser) {
@@ -35,9 +58,10 @@ export default (props) => {
     };
   }, [mobileBrowser]);
 
+
+
   debounce: useEffect(() => {
     const debouncedHandleResize = debounce(() => {
-
       setDimensions({
         height: window.innerHeight,
         width: window.innerWidth
@@ -57,10 +81,7 @@ export default (props) => {
     }
   }, [dimensions]);
 
-  set_mobile_browser: useEffect(() => {
-    const mobileBrowserTest = mobileBrowserFunction();
-    setMobileBrowser(!!mobileBrowserTest);
-  }, []);
+
 
   // This useEffect moves the marqueebuttons depending on what element is in view.
   set_marquee_buttons: useEffect(() => {
@@ -77,10 +98,7 @@ export default (props) => {
     observer.observe(document.querySelector("#portfolio-root"));
   }, [])
 
-  const test = useCallback((indicator) => {
-    const newHoverParams = handleHover(indicator, hoverParams[1]);
-    setHoverParams(newHoverParams)
-  });
+  const onHandleHover = (indicator) => handleHover(indicator, hoverParams[1], dispatchHoverParams);
 
   return (
     <div>
@@ -90,7 +108,7 @@ export default (props) => {
           mobileBrowser={mobileBrowser}
         />
         {
-          marqueeButtonsPlacement === 'about-me-root' && !mobileBrowser ? (
+          marqueeButtonsPlacement === 'about-me-root' && mobileBrowser === false ? (
             <div className='fader'>
               <MarqueeButtons />
               <hr className='marqueeButtonsHR' />
@@ -104,14 +122,14 @@ export default (props) => {
         <Resume
           smallWindow={smallWindow}
           mobileBrowser={mobileBrowser}
-          handleMobileResumeClick={test}
-          handleHover={test}
+          handleMobileResumeClick={onHandleHover}
+          handleHover={onHandleHover}
           hoverDepth={hoverParams[0]}
           hoverBreadth={hoverParams[1]}
           {...props}
         />
         {
-          marqueeButtonsPlacement === 'resume-root' && !mobileBrowser ?
+          marqueeButtonsPlacement === 'resume-root' && mobileBrowser === false ?
             (
               <div className='fader'>
                 <MarqueeButtons />
@@ -124,13 +142,13 @@ export default (props) => {
       <div data-name='Portfolio' className='container' id='portfolio-root'>
         {
           !props.admin ?
-            <Portfolio {...props} mobileBrowser={mobileBrowser} />
+            <Portfolio {...props} smallWindow={smallWindow} mobileBrowser={mobileBrowser} />
             : <AdminPortfolio {...props} />
 
         }
 
 
-        {marqueeButtonsPlacement === 'portfolio-root' && !mobileBrowser ?
+        {marqueeButtonsPlacement === 'portfolio-root' && mobileBrowser === false ?
           (
             <div className={'fader'}>
               <MarqueeButtons indicator={true} />
@@ -139,7 +157,6 @@ export default (props) => {
           ) : null
         }
       </div>
-
     </div >
   );
 }

@@ -28,12 +28,13 @@ module.exports = function (grunt) {
             src: ['index.min.css', 'index-bundle.js'],
             dest: 'main/build/server'
           },
-          // {
-          //   expand: true,
-          //   cwd: 'src/images',
-          //   src: ['*.png', '*.jpg', '*.jpeg'],
-          //   dest: 'main/main-images'
-          // }
+          {
+            expand: true,
+            cwd: 'src/images',
+            src: ['*.png', '*.jpg', '*.jpeg'],
+            // src: ['ges-favicon.png']
+            dest: 'main/main-images'
+          }
         ]
       }
     },
@@ -98,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Improvements made to browser view portfolio, images now only load one time.'
+          message: 'Introduction of useReducer logic as well as portfolio section loading only after all images have laoded (preloaded)'
         }
       }
     },

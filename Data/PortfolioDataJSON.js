@@ -1,7 +1,9 @@
-[
+const { cFLink } = process.env;
+
+export default [
   {
     "title": "Fjakeraven.com",
-    "imgUrl": "http://static.fullstackhrivnak.com/main/main-images/fec.jpg",
+    "imgUrl": `${cFLink}/main/main-images/fec.jpg`,
     "cssStyles": {
       "backgroundColor": "ivory",
       "color": "black"
@@ -23,7 +25,7 @@
       "backgroundColor": "black",
       "color": "ivory"
     },
-    "imgUrl": "https://d1y3bjxf7c78hf.cloudfront.net/main/main-images/backendArchitecture.jpeg",
+    "imgUrl": `${cFLink}/main/main-images/backendArchitecture.jpeg`,
     "github": [
       {
         "title": "Steammop.app Proxy Server",
@@ -49,7 +51,7 @@
       "backgroundColor": "ivory",
       "color": "black"
     },
-    "imgUrl": "https://d1y3bjxf7c78hf.cloudfront.net/main/main-images/Strava_Results_Generator.jpg",
+    "imgUrl": `${cFLink}/main/main-images/Strava_Results_Generator.jpg`,
     "github": [
       {
         "title": "github",
@@ -63,7 +65,7 @@
       "backgroundColor": "ivory",
       "color": "black"
     },
-    "imgUrl": "https://d1y3bjxf7c78hf.cloudfront.net/main/main-images/GES.jpg",
+    "imgUrl": `${cFLink}/main/main-images/GES.jpg`,
     "github": [
       {
         "title": "This website! (github)",

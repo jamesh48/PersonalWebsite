@@ -1,0 +1,135 @@
+#portfolio-root {
+  // margin-bottom: 0;
+  min-height: 900px;
+
+  .portfolioContainer {
+    text-rendering: geometricPrecision;
+    display: flex;
+    flex-direction: column;
+    .portfolioTitle {
+      align-self: center;
+      text-align: center;
+    }
+
+    .portfolioApplicationContainer {
+      display: flex;
+      flex-direction: column;
+      margin: 2.5% 0 0 0;
+      .portfolioApplicationRow {
+        display: flex;
+
+        .portfolioApplication {
+          background-color: midnightblue;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          border: 1px solid darkgoldenrod;
+          margin: 1.75%;
+          &:hover {
+            background-color: darkgoldenrod;
+          }
+
+          p {
+            align-self: center;
+          }
+
+          .applicationImgContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 300px;
+
+            &:hover {
+              background-color: inherit;
+
+              .nestedGithubLinks {
+                opacity: 0.5;
+                //     z-index: 0;
+              }
+            }
+
+            .nestedGithubRow {
+              display: flex;
+              width: 100%;
+              height: 100%;
+
+              .nestedGithubLinks {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                width: 100%;
+                height: 100%;
+                &:hover {
+                  opacity: 0.8;
+                  // opacity: 0.5;
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.portfolioFader {
+  animation: fadeIn ease 5s;
+  animation-fill-mode: forwards !important;
+  // animation: fadeIn 3s linear 0.5s 1 normal forwards;
+  -webkit-animation: fadeIn ease 5s;
+  -moz-animation: fadeIn ease 5s;
+  -o-animation: fadeIn ease 5s;
+  -ms-animation: fadeIn ease 5s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

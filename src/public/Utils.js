@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 export default {
   handleMouseMove: () => {
@@ -37,11 +37,9 @@ export default {
       /BlackBerry/i,
       /Windows Phone/i
     ];
-
     return toMatch.some((toMatchItem) => {
       // Second condition works for ipads that display intel mac...
       return navigator.userAgent.match(toMatchItem) || (navigator.userAgent.indexOf('Macintosh') > -1 && 'ontouchend' in document);
     });
   }
-
 }

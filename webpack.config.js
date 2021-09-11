@@ -33,9 +33,9 @@ const serverConfig = {
   mode: "development",
   target: "node",
   plugins: [new MiniCssExtractPlugin(),
-    //   new webpack.DefinePlugin({
-    //   "process.env": JSON.stringify(json)
-    // })
+  new webpack.DefinePlugin({
+    'process.env.cFLink': JSON.stringify(process.env.CLOUDFRONTLINK || 'development')
+  }),
   ],
   devtool: "source-map",
   node: {
@@ -54,8 +54,8 @@ const serverConfig = {
   },
   resolve: {
     alias: {
-      PortfolioJSON: path.resolve('Data/PortfolioData.json'),
-      FooterJSON: path.resolve('Data/FooterData.json'),
+      PortfolioJSON: path.resolve('Data/PortfolioDataJSON.js'),
+      FooterJSON: path.resolve('Data/FooterDataJSON.js'),
       Database: path.resolve('db'),
       Public: path.resolve('src/public'),
       Server: path.resolve('src/server'),
@@ -77,16 +77,16 @@ const clientConfig = {
   },
   target: "web",
   plugins: [new MiniCssExtractPlugin(),
-    //   new webpack.DefinePlugin({
-    //   "process.env": JSON.stringify(json)
-    // })
+  new webpack.DefinePlugin({
+    'process.env.cFLink': JSON.stringify(process.env.CLOUDFRONTLINK || 'development')
+  }),
   ],
   entry: {
     "appRouter": path.resolve(
       __dirname,
       "src/public/appRouter.js"
     ),
-    "footer": path.resolve(__dirname, "src/public/footer.js"),
+    "footer": path.resolve(__dirname, "src/public/FooterRoot.js"),
     "minesweeper": path.resolve(__dirname, "src/public/components/MinesweeperComponents/Minesweeper_Proxy.js")
   },
   module: {

@@ -87,10 +87,6 @@
   }
 }
 
-.portfolioRoot {
-  margin-bottom: 0;
-}
-
 .marqueeButtonContainer {
   margin: 5% auto 0 auto;
   display: flex;
@@ -123,81 +119,6 @@
 
 .lastMarqueeButtonContainer {
   margin-top: 0;
-}
-
-.portfolioContainer {
-  text-rendering: geometricPrecision;;
-  display: flex;
-  flex-direction: column;
-  .portfolioTitle {
-    align-self: center;
-  }
-
-  .portfolioApplicationContainer {
-    display: flex;
-    flex-direction: column;
-    margin: 2.5% 0 0 0;
-    .portfolioApplicationRow {
-      display: flex;
-
-      .portfolioApplication {
-        background-color: midnightblue;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        border: 1px solid darkgoldenrod;
-        margin: 1.75%;
-        &:hover {
-          background-color: darkgoldenrod;
-        }
-
-        p {
-          align-self: center;
-        }
-
-        .applicationImgContainer {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          flex: 1;
-          background-position: center;
-          background-repeat: no-repeat;
-          background-size: cover;
-          min-height: 300px;
-
-          &:hover {
-            background-color: inherit;
-
-            .nestedGithubLinks {
-              opacity: 0.5;
-          //     z-index: 0;
-            }
-          }
-
-          .nestedGithubRow {
-            display: flex;
-            width: 100%;
-            height: 100%;
-
-            .nestedGithubLinks {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              text-align: center;
-              width: 100%;
-              height: 100%;
-              &:hover {
-                opacity: 0.8;
-                // opacity: 0.5;
-                cursor: pointer;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
 }
 
 .fader {

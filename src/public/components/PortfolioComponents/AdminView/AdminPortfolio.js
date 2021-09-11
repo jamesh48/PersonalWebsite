@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ExistingPortfolioContainers from './ExistingPortfolioContainers.js';
-import portfolioJSON from '../../../../../Data/PortfolioData.json';
+import portfolioJSON from '../../../../../Data/PortfolioDataJSON.js';
 
 import utils from './Utils.js';
 const { getAllPortfolioItems, postPortfolio } = utils;

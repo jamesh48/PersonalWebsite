@@ -17,7 +17,7 @@ export default ({ mobileBrowser, smallWindow }) => {
                 I am kind, compassionate, empathetic and a good listener. I have a background in secular Buddhism, and have worked on compassionate and mindful teams in eldercare for the past two years. I value self care but I also like going in hard. I’ve trained for and ran a marathon, and also was a competitive swimmer in college and now. I also have lived in two foreign countries and have visited 32 others.
               </p>
             </div>
-            {(!mobileBrowser && !smallWindow) ? <div className={'smileContainer'}></div> : null}
+            {(mobileBrowser === false && smallWindow === false) ? <div className={'smileContainer'}></div> : null}
           </span>
         </div>
       </div>

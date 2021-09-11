@@ -124,7 +124,7 @@ const recurseContainers = ({ resumeDetails, mobileBrowser, hoverDepth, hoverBrea
               handleMobileResumeClick()
             }
           }}
-          onMouseOver={_ => !mobileBrowser ? handleHover() : null}
+          onMouseOver={_ => mobileBrowser === false ? handleHover() : null}
           onMouseLeave={() => {
             if (mobileBrowser) return;
             let test = typeof hoverBreadth === 'string' ? hoverBreadth.split('_') : hoverBreadth;

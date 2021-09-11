@@ -1,32 +1,72 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import ApplicationImgContainer from './test.js';
+import React, { useState, useReducer, useEffect, useCallback, useRef } from 'react';
+import PortfolioUtils from './publicViewPortfolioUtils.js';
+const { handleContainerData, handleImageData, testLoadedImages, useEffectOnlyOnUpdate } = PortfolioUtils;
+import './publicPortfolio.scss';
+import ApplicationImgContainer from './ApplicationImgContainer.js';
 
-export default ({ portfolioJSON, mobileBrowser }) => {
-  const [hovered, setHovered] = useState([null, null]);
 
-  const portfolioRowJSON = portfolioJSON?.reduce((total, item, index) => {
-    if (mobileBrowser) {
-      total.push([item])
-      return total;
+export default ({ portfolioJSON, mobileBrowser, smallWindow }) => {
+
+  const imageReducer = (state, { type, payload }) => {
+    switch (type) {
+      case 'allImages':
+        return payload;
+      case 'loadedImage':
+        const [i, j] = payload;
+        let newArr = state.slice();
+        newArr[i][j].loaded = true
+        return [...newArr];
+      default:
+        throw new Error()
     }
-    if (index % 2 === 0) {
-      total.push([item])
-    } else {
-      total[total.length - 1].push(item);
+  };
+
+  const hoveredReducer = (state, action) => {
+    switch (action.type) {
+      case 'empty':
+        return [null, null];
+      case 'full':
+        return action.payload;
+      default:
+        throw new Error();
     }
-    return total;
-  }, []);
+  };
 
-  const memoizedCallback = useCallback((row, column) => {
-    setHovered([row, column])
-  }, [hovered]);
+  const allLoadedReducer = (state, { type }) => {
+    switch (type) {
+      case 'allLoaded':
+        return true;
+      default:
+        throw new Error();
+    }
+  };
 
-  return (
-    <div className='portfolioContainer'>
+  const containerDataReducer = (state, action) => {
+    switch (action.type) {
+      case 'full':
+        return action.payload;
+      default:
+        throw new Error();
+    }
+  };
+
+  const [images, imagesDispatch] = useReducer(imageReducer, []);
+  const [hovered, hoveredDispatch] = useReducer(hoveredReducer, [null, null])
+  const [allLoaded, allLoadedDispatch] = useReducer(allLoadedReducer, false);
+  const [portfolioRowJSON, containerDataDispatch] = useReducer(containerDataReducer, []);
+
+  useEffect(() => testLoadedImages(images, allLoadedDispatch), [images]);
+
+  useEffectOnlyOnUpdate((args) => handleImageData(...args), [portfolioRowJSON], [portfolioRowJSON, imagesDispatch]);
+  useEffectOnlyOnUpdate((args) => handleContainerData(...args), [mobileBrowser, smallWindow], [portfolioJSON, mobileBrowser, smallWindow, containerDataDispatch]);
+
+  return allLoaded ? (
+    <div className={`portfolioContainer portfolioFader`}>
+
       <h4 className='portfolioTitle'>Software Engineering Applications</h4>
       <div className='portfolioApplicationContainer'>
         {
-          portfolioRowJSON?.map((portfolioRow, rowIndex) => {
+          images?.map((portfolioRow, rowIndex) => {
             return (<div key={rowIndex} className={'portfolioApplicationRow'}> {
               portfolioRow.map((appData, columnIndex) => {
                 return (
@@ -36,9 +76,25 @@ export default ({ portfolioJSON, mobileBrowser }) => {
                     </p>
                     {
                       rowIndex === hovered[0] && columnIndex === hovered[1] ?
-                        <ApplicationImgContainer setHovered={setHovered} appData={appData} nestedIndicator={true} hovered={hovered} mobileBrowser={mobileBrowser} />
+                        <ApplicationImgContainer
+                          appData={appData}
+                          mobileBrowser={mobileBrowser}
+                          smallWindow={smallWindow}
+                          hoveredDispatch={hoveredDispatch}
+                          nestedIndicator={true}
+                          hovered={hovered}
+                        />
                         :
-                        <ApplicationImgContainer appData={appData} mobileBrowser={mobileBrowser} setHovered={setHovered} rowIndex={rowIndex} columnIndex={columnIndex} nestedIndicator={false} hovered={hovered} />
+                        <ApplicationImgContainer
+                          appData={appData}
+                          mobileBrowser={mobileBrowser}
+                          smallWindow={smallWindow}
+                          hoveredDispatch={hoveredDispatch}
+                          nestedIndicator={false}
+                          hovered={hovered}
+                          rowIndex={rowIndex}
+                          columnIndex={columnIndex}
+                        />
                     }
                   </div>
                 );
@@ -47,10 +103,8 @@ export default ({ portfolioJSON, mobileBrowser }) => {
             </div>)
           })
         }
-
-
       </div>
-
     </div >
-  )
+
+  ) : null
 };

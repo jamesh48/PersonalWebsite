@@ -1,7 +1,4 @@
-import path from 'path';
-import env from 'dotenv';
-env.config({ path: path.resolve('.env') });
-const { CLOUDFRONTLINK: cFLink } = process.env;
+const {  cFLink } = process.env;
 
 export default {
   htmlStart: (data, handleMouseMove) => {
@@ -13,7 +10,7 @@ export default {
           <meta charset="utf-8">
           <title>James Hrivnak</title>
           <!-- <link rel='stylesheet' href='${cFLink}/main/build/public/appRouter.min.css'/> -->
-          <link rel="icon" type="image/png" href='${cFLink}/main/main-images/ges-favicon-3.png'/>
+          <link rel="icon" type="image/png" href='${cFLink}/main/main-images/ges-favicon.png'/>
           <link rel='stylesheet' href='${cFLink}/main/build/public/footer.min.css'/>
           <link rel='stylesheet' href='${cFLink}/main/build/public/minesweeper.min.css'/>
           <link rel='stylesheet' href='${cFLink}/mines/build/public/index.min.css'/>
@@ -22,7 +19,7 @@ export default {
           <script>window.__INITIAL__DATA__=${JSON.stringify(data)}</script>
 
           <!-- For Dev Mode -->
-          <link rel='stylesheet' href='/static/appRouter.css'/>
+           <link rel='stylesheet' href='/static/appRouter.css'/>
           <!-- <meta http-equiv="pragma" content="no-cache" /> -->
            <!-- <meta http-equiv="Cache-control" content="public"> -->
         </head>
@@ -44,14 +41,15 @@ export default {
   htmlEnd: /* html */
     `
   </footer>
-    <script src='/static/appRouter.js'></script>
-    <!-- <script src='${cFLink}/main/build/public/appRouter-bundle.js'></script> -->
+     <script src='/static/appRouter.js'></script>
+     <!-- <script src='${cFLink}/main/build/public/appRouter-bundle.js'></script> -->
 
     <script src='${cFLink}/mines/build/public/public-bundle.js'></script>
 
     <!-- <script src='${cFLink}/main/build/public/minesweeper-bundle.js'/></script> -->
 
-    <script src='${cFLink}/main/build/public/footer-bundle.js'></script>
+    <script src='/static/footer.js'></script>
+    <!-- <script src='${cFLink}/main/build/public/footer-bundle.js'></script> -->
   </html>
 `,
 };
