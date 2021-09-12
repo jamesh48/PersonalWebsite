@@ -1,6 +1,7 @@
 #resume-root {
   display: flex;
   flex-direction: column;
+  min-height: 90vh;
   .resumeContainer {
     height: 90vh;
     text-rendering: geometricPrecision;

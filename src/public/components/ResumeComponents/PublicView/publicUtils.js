@@ -124,10 +124,11 @@ const recurseContainers = ({ resumeDetails, mobileBrowser, hoverDepth, hoverBrea
               handleMobileResumeClick()
             }
           }}
-          onMouseOver={_ => mobileBrowser === false ? handleHover() : null}
+          onMouseOver={_ => (mobileBrowser === false && depth !== null) ? handleHover() : null}
           onMouseLeave={() => {
             if (mobileBrowser) return;
             let test = typeof hoverBreadth === 'string' ? hoverBreadth.split('_') : hoverBreadth;
+
             if (
               (
                 // If hovering downwards from one section to the next...
@@ -174,6 +175,14 @@ const recurseContainers = ({ resumeDetails, mobileBrowser, hoverDepth, hoverBrea
   });
 }
 
+
+// const isEqual = (prevProps, nextProps) => {
+//   if (prevProps.hoverBreadth === nextProps.hoverBreadth && prevProps.hoverDepth === nextProps.hoverDepth) {
+//     return true;
+//   }
+//   return true;...
+// }
+
 export default (props) => {
   const { handleHover, handleMobileResumeClick, mobileBrowser, resumeData, resume: { resume_Details: csrResume } } = props;
 
@@ -184,4 +193,4 @@ export default (props) => {
       {recurseContainers({ ...props, resumeDetails: displayedResume, depth: 0, prevIndex: 0 })}
     </div>
   )
-}
+};

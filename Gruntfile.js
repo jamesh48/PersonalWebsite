@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Significant progress with the layout of the website- better UX for both Mobile and Browser, finally got images to preload thanks to Bluebird Promises'
+          message: 'Last commit of the day will work on improving the resume performance next'
         }
       }
     },

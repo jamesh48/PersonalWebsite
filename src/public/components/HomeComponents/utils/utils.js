@@ -1,6 +1,7 @@
 export default {
   handleHover: (indicator, hoverBreadth, dispatchHoverParams) => {
     if (indicator === 'exit') return dispatchHoverParams({ type: 'full', payload: [null, null] })
+    if (!hoverBreadth) { return }
 
     if (indicator === 'prevSection') {
       // Depth = 1

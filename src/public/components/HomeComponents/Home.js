@@ -131,8 +131,7 @@ export default (props) => {
 
 
 
-      <div data-name='Resume' id='resume-root'
-        className='container'>
+      <div data-name='Resume' id='resume-root' className='container'>
         <Resume
           smallWindow={smallWindow}
           mobileBrowser={mobileBrowser}
