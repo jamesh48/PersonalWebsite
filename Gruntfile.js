@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Last commit of the day will work on improving the resume performance next'
+          message: 'Couple of minor fixes'
         }
       }
     },
