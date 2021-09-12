@@ -1,13 +1,21 @@
-#headerNav {
-  position: fixed;
+.headerNav {
+  position: sticky;
   top: 0;
-  width: 100%;
+  width: 75%;
   display: flex;
   z-index: 1;
   justify-content: center;
+  height: 5vh;
+  margin: 0 auto;
+
+  &--Mobile {
+    width: 90%;
+  }
+
+
   ul {
     display: flex;
-    width: 75%;
+    width: 100%;
     border-radius: 0.5% / 15%;
     border-top-left-radius: 0;
     border-top-right-radius: 0;

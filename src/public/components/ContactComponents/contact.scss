@@ -1,11 +1,16 @@
-.contactContainer {
-  border: 1px solid ivory;
-  .contactChildContainer {
-    display: flex;
-    .contactInput {
-      margin: 1% 0;
+.contact-root {
+  width: 75%;
+  margin: 0 auto;
+  &--Mobile {
+    width: 90%;
+  }
+  .contactContainer {
+    border: 1px solid ivory;
+    .contactChildContainer {
+      display: flex;
+      .contactInput {
+        margin: 1% 0;
+      }
     }
   }
 }
-
-

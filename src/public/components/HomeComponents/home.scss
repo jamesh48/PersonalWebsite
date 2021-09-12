@@ -1,94 +1,58 @@
-.marqueeContainer {
-  padding-bottom: 1%;
+.homeContainer {
   display: flex;
-  .aboutMeMarqueeDetails {
-    // flex: 0.7;
-    .aboutMeMarqueeTitle {
-      padding-top: 1%;
-      padding-bottom: 1%;
-    }
+  flex-direction: column;
+  margin: 0 auto;
+  width: 75%
 
-    .aboutMeMarqueeTitle {
-      display: flex;
-      justify-content: center;
-      padding: 6% 0;
-    }
-    .marqueeContents {
-      display: flex;
-      .marqueeParagraphs {
-        display: flex;
-        flex-direction: column;
-        flex: 0.9;
-        .aboutMeMarqueeDescription {
-          text-rendering: geometricPrecision;
-          width: 97.5%;
-          line-height: 1.95;
-          font-size: 1.19em;
-          font-weight: 200;
-          letter-spacing: 0.25px;
-        }
-      }
-    }
-    .smileContainer {
-      min-height: 30rem;
-      max-width: 50%;
-      min-width: 27.5%;
-      background-size: cover;
 
-      border: 1px solid ivory;
-      background-position-y: 25%;
-      background-position-x: 75%;
-      background-repeat: no-repeat;
-      border-radius: 50%;
-      background-image: url(https://d1y3bjxf7c78hf.cloudfront.net/main/main-images/linkedin.jpg);
+}
 
-      // Specifying Media Queries for Desktop Sizes most  people will see, the above conditions of max and min width are for a bigger screen above 1750px
-      @media (min-width: 1600px) and (max-width: 1750px) {
-        flex: 0.4;
-      }
+.homeContainer--Mobile {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 90%;
+}
 
-      @media (min-width: 1300px) and (max-width: 1600px) {
-        flex: 0.5;
-      }
-
-      @media (min-width: 1150px) and (max-width: 1300px) {
-        flex: 0.6;
-      }
-    }
+.container {
+  height: 90vh;
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid ivory;
+  p,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 1%;
+    color: ivory;
   }
 
-  // Mobile View is a column rather than rows...
-  &--Mobile {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10%;
-    text-align: center;
-    .aboutMeMarqueeDetails {
-      .aboutMeMarqueeTitle {
-        font-size: 4.5em;
-      }
-      .marqueeContents {
-        display: flex;
-        flex-direction: column;
-        .marqueeParagraphs {
-          text-align: center;
-          .aboutMeMarqueeDescription {
-            font-size: 1.9em !important;
-          }
-          .smileContainer {
-            margin: 2.5% auto;
-            min-height: 25rem;
-            width: 50%;
-            padding: 0;
-          }
-        }
-      }
-    }
+  h4 {
+    font-size: 40px;
+    font-weight: 150;
+    margin: 0;
+    letter-spacing: 0.5px;
+  }
+
+  h5 {
+    font-size: 26px;
+    margin: 0.75%;
+  }
+
+  h6 {
+    margin: 0.5% 1%;
   }
 }
 
-.marqueeButtonContainer {
+#portfolio-root {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.floatingButtonContainer {
   margin: 5% auto 0 auto;
+  opacity: 0.5;
   display: flex;
   button {
     flex: 1;
@@ -121,15 +85,15 @@
   margin-top: 0;
 }
 
-.fader {
-  animation: fadeIn ease 3s;
-  animation-fill-mode: forwards !important;
-  // animation: fadeIn 3s linear 0.5s 1 normal forwards;
+#floating-fader {
+  animation: fadeIn 3s ease forwards !important;
+  // animation-fill-mode: forwards !important;
   -webkit-animation: fadeIn ease 3s;
   -moz-animation: fadeIn ease 3s;
   -o-animation: fadeIn ease 3s;
   -ms-animation: fadeIn ease 3s;
 }
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -144,7 +108,7 @@
     opacity: 0;
   }
   100% {
-    opacity: 1;
+    opacity: 0.5;
   }
 }
 
@@ -159,7 +123,7 @@
 
 @-o-keyframes fadeIn {
   0% {
-    opacity: 0.5;
+    opacity: 0;
   }
 
   100% {
@@ -176,6 +140,9 @@
   }
 }
 
+* {
+  cursor: none !important;
+}
 
-//cadet blue, cornflowerblue, darkcyan
-// darkgolden darkslategray midnightblue mediumblue
+// //cadet blue, cornflowerblue, darkcyan
+// // darkgolden darkslategray midnightblue mediumblue

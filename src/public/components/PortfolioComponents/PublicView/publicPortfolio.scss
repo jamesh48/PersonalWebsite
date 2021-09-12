@@ -1,12 +1,15 @@
 #portfolio-root {
   // margin-bottom: 0;
-  min-height: 900px;
+  // min-height: 900px;
 
   .portfolioContainer {
     text-rendering: geometricPrecision;
     display: flex;
     flex-direction: column;
+    // test
+    height: 100%;
     .portfolioTitle {
+      padding: 5% 0;
       align-self: center;
       text-align: center;
     }
@@ -14,9 +17,10 @@
     .portfolioApplicationContainer {
       display: flex;
       flex-direction: column;
-      margin: 2.5% 0 0 0;
+      flex: 1;
       .portfolioApplicationRow {
         display: flex;
+        flex: 1;
 
         .portfolioApplication {
           background-color: midnightblue;
@@ -39,10 +43,10 @@
             justify-content: center;
             align-items: center;
             flex: 1;
+            width: 100%;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
-            min-height: 300px;
 
             &:hover {
               background-color: inherit;

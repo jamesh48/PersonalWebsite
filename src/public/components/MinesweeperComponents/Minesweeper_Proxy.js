@@ -4,14 +4,16 @@ import useScript from './customHook.jsx';
 import '../../main-styles/global.scss';
 import './minesweeperStyles.scss';
 
-export default (props) => {
+export default ({game, mobileBrowser}) => {
 
 
   return (
-    <div className={`${'container'} ${'websiteMinesweeperAdjust'}`} id='minesweeper-root'>
+    <div className={mobileBrowser ? `minesweeper-proxy-root minesweeper-proxy-root--Mobile` : `minesweeper-proxy-root`} >
+      <div className={`container websiteMinesweeperAdjust`} id='minesweeper-root'>
 
-      {props.game}
+        {game}
 
+      </div>
     </div>
   );
 };

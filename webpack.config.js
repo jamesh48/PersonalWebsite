@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require("path");
 
 require('dotenv').config({ path: './.env' });
+
 const css = {
   test: /\.(css|scss)$/,
   include: path.resolve(__dirname, 'src'),
@@ -34,7 +35,8 @@ const serverConfig = {
   target: "node",
   plugins: [new MiniCssExtractPlugin(),
   new webpack.DefinePlugin({
-    'process.env.cFLink': JSON.stringify(process.env.CLOUDFRONTLINK || 'development')
+    'process.env.cFLink': JSON.stringify(process.env.CLOUDFRONTLINK || 'development'),
+    'process.env.DEV_ENV': process.env.DEV_ENV
   }),
   ],
   devtool: "source-map",
@@ -78,13 +80,14 @@ const clientConfig = {
   target: "web",
   plugins: [new MiniCssExtractPlugin(),
   new webpack.DefinePlugin({
-    'process.env.cFLink': JSON.stringify(process.env.CLOUDFRONTLINK || 'development')
+    'process.env.cFLink': JSON.stringify(process.env.CLOUDFRONTLINK || 'development'),
+    'process.env.DEV_ENV': process.env.DEV_ENV
   }),
   ],
   entry: {
     "appRouter": path.resolve(
       __dirname,
-      "src/public/appRouter.js"
+      "src/public/AppRouterRoot.js"
     ),
     "footer": path.resolve(__dirname, "src/public/FooterRoot.js"),
     "minesweeper": path.resolve(__dirname, "src/public/components/MinesweeperComponents/Minesweeper_Proxy.js")

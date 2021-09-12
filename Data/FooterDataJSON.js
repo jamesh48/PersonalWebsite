@@ -1,5 +1,4 @@
 const { cFLink } = process.env;
-// const cFLink = 'https://d1y3bjxf7c78hf.cloudfront.net'
 
 export default [
   {

@@ -1,46 +1,51 @@
-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  #footerContainer {
-    color: ivory;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    #footerItemsContainer {
-      display: flex;
-      width: 75%;
-      border: 1px solid rgb(255, 255, 240);
-      background-color: rgb(255, 255, 240);
-      border-radius: 0.7% / 25%;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
+.footer-container {
+  position: sticky;
+  display: flex;
+  justify-content: center;
+  height: 5vh;
+  width: 75%;
+  margin: 0 auto;
 
-      .footerItemContainer {
-        display: flex;
-        justify-content: center;
+  &--Mobile {
+    width: 90%;
+  }
+
+  #footerItemsContainer {
+    display: flex;
+    width: 100%;
+    border: 1px solid rgb(255, 255, 240);
+    background-color: rgb(255, 255, 240);
+    border-radius: 0.7% / 25%;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    .footerItemContainer {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      div {
+        background-size: contain;
+        opacity: 0.4;
+        background-position: center;
+        background-repeat: no-repeat;
         flex: 1;
-        div {
-          background-size: cover;
-          opacity: 0.4;
-          padding: 5%;
+        height: 80%;
+      }
+      &:hover {
+        border-radius: 0;
+        &:first-child {
+          border-radius: 1% / 25%;
+          border-top-right-radius: 0;
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
         }
-        &:hover {
-          border-radius: 0;
-          &:first-child {
-            border-radius: 1% / 25%;
-            border-top-right-radius: 0;
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-          }
-          &:last-child {
-            border-radius: 1% / 25%;
-            border-bottom-right-radius: 0;
-            border-bottom-left-radius: 0;
-            border-top-left-radius: 0;
-          }
-          background-color: rgba(225, 225, 240, 0.8);
+        &:last-child {
+          border-radius: 1% / 25%;
+          border-bottom-right-radius: 0;
+          border-bottom-left-radius: 0;
+          border-top-left-radius: 0;
         }
+        background-color: rgba(225, 225, 240, 0.8);
       }
     }
   }

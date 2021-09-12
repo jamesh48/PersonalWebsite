@@ -25,13 +25,7 @@ export default ({ mobileBrowser, smallWindow, nestedIndicator, hovered, hoveredD
       className='applicationImgContainer'
       onMouseLeave={nestedIndicator ? () => { hoveredDispatch({ type: 'empty' }) } : null}
       onMouseOver={!nestedIndicator ? () => { hoveredDispatch({ type: 'full', payload: [rowIndex, columnIndex] }) } : null}
-      style={{
-        backgroundImage: `url(${appData.imgUrl})`,
-        minHeight: '300px',
-        width: '100%',
-        backgroundRepeat: 'no-repeat',
-        backgroundColor: appData.cssStyles.backgroundColor
-      }}
+      style={{ backgroundImage: `url(${appData.imgUrl})`, backgroundColor: appData.cssStyles.backgroundColor }}
     >
 
       {

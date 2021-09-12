@@ -10,3 +10,4 @@ db/config
 dist
 images
 aws-keys.json
+LogRocketConfig

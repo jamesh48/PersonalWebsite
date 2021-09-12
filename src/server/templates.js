@@ -1,46 +1,54 @@
-const {  cFLink } = process.env;
-
+const { cFLink, DEV_ENV } = process.env;
 export default {
-  htmlStart: (data, handleMouseMove) => {
+  htmlStart: (data) => {
+    // console.log(DEV_ENV)
+
     const startingSection = //html
-      `
-      <!DOCTYPE HTML>
+      `<!DOCTYPE HTML>
         <html>
           <head>
           <meta charset="utf-8">
           <title>James Hrivnak</title>
-          <!-- <link rel='stylesheet' href='${cFLink}/main/build/public/appRouter.min.css'/> -->
           <link rel="icon" type="image/png" href='${cFLink}/main/main-images/ges-favicon.png'/>
-          <link rel='stylesheet' href='${cFLink}/main/build/public/footer.min.css'/>
+          <!-- <link rel='stylesheet' href='${cFLink}/main/build/public/appRouter.min.css'/> -->
+          <!-- <link rel='stylesheet' href='${cFLink}/main/build/public/footer.min.css'/> -->
           <link rel='stylesheet' href='${cFLink}/main/build/public/minesweeper.min.css'/>
           <link rel='stylesheet' href='${cFLink}/mines/build/public/index.min.css'/>
 
           <!-- Server Side Rendering of Page Data -->
           <script>window.__INITIAL__DATA__=${JSON.stringify(data)}</script>
 
-          <!-- For Dev Mode -->
-           <link rel='stylesheet' href='/static/appRouter.css'/>
           <!-- <meta http-equiv="pragma" content="no-cache" /> -->
-           <!-- <meta http-equiv="Cache-control" content="public"> -->
         </head>
+
+          <script>
+          if (${DEV_ENV}) {
+            let linkArr =['/static/appRouter.css', '/static/footer.css', '/static/minesweeper.css'];
+            linkArr.forEach((devLink) => {
+              const [head] = document.getElementsByTagName('HEAD');
+              let link = document.createElement('link');
+              link.rel = 'stylesheet';
+              link.type - 'text/css';
+              link.href = devLink;
+              head.appendChild(link);
+            })
+          }
+          </script>
+
 
       <body>
 
-      <div id="root">
-      `;
+      <div id="root">`;
     return startingSection;
   },
   htmlMid: /* html */
-    `
-      </div>
+    `</div>
 
     </body>
-  <footer id='footerroot'>
-    `,
+  <footer id='footerroot'>`,
 
   htmlEnd: /* html */
-    `
-  </footer>
+    `</footer>
      <script src='/static/appRouter.js'></script>
      <!-- <script src='${cFLink}/main/build/public/appRouter-bundle.js'></script> -->
 

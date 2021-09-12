@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Introduction of useReducer logic as well as portfolio section loading only after all images have laoded (preloaded)'
+          message: 'Significant progress with the layout of the website- better UX for both Mobile and Browser, finally got images to preload thanks to Bluebird Promises'
         }
       }
     },

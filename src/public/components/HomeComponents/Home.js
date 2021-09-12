@@ -1,26 +1,35 @@
-import React, { useState, useEffect, useCallback, useReducer } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useCallback, useReducer, useRef } from 'react';
 import './home.scss';
 import '../../main-styles/global.scss';
-import MarqueeContainer from './Home_Components/MarqueeSection.js';
-import MarqueeButtons from './Home_Components/MarqueeButtons.js';
+import MarqueeContainer from '../MarqueeComponents/PublicView/MarqueeContainer.js';
+import FloatingButtons from './Home_Components/FloatingButtons.js';
 import Portfolio from '../PortfolioComponents/PublicView/Portfolio.js';
 import AdminPortfolio from '../PortfolioComponents/AdminView/AdminPortfolio.js';
-import Utils from '../../Utils.js';
-const { handleMouseMove, mobileBrowserFunction, debounce } = Utils;
+import Utils from '../AppRouterComponents/AppUtils.js';
+const { handleMouseMove, debounce } = Utils;
 import Resume from '../ResumeComponents/Resume.js';
-import HomeUtils from './utils/utils.js';
+import HomeUtils from './homeUtils.js';
 const { handleHover } = HomeUtils;
 
 export default (props) => {
-
+  const { mobileBrowser } = props;
   const hoverParamsReducer = (state, action) => {
     switch (action.type) {
-      case 'full':
+      case 'FULL':
         return action.payload;
       default:
         throw new Error();
     }
   };
+
+  const floatingButtonsReducer = (state, action) => {
+    switch (action.type) {
+      case 'UPDATE_FLOAT':
+        return action.payload;
+      default:
+        throw new Error();
+    }
+  }
 
   const [dimensions, setDimensions] = useState({
     height: null,
@@ -28,9 +37,12 @@ export default (props) => {
   });
 
   const [hoverParams, dispatchHoverParams] = useReducer(hoverParamsReducer, [null, null]);
-  const [mobileBrowser, setMobileBrowser] = useState(null);
+  // const [mobileBrowser, setMobileBrowser] = useState(null);
   const [smallWindow, setSmallWindow] = useState(null);
-  const [marqueeButtonsPlacement, setMarqueeButtonsPlacement] = useState('about-me-root');
+  // const [floatingButtonsPlacement, setFloatingButtonsPlacement] = useState('');
+  const [floatingButtonsPlacement, dispatchFloatingButtons] = useReducer(floatingButtonsReducer, '');
+  const [smileLoaded, setSmileLoaded] = useState(false);
+
 
   initial_page_render: useEffect(() => {
     // Initial Page Render is correct and doesn't wait for a resize to adjust.
@@ -40,10 +52,10 @@ export default (props) => {
     };
   }, []);
 
-  set_mobile_browser: useEffect(() => {
-    const mobileBrowserTest = mobileBrowserFunction();
-    setMobileBrowser(!!mobileBrowserTest);
-  }, []);
+  // set_mobile_browser: useEffect(() => {
+  //   const mobileBrowserTest = mobileBrowserFunction();
+  //   setMobileBrowser(!!mobileBrowserTest);
+  // }, []);
 
 
   cursor: useEffect(() => {
@@ -81,44 +93,46 @@ export default (props) => {
     }
   }, [dimensions]);
 
-
-
-  // This useEffect moves the marqueebuttons depending on what element is in view.
+  // This useEffect moves the floatingButtons depending on what element is in view.
   set_marquee_buttons: useEffect(() => {
+
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setMarqueeButtonsPlacement(entry.target.id)
+          dispatchFloatingButtons({ type: 'UPDATE_FLOAT', payload: entry.target.id });
         }
       });
-    }, { threshold: [.8] });
+    }, { threshold: [1] });
 
-    observer.observe(document.querySelector('#about-me-root'));
+    observer.observe(document.querySelector('#about-me-root'))
     observer.observe(document.querySelector("#resume-root"));
     observer.observe(document.querySelector("#portfolio-root"));
+
+    return () => { observer.disconnect() }
+
   }, [])
 
   const onHandleHover = (indicator) => handleHover(indicator, hoverParams[1], dispatchHoverParams);
 
+  const smileCallback = useCallback(() => {
+    setSmileLoaded(true);
+  });
+
   return (
-    <div>
-      <div id='about-me-root' data-name='About Me' className={'container'}>
+    <div className={mobileBrowser ? 'homeContainer--Mobile' : 'homeContainer'}>
+      <div id='about-me-root' data-name='About Me' className='container'>
         <MarqueeContainer
           smallWindow={smallWindow}
           mobileBrowser={mobileBrowser}
+          smileCallback={smileCallback}
         />
-        {
-          marqueeButtonsPlacement === 'about-me-root' && mobileBrowser === false ? (
-            <div className='fader'>
-              <MarqueeButtons />
-              <hr className='marqueeButtonsHR' />
-            </div>
-          ) : null
-        }
+        {(floatingButtonsPlacement === 'about-me-root' && mobileBrowser === false && smileLoaded) ? <FloatingButtons /> : null}
       </div>
 
+
+
       <div data-name='Resume' id='resume-root'
-        className={'container'}>
+        className='container'>
         <Resume
           smallWindow={smallWindow}
           mobileBrowser={mobileBrowser}
@@ -128,15 +142,7 @@ export default (props) => {
           hoverBreadth={hoverParams[1]}
           {...props}
         />
-        {
-          marqueeButtonsPlacement === 'resume-root' && mobileBrowser === false ?
-            (
-              <div className='fader'>
-                <MarqueeButtons />
-                <hr className='marqueeButtonsHR' />
-              </div>
-            ) : null
-        }
+        {(floatingButtonsPlacement === 'resume-root' && mobileBrowser === false) ? <FloatingButtons /> : null}
       </div>
 
       <div data-name='Portfolio' className='container' id='portfolio-root'>
@@ -144,18 +150,9 @@ export default (props) => {
           !props.admin ?
             <Portfolio {...props} smallWindow={smallWindow} mobileBrowser={mobileBrowser} />
             : <AdminPortfolio {...props} />
-
         }
 
-
-        {marqueeButtonsPlacement === 'portfolio-root' && mobileBrowser === false ?
-          (
-            <div className={'fader'}>
-              <MarqueeButtons indicator={true} />
-              <hr className='marqueeButtonsHR' />
-            </div>
-          ) : null
-        }
+        {(floatingButtonsPlacement === 'portfolio-root' && mobileBrowser === false) ? <FloatingButtons indicator={true} /> : null}
       </div>
     </div >
   );

@@ -1,272 +1,286 @@
-.resumeContainer {
-  text-rendering: geometricPrecision;
-  font-weight: 250;
+#resume-root {
   display: flex;
   flex-direction: column;
-  .resumeContainerTitle {
-    align-self: center;
-  }
-  .resumeUIContainer {
-    margin: 3% 0;
-    .resumeParentContainer {
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-
-      .publicColumnContainerTitle,
-      .publicColumnContainerSection,
-      .publicColumnContainerDetail {
-        display: flex;
-        width: 25%;
-        justify-content: center;
-        h6 {
-          display: flex;
-          justify-content: center;
-          margin: 0 auto;
-          flex: 1;
-          align-self: center;
-        }
-      }
-
-      // Default View
-      .publicResponsiveRowX {
-        width: 35%;
-        .publicColumnContainerTitle {
-          width: 100%;
-          h6 {
-            // line-height: 3;
-            padding: 5% 0;
-          }
-        }
-      }
-      // View when Being Hovered
-      .publicContainerRow {
-        display: flex;
-        &:hover .publicColumnContainerTitle {
-          // height: 100%;
-          border: 1px solid lightslategray;
-          background-color: ivory;
-          h6 {
-            padding: 100% 0;
-            color: darkslategray;
-          }
-        }
-        .publicColumnContainerTitle {
-          padding: 2% 0;
-          h6 {
-            color: ivory;
-          }
-        }
-        .publicColumnContainer {
-          width: 0;
-          display: flex;
-          flex-direction: column;
-          // border: 1px solid white;
-          width: 100%;
-          .resumeParentContainer {
-            .publicChildContainerRow {
-              margin: 0 1%;
-              display: flex;
-              flex-direction: column;
-              &:hover .publicColumnContainerSection {
-                border: 1px solid lightslategrey;
-                h6 {
-                  line-height: 3;
-                  background-color: ivory;
-                  color: darkslategrey;
-                }
-              }
-              .publicColumnContainerSection {
-                // height: 100%;
-                width: 100%;
-                h6 {
-                  display: flex;
-                  justify-content: center;
-                  align-items: middle;
-                  font-size: 20px;
-                  padding: 1% 0;
-                  color: ivory;
-                }
-              }
-              .publicColumnContainer {
-                .resumeParentContainer {
-                  .publicColumnContainerDetail {
-                    width: 100%;
-                    text-align: center;
-                    padding: 4.5% 0;
-                    h6 {
-                      line-height: 1.5;
-                      // font-weight: 200;
-                    }
-                  }
-                }
-              }
-              .minorContainer {
-                .minorContainerTitle {
-                  text-decoration: underline;
-                }
-                .minorHighlights {
-                  margin: 0 1%;
-                  .minorItem {
-                    display: inline-flex;
-                    margin: 0 1%;
-                    color: ivory;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-      .publicParentContainerRow {
-        display: flex;
-        height: auto;
-      }
-    }
-  }
-
-  &--Mobile {
+  .resumeContainer {
+    height: 90vh;
+    text-rendering: geometricPrecision;
+    font-weight: 250;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     .resumeContainerTitle {
-      font-size: 4em;
-      margin-bottom: 5%;
+      align-self: center;
+      padding: 5% 0;
     }
-
     .resumeUIContainer {
-      margin: 5% 0;
-
+      margin: 1% 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
       .resumeParentContainer {
-        // Default View (nothing highlighted)
-        .publicResponsiveRowX {
-          text-align: center;
-          // width: 15%;
-          .publicColumnContainerTitle {
-            h6 {
-              font-size: 2em;
-              padding: 25% 0;
-              line-height: 1.5;
-            }
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+
+        .publicColumnContainerTitle,
+        .publicColumnContainerSection,
+        .publicColumnContainerDetail {
+          display: flex;
+          width: 25%;
+          justify-content: center;
+          h6 {
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+            flex: 1;
+            align-self: center;
           }
         }
 
-        // Mobile View when being hovered...
+        // Default View
+        .publicResponsiveRowX {
+          width: 35%;
+          .publicColumnContainerTitle {
+            width: 100%;
+            h6 {
+              // line-height: 3;
+              padding: 5% 0;
+            }
+          }
+        }
+        // View when Being Hovered
         .publicContainerRow {
           display: flex;
-
-          // Default Settings, negating the settings caused by browser view
           &:hover .publicColumnContainerTitle {
-            background-color: transparent;
-            border: none;
+            // height: 100%;
+            border: 1px solid lightslategray;
+            background-color: ivory;
+            margin-left: .5%;
+            h6 {
+              padding: 100% 0;
+              color: darkslategray;
+            }
+          }
+          .publicColumnContainerTitle {
+            padding: 2% 0;
             h6 {
               color: ivory;
             }
           }
-
-          .responsiveMobileColumnContainer {
-            width: 25%;
-            text-align: center;
-          }
-          .publicColumnContainerTitle {
-            h6 {
-              font-size: 2em;
-              padding: 100% 0;
-              line-height: 1.5;
-            }
-          }
-
           .publicColumnContainer {
-            flex: 1;
-
-
+            width: 0;
+            display: flex;
+            flex-direction: column;
+            // border: 1px solid white;
+            width: 100%;
             .resumeParentContainer {
-              &:last-child .publicContainerRow {
-                padding-bottom: 0;
-              }
               .publicChildContainerRow {
-                margin: 0;
-
+                margin: 0 1%;
+                display: flex;
+                flex-direction: column;
                 &:hover .publicColumnContainerSection {
-                  border: none;
+                  border: 1px solid lightslategrey;
                   h6 {
-                    background-color: transparent;
-                    color: ivory;
+                    line-height: 3;
+                    background-color: ivory;
+                    color: darkslategrey;
                   }
-                }
-
-                .publicColumnContainerSection,
-                .publicColumnContainerDetail {
-                  margin: 0 2%;
                 }
                 .publicColumnContainerSection {
+                  // height: 100%;
+                  width: 100%;
                   h6 {
-                    font-size: 2em;
+                    display: flex;
+                    justify-content: center;
+                    align-items: middle;
+                    font-size: 20px;
+                    padding: 1% 0;
                     color: ivory;
-                    // Test
-                    padding-bottom: 7.5%;
                   }
                 }
-
-                .publicColumnContainerDetail {
-                  font-size: 1.65em;
-                  line-height: 2;
+                .publicColumnContainer {
+                  .resumeParentContainer {
+                    .publicColumnContainerDetail {
+                      width: 100%;
+                      text-align: center;
+                      padding: 1.5% 0;
+                      h6 {
+                        line-height: 1.5;
+                        // font-weight: 200;
+                      }
+                    }
+                  }
                 }
                 .minorContainer {
-                  border-top: 1px solid ivory;
-                  border-bottom: 1px solid ivory;
-                  width: 90%;
-                  padding: 5% 0;
-                  align-self: center;
-                  text-align: center;
                   .minorContainerTitle {
-                    padding: 2% 0;
-                    font-size: 2em;
-                    text-decoration: none;
-                    margin-bottom: 2.5%;
+                    text-decoration: underline;
                   }
                   .minorHighlights {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    font-size: 1.5em;
-                    line-height: 2;
-                    list-style: circle;
+                    margin: 0 1%;
                     .minorItem {
-                      display: list-item;
-                      padding: 1% 0;
+                      display: inline-flex;
+                      margin: 0 1%;
+                      color: ivory;
                     }
                   }
                 }
               }
-              .activeHighlightedContainer {
-                padding-bottom: 7.5%;
-                .publicColumnContainerSection {
-                  border: 1px solid lightslategrey;
-                  h6 {
-                    padding: 0 0;
-                    line-height: 3;
-                    background-color: ivory !important;
-                    color: darkslategrey !important;
+            }
+          }
+        }
+        .publicParentContainerRow {
+          display: flex;
+          height: auto;
+        }
+      }
+    }
+
+    &--Mobile {
+      .resumeContainerTitle {
+        font-size: 4em;
+        margin-bottom: 5%;
+      }
+
+      .resumeUIContainer {
+        margin: 5% 0;
+
+        .resumeParentContainer {
+          // Default View (nothing highlighted)
+          .publicResponsiveRowX {
+            text-align: center;
+            // width: 15%;
+            .publicColumnContainerTitle {
+              h6 {
+                font-size: 2em;
+                padding: 25% 0;
+                line-height: 1.5;
+              }
+            }
+          }
+
+          // Mobile View when being hovered...
+          .publicContainerRow {
+            display: flex;
+
+            // Default Settings, negating the settings caused by browser view
+            &:hover .publicColumnContainerTitle {
+              background-color: transparent;
+              border: none;
+              h6 {
+                color: ivory;
+              }
+            }
+
+            .responsiveMobileColumnContainer {
+              width: 25%;
+              text-align: center;
+            }
+            .publicColumnContainerTitle {
+              h6 {
+                font-size: 2em;
+                padding: 100% 0;
+                line-height: 1.5;
+              }
+            }
+
+            .publicColumnContainer {
+              flex: 1;
+
+              .resumeParentContainer {
+                &:last-child .publicContainerRow {
+                  padding-bottom: 0;
+                }
+                .publicChildContainerRow {
+                  margin: 0;
+
+                  &:hover .publicColumnContainerSection {
+                    border: none;
+                    h6 {
+                      background-color: transparent;
+                      color: ivory;
+                    }
+                  }
+
+                  .publicColumnContainerSection,
+                  .publicColumnContainerDetail {
+                    margin: 0 2%;
+                  }
+                  .publicColumnContainerSection {
+                    h6 {
+                      font-size: 2em;
+                      color: ivory;
+                      // Test
+                      padding-bottom: 7.5%;
+                    }
+                  }
+                  .publicColumnContainer {
+                    .resumeParentContainer {
+                      .publicColumnContainerDetail {
+                        font-size: 1.65em;
+                        line-height: 2;
+                        padding: 4.5% 0;
+                      }
+                    }
+                  }
+                  .minorContainer {
+                    border-top: 1px solid ivory;
+                    border-bottom: 1px solid ivory;
+                    width: 90%;
+                    padding: 5% 0;
+                    align-self: center;
+                    text-align: center;
+                    .minorContainerTitle {
+                      padding: 2% 0;
+                      font-size: 2em;
+                      text-decoration: none;
+                      margin-bottom: 2.5%;
+                    }
+                    .minorHighlights {
+                      display: flex;
+                      flex-direction: column;
+                      align-items: center;
+                      font-size: 1.5em;
+                      line-height: 2;
+                      list-style: circle;
+                      .minorItem {
+                        display: list-item;
+                        padding: 1% 0;
+                      }
+                    }
+                  }
+                }
+                .activeHighlightedContainer {
+                  padding-bottom: 7.5%;
+                  .publicColumnContainerSection {
+                    border: 1px solid lightslategrey;
+                    h6 {
+                      padding: 0 0;
+                      line-height: 3;
+                      background-color: ivory !important;
+                      color: darkslategrey !important;
+                    }
                   }
                 }
               }
             }
-          }
-          // Parent is highlighted
-          &:hover {
-            .publicColumnContainerTitle {
-              h6 {
-                padding: 100% 10%;
+            // Parent is highlighted
+            &:hover {
+              .publicColumnContainerTitle {
+                h6 {
+                  padding: 100% 10%;
+                }
+              }
+              .publicColumnContainer {
               }
             }
-            .publicColumnContainer {
-            }
           }
-        }
-        .activeHighlightedContainer {
-          .publicColumnContainerTitle {
-            border: 1px solid lightslategrey;
-            background-color: ivory !important;
-            h6 {
-              color: darkslategrey !important;
+          .activeHighlightedContainer {
+            .publicColumnContainerTitle {
+              border: 1px solid lightslategrey;
+              background-color: ivory !important;
+              h6 {
+                color: darkslategrey !important;
+              }
             }
           }
         }
@@ -601,9 +615,9 @@
 // }
 
 // .publicColumnContainer .resumeParentContainer:first-of-type .publicChildContainerRow .publicColumnContainerSection h6 {
-  // margin-bottom: 5% !important;
-  // padding-bottom: 0 !important;
-  // padding-top: 0 !important;
+// margin-bottom: 5% !important;
+// padding-bottom: 0 !important;
+// padding-top: 0 !important;
 // }
 
 // .resumeParentContainer:last-child .publicContainerRow {

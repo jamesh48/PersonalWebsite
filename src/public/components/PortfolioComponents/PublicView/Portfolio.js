@@ -9,13 +9,8 @@ export default ({ portfolioJSON, mobileBrowser, smallWindow }) => {
 
   const imageReducer = (state, { type, payload }) => {
     switch (type) {
-      case 'allImages':
+      case 'ALL_IMAGES_LOADED':
         return payload;
-      case 'loadedImage':
-        const [i, j] = payload;
-        let newArr = state.slice();
-        newArr[i][j].loaded = true
-        return [...newArr];
       default:
         throw new Error()
     }
@@ -32,14 +27,6 @@ export default ({ portfolioJSON, mobileBrowser, smallWindow }) => {
     }
   };
 
-  const allLoadedReducer = (state, { type }) => {
-    switch (type) {
-      case 'allLoaded':
-        return true;
-      default:
-        throw new Error();
-    }
-  };
 
   const containerDataReducer = (state, action) => {
     switch (action.type) {
@@ -50,12 +37,9 @@ export default ({ portfolioJSON, mobileBrowser, smallWindow }) => {
     }
   };
 
-  const [images, imagesDispatch] = useReducer(imageReducer, []);
+  const [{ imageArr, allLoaded }, imagesDispatch] = useReducer(imageReducer, { allLoaded: false, imageArr: [] });
   const [hovered, hoveredDispatch] = useReducer(hoveredReducer, [null, null])
-  const [allLoaded, allLoadedDispatch] = useReducer(allLoadedReducer, false);
   const [portfolioRowJSON, containerDataDispatch] = useReducer(containerDataReducer, []);
-
-  useEffect(() => testLoadedImages(images, allLoadedDispatch), [images]);
 
   useEffectOnlyOnUpdate((args) => handleImageData(...args), [portfolioRowJSON], [portfolioRowJSON, imagesDispatch]);
   useEffectOnlyOnUpdate((args) => handleContainerData(...args), [mobileBrowser, smallWindow], [portfolioJSON, mobileBrowser, smallWindow, containerDataDispatch]);
@@ -66,7 +50,7 @@ export default ({ portfolioJSON, mobileBrowser, smallWindow }) => {
       <h4 className='portfolioTitle'>Software Engineering Applications</h4>
       <div className='portfolioApplicationContainer'>
         {
-          images?.map((portfolioRow, rowIndex) => {
+          imageArr?.map((portfolioRow, rowIndex) => {
             return (<div key={rowIndex} className={'portfolioApplicationRow'}> {
               portfolioRow.map((appData, columnIndex) => {
                 return (

@@ -5,7 +5,7 @@ import React from 'react';
 import cors from 'cors';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter as Router } from "react-router-dom";
-import AppRouter from 'Public/components/AppRouter.js';
+import AppRouter from 'Public/components/AppRouterComponents/AppRouter.js';
 import Minesweeper from 'Public/components/MinesweeperComponents/Minesweeper_Proxy.js';
 import Footer from 'Public/components/FooterComponents/Footer.js';
 import templates from 'Server/templates.js';
@@ -14,7 +14,6 @@ import { getTopTimes } from 'Minesweeper/minesweeperControllers.js';
 import { getAllPortfolioItems } from 'Database/controllers/portfolio_controllers.js';
 import portfolioJSON from 'PortfolioJSON';
 import footerJSON from 'FooterJSON';
-import handleMouseMove from '../public/Utils.js';
 const { htmlStart, htmlMid, htmlEnd } = templates;
 const app = express();
 
@@ -51,18 +50,16 @@ app.get("*", async (req, res) => {
   const activeResume = req.url === '/' ? await getResume() : null;
   // const portfolioJSON = req.url === '/' ? await getAllPortfolioItems() : null;
   const appStream = ReactDOMServer.renderToNodeStream(
-    <Router location={req.url} context={context}>
-      <AppRouter />
-    </Router>
+    <Router location={req.url} context={context}><AppRouter/></Router>
   );
-  const footerStream = ReactDOMServer.renderToNodeStream(<Footer />);
+  const footerStream = ReactDOMServer.renderToNodeStream(<Footer/>);
 
   res.write(htmlStart({
     portfolioJSON: portfolioJSON,
     footerJSON: footerJSON,
     topTimes: minesweeperTopTimes,
     resumeData: activeResume
-  }, handleMouseMove));
+  }));
 
   appStream.pipe(res, { end: false });
   appStream.on("end", () => {

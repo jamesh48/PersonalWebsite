@@ -1,10 +1,20 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import FooterItemContainer from './FooterItemContainer.js';
+import AppUtils from '../AppRouterComponents/AppUtils.js'
+const { mobileBrowserFunction } = AppUtils;
 import './footerStyles.scss';
 
 export default ({ footerJSON }) => {
   const [images, setImages] = useState([{ url: '', loaded: false, link: '' }]);
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [mobileBrowser, setMobileBrowser] = useState(null);
+
+
+  set_mobile_browser: useEffect(() => {
+    const mobileBrowserTest = mobileBrowserFunction();
+    setMobileBrowser(!!mobileBrowserTest);
+  }, []);
+
 
   const incrementImageLoad = (i) => {
     setImages(x => { x[i].loaded = true; return [...x] });
@@ -30,9 +40,13 @@ export default ({ footerJSON }) => {
     }));
   }, []);
 
+  useEffect(() => {
+
+  }, [])
+
   return isLoaded ? (
-    <div id={'footerContainer'}>
-      <div id={'footerItemsContainer'}>
+    <div id='footerContainer' className={mobileBrowser ? `footer-container footer-container--Mobile` : `footer-container`}>
+      <div id='footerItemsContainer'>
         {images.map((iconData, iconIndex) => {
           return <FooterItemContainer key={iconIndex} iconData={iconData} />
         })}
