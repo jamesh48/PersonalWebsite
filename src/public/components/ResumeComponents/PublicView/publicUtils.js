@@ -119,7 +119,7 @@ const recurseContainers = ({ resumeDetails, mobileBrowser, hoverDepth, hoverBrea
         <div
           data-depth={depth}
 
-          onTouchStart={() => {
+          onTouchEnd={() => {
             if (mobileBrowser) {
               handleMobileResumeClick()
             }

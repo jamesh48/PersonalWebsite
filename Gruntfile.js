@@ -28,13 +28,13 @@ module.exports = function (grunt) {
             src: ['index.min.css', 'index-bundle.js'],
             dest: 'main/build/server'
           },
-          {
-            expand: true,
-            cwd: 'src/images',
-            src: ['*.png', '*.jpg', '*.jpeg'],
-            // src: ['ges-favicon.png']
-            dest: 'main/main-images'
-          }
+          // {
+          //   expand: true,
+          //   cwd: 'src/images',
+          //   src: ['*.png', '*.jpg', '*.jpeg'],
+          //   // src: ['ges-favicon.png']
+          //   dest: 'main/main-images'
+          // }
         ]
       }
     },
@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Couple of minor fixes prt 2'
+          message: 'Trying out onTouchEnd'
         }
       }
     },
