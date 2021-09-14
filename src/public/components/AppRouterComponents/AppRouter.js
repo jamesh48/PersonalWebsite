@@ -7,12 +7,14 @@ import {
   Switch,
   useHistory
 } from "react-router-dom";
+const { log } = GlobalUtils;
 
 import Contact from '../ContactComponents/Contact.js';
 import Minesweeper from '../MinesweeperComponents/Minesweeper_Proxy.js';
 import Home from '../HomeComponents/Home.js';
 import AppUtils from './AppUtils.js'
 const { mobileBrowserFunction } = AppUtils;
+// const { log } = GlobalUtils;
 
 import '../../main-styles/cursor.css';
 import '../../main-styles/reset.scss';
@@ -36,6 +38,7 @@ export default (props) => {
   };
 
   set_mobile_browser: useEffect(() => {
+    log('hello ', 'world')
     const mobileBrowserTest = mobileBrowserFunction();
     setMobileBrowser(!!mobileBrowserTest);
   }, [admin]);

@@ -2,8 +2,8 @@ const webpack = require('webpack');
 const nodeExternals = require("webpack-node-externals");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require("path");
-
 require('dotenv').config({ path: './.env' });
+const GlobalUtils = require('./globalUtils.js');
 
 const css = {
   test: /\.(css|scss)$/,
@@ -36,7 +36,8 @@ const serverConfig = {
   plugins: [new MiniCssExtractPlugin(),
   new webpack.DefinePlugin({
     'process.env.cFLink': JSON.stringify(process.env.CLOUDFRONTLINK || 'development'),
-    'process.env.DEV_ENV': process.env.DEV_ENV
+    'process.env.DEV_ENV': process.env.DEV_ENV,
+    'GlobalUtils': GlobalUtils
   }),
   ],
   devtool: "source-map",
@@ -70,18 +71,19 @@ const clientConfig = {
   mode: "development",
   devtool: "source-map",
   // Req by webpack 5/ala dotenv-environment variables
-  resolve: {
-    fallback: {
-      "fs": false,
-      "path": false,
-      "os": false
-    }
-  },
+  // resolve: {
+  //   fallback: {
+  //     "fs": false,
+  //     "path": false,
+  //     "os": false
+  //   }
+  // },
   target: "web",
   plugins: [new MiniCssExtractPlugin(),
   new webpack.DefinePlugin({
     'process.env.cFLink': JSON.stringify(process.env.CLOUDFRONTLINK || 'development'),
-    'process.env.DEV_ENV': process.env.DEV_ENV
+    'process.env.DEV_ENV': process.env.DEV_ENV,
+    'GlobalUtils': GlobalUtils
   }),
   ],
   entry: {

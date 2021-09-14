@@ -1,51 +1,54 @@
-.footer-container {
+footer {
   position: sticky;
-  display: flex;
-  justify-content: center;
-  height: 5vh;
-  width: 75%;
-  margin: 0 auto;
-
-  &--Mobile {
-    width: 90%;
-  }
-
-  #footerItemsContainer {
+  bottom: 0;
+  .footer-container {
     display: flex;
-    width: 100%;
-    border: 1px solid rgb(255, 255, 240);
-    background-color: rgb(255, 255, 240);
-    border-radius: 0.7% / 25%;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    justify-content: center;
+    height: 5vh;
+    width: 75%;
+    margin: 0 auto;
 
-    .footerItemContainer {
+    &--Mobile {
+      width: 90%;
+    }
+
+    #footerItemsContainer {
       display: flex;
       width: 100%;
-      align-items: center;
-      div {
-        background-size: contain;
-        opacity: 0.4;
-        background-position: center;
-        background-repeat: no-repeat;
-        flex: 1;
-        height: 80%;
-      }
-      &:hover {
-        border-radius: 0;
-        &:first-child {
-          border-radius: 1% / 25%;
-          border-top-right-radius: 0;
-          border-bottom-left-radius: 0;
-          border-bottom-right-radius: 0;
+      border: 1px solid rgb(255, 255, 240);
+      background-color: rgb(255, 255, 240);
+      border-radius: 0.7% / 25%;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+
+      .footerItemContainer {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        div {
+          background-size: contain;
+          opacity: 0.4;
+          background-position: center;
+          background-repeat: no-repeat;
+          flex: 1;
+          height: 80%;
         }
-        &:last-child {
-          border-radius: 1% / 25%;
-          border-bottom-right-radius: 0;
-          border-bottom-left-radius: 0;
-          border-top-left-radius: 0;
+        &:hover {
+          border-radius: 0;
+          &:first-child {
+            border-radius: 1% / 25%;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+          }
+          &:last-child {
+            border-radius: 1% / 25%;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0;
+          }
+          background-color: rgba(225, 225, 240, 0.8);
         }
-        background-color: rgba(225, 225, 240, 0.8);
       }
     }
   }

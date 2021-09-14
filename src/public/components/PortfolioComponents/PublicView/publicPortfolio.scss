@@ -1,11 +1,13 @@
 #portfolio-root {
-  // margin-bottom: 0;
-  // min-height: 900px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0;
 
   .portfolioContainer {
     text-rendering: geometricPrecision;
     display: flex;
     flex-direction: column;
+    flex: 1;
     // test
     height: 100%;
     .portfolioTitle {

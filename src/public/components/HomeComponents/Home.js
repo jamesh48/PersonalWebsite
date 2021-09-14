@@ -147,11 +147,14 @@ export default (props) => {
       <div data-name='Portfolio' className='container' id='portfolio-root'>
         {
           !props.admin ?
-            <Portfolio {...props} smallWindow={smallWindow} mobileBrowser={mobileBrowser} />
+            <><Portfolio {...props} smallWindow={smallWindow} mobileBrowser={mobileBrowser} />
+
+              {floatingButtonsPlacement === 'portfolio-root' && mobileBrowser === false ? <FloatingButtons indicator={true} /> : null}
+            </>
             : <AdminPortfolio {...props} />
         }
 
-        {(floatingButtonsPlacement === 'portfolio-root' && mobileBrowser === false) ? <FloatingButtons indicator={true} /> : null}
+
       </div>
     </div >
   );

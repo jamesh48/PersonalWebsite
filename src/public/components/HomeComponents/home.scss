@@ -1,10 +1,22 @@
+#root {
+  // scroll-padding-bottom: 300px;
+  // scroll-snap-type: y mandatory;
+
+}
+
+#resume-root, #portfolio-root {
+  min-height: 90vh;
+
+}
+
 .homeContainer {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  width: 75%
-
-
+  width: 75%;
+  #about-me-root {
+    height: 90vh
+  }
 }
 
 .homeContainer--Mobile {
@@ -12,12 +24,18 @@
   flex-direction: column;
   margin: 0 auto;
   width: 90%;
+  #about-me-root {
+    min-height: 90vh;
+  }
+
+ #portfolio-root {
+   padding-bottom: 0;
+ }
 }
 
 .container {
-  &:not(#resume-root) {
-    height: 90vh;
-  }
+  scroll-snap-align: center none;
+
   width: 100%;
   margin: 0 auto;
   p,
@@ -47,8 +65,12 @@
 }
 
 #portfolio-root {
-  margin-bottom: 5%;
-  padding-bottom: 0;
+  margin-bottom: 0;
+  padding-bottom: 5%;
+}
+
+#about-me-root {
+  padding-bottom: 5%;
 }
 
 .floatingButtonContainer {
