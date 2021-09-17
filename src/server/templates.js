@@ -57,15 +57,14 @@ export default {
     <script>
       const devScriptArr = [
         '/static/appRouter.js',
-        'https://static.fullstackhrivnak.com/mines/build/public/public-bundle.js',
+        '${cFLINK}/mines/build/public/public-bundle.js',
         '/static/footer.js'
       ];
 
       const prodScriptArr = [
         '${cFLink}/main/build/public/appRouter-bundle.js',
+        '${cFLINK}/mines/build/public/public-bundle.js',
         '${cFLink}/main/build/public/footer-bundle.js',
-        '${cFLink}/main/build/public/minesweeper-bundle.js',
-        '${cFLink}/mines/build/public/public-bundle.js'
       ];
 
       (${DEV_ENV} ? devScriptArr : prodScriptArr).forEach((scriptSrc) => {
