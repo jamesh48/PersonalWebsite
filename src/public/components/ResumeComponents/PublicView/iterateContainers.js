@@ -157,7 +157,7 @@ const iterateSections = (props) => {
                   {iterateDetails({ details: section.detail, hoveredIndex: hoveredIndex, ...props })}
                 </div>
                 <div className={hFCN({ existing: `minorContainer`, hoveredIndex: hoveredIndex, itrDepth: 2, ...props })} ref={loadedSections} data-dex={sectionIndex}>
-                  <h5 className='minorContainerTitle'>{section.highlightDetail[0].title}</h5>
+                  <h5 className='minorContainerTitle'>{section.highlightDetail[0]?.title || ''}</h5>
                   <div className='minorHighlights'>
                     {iterateHighlights(section.highlightDetail.slice(1))}
                   </div>
@@ -170,7 +170,7 @@ const iterateSections = (props) => {
                   {iterateDetails({ details: section.detail, hoveredIndex: hoveredIndex, ...props }, 'cancel')}
                 </div>
                 <div className='minorContainer'>
-                  <h5 className='minorContainerTitle'>{section.highlightDetail[0].title}</h5>
+                  <h5 className='minorContainerTitle'>{section.highlightDetail[0]?.title || ''}</h5>
                   <div className='minorHighlights'>
                     {iterateHighlights(section.highlightDetail.slice(1))}
                   </div>
@@ -194,7 +194,7 @@ const iterateDetails = (props, ind) => {
           <div className='publicColumnContainerDetail'>
             <PublicDisplayContainer
               key={detailIndex}
-              displayItem={detail.title}
+              displayItem={detail?.title}
               breadth={hoveredIndex}
               depth={1}
             />
