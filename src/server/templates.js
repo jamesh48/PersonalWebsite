@@ -25,7 +25,8 @@ export default {
           const devLinkArr =[
             '/static/appRouter.css',
             '/static/footer.css',
-            '/static/minesweeper.css'
+            '${cFLink}/mines/build/public/index.min.css',
+            '/static/minesweeper.css',
           ];
 
             (${DEV_ENV} ? devLinkArr : prodLinkArr).forEach((devLink) => {
@@ -56,6 +57,7 @@ export default {
     <script>
       const devScriptArr = [
         '/static/appRouter.js',
+        'https://static.fullstackhrivnak.com/mines/build/public/public-bundle.js',
         '/static/footer.js'
       ];
 

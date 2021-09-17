@@ -1,19 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useScript from './customHook.jsx';
 import '../../main-styles/global.scss';
 import './minesweeperStyles.scss';
+import Utils from '../PortfolioComponents/PublicView/publicViewPortfolioUtils.js';
+const { useEffectOnlyOnUpdate } = Utils;
+export default ({ game, mobileBrowser }) => {
+  let [leaderboard, setLeaderboard] = useState(null);
+  let [toggled, setToggled] = useState(false);
 
-export default ({game, mobileBrowser}) => {
+  useEffectOnlyOnUpdate(() => {
+    if (!leaderboard || toggled) {
+      if (!leaderboard) {
+        setLeaderboard(document.getElementById('leaderboard'));
+      }
+      document.getElementById('leaderboard').remove();
+    } else if (!toggled) {
+      return document.querySelector('.minesweeper-proxy-root--Mobile').appendChild(leaderboard)
+    }
+  }, [toggled])
 
 
   return (
     <div className={mobileBrowser ? `minesweeper-proxy-root minesweeper-proxy-root--Mobile` : `minesweeper-proxy-root`} >
-      <div className={`container websiteMinesweeperAdjust`} id='minesweeper-root'>
+      <div className={`container websiteMinesweeperAdjust`} id='minesweeper-root' onLoad={() => { console.log('hi') }}>
 
         {game}
 
       </div>
+      {
+        mobileBrowser ?
+          <button onClick={() => { setToggled(x => !x) }}>{!toggled ? 'remove leaderboard' : 'add leaderboard'}</button> : null
+      }
     </div>
   );
 };

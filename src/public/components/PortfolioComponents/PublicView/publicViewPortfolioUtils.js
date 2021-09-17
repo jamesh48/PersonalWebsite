@@ -41,7 +41,6 @@ exports.handleImageData = async (inputArr, imagesDispatch) => {
         img.src = imgData.imgUrl;
       });
     })]
-    return [...total, rowResult];
   }, []);
 
   imagesDispatch({ type: 'ALL_IMAGES_LOADED', payload: { allLoaded: true, imageArr: processedImages } });

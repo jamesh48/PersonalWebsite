@@ -1,3 +1,7 @@
+.pointerEventsRemoved {
+  pointer-events: none !important;
+}
+
 #resume-root {
   display: flex;
   flex-direction: column;
@@ -56,7 +60,7 @@
             // height: 100%;
             border: 1px solid lightslategray;
             background-color: ivory;
-            margin-left: .5%;
+            margin-left: 0.5%;
             h6 {
               padding: 100% 0;
               color: darkslategray;
@@ -80,11 +84,11 @@
                 display: flex;
                 flex-direction: column;
                 &:hover .publicColumnContainerSection {
-                  border: 1px solid lightslategrey;
+                  // border: 1px solid lightslategrey;
                   h6 {
-                    line-height: 3;
-                    background-color: ivory;
-                    color: darkslategrey;
+                    // line-height: 3;
+                    background-color: transparent;
+                    color: ivory;
                   }
                 }
                 .publicColumnContainerSection {
@@ -124,6 +128,18 @@
                       color: ivory;
                     }
                   }
+                }
+              }
+            }
+
+            .activeBrowserHighlightedContainer {
+              .publicColumnContainerSection {
+                border: 1px solid lightslategrey;
+                h6 {
+                  padding: 0 0;
+                  line-height: 3;
+                  background-color: ivory !important;
+                  color: darkslategrey !important;
                 }
               }
             }
@@ -210,8 +226,9 @@
                     h6 {
                       font-size: 2em;
                       color: ivory;
-                      // Test
-                      padding-bottom: 7.5%;
+                      height: 5rem;
+                      align-items: center;
+
                     }
                   }
                   .publicColumnContainer {
@@ -250,8 +267,7 @@
                     }
                   }
                 }
-                .activeHighlightedContainer {
-                  padding-bottom: 7.5%;
+                .activeMobileHighlightedContainer {
                   .publicColumnContainerSection {
                     border: 1px solid lightslategrey;
                     h6 {
@@ -275,7 +291,7 @@
               }
             }
           }
-          .activeHighlightedContainer {
+          .activeMobileHighlightedContainer {
             .publicColumnContainerTitle {
               border: 1px solid lightslategrey;
               background-color: ivory !important;
@@ -535,6 +551,11 @@
   background-color: cornflowerblue;
 }
 
+.specialTest {
+  h6 {
+    padding: 100% 0;
+  }
+}
 // fade in
 
 .fader {
@@ -544,9 +565,79 @@
   -o-animation: fadeIn ease 3s;
   -ms-animation: fadeIn ease 3s;
 }
-@keyframes fadeIn {
+
+.faderContainer {
+  padding: 0 0;
+  margin: 0 0;
+  .publicColumnContainer .resumeParentContainer,
+  .minorContainer {
+    // overflow-block: visible;
+    animation: disappearText ease 1s forwards;
+  }
+}
+
+.collapseTitleContainer {
+  h6 {
+    animation: collapseTitleContainer ease 3s forwards;
+  }
+}
+
+.faderContainerSection {
+  animation: disappearCoolText ease 3s forwards;
+  .resumeParentContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+}
+
+.initFader {
+  animation: initFade ease 3s;
+}
+
+@keyframes collapseTitleContainer {
+  0% {
+    padding: 40% 0;
+  }
+  100% {
+    padding: 0 0;
+  }
+}
+@keyframes disappearCoolText {
+  0% {
+    opacity: 0.5;
+    max-height: 10em;
+  }
+
+  100% {
+    opacity: 0;
+    max-height: 0rem;
+  }
+}
+
+@keyframes disappearText {
+  0% {
+    opacity: 0.5;
+    max-height: 4em;
+  }
+
+  100% {
+    opacity: 0;
+    max-height: 0rem;
+  }
+}
+
+@keyframes initFade {
   0% {
     opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0.2;
   }
   100% {
     opacity: 1;
@@ -610,18 +701,3 @@
     // z-index: -1;
   }
 }
-
-// .responsiveMobileColumnContainer {
-//   width: 35%;
-// }
-
-// .publicColumnContainer .resumeParentContainer:first-of-type .publicChildContainerRow .publicColumnContainerSection h6 {
-// margin-bottom: 5% !important;
-// padding-bottom: 0 !important;
-// padding-top: 0 !important;
-// }
-
-// .resumeParentContainer:last-child .publicContainerRow {
-//   padding-bottom: 0;
-//   background-color: red;
-// }

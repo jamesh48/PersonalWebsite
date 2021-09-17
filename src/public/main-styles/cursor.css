@@ -1,5 +1,5 @@
 #cursor {
-  pointer-events: none;
+  pointer-events: none !important;
   z-index: 1;
   background-image: url(https://static.fullstackhrivnak.com/main/main-images/cursor.png);
   height: 20px;

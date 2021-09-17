@@ -6,13 +6,16 @@ import FloatingButtons from './Home_Components/FloatingButtons.js';
 import Portfolio from '../PortfolioComponents/PublicView/Portfolio.js';
 import AdminPortfolio from '../PortfolioComponents/AdminView/AdminPortfolio.js';
 import Utils from '../AppRouterComponents/AppUtils.js';
-const { handleMouseMove, debounce } = Utils;
+const { debounce } = Utils;
 import Resume from '../ResumeComponents/Resume.js';
 import HomeUtils from './homeUtils.js';
-const { handleHover } = HomeUtils;
+// const { handleHover } = HomeUtils;
+import { useSelector, useDispatch } from 'react-redux';
+
 
 export default (props) => {
   const { mobileBrowser } = props;
+
   const hoverParamsReducer = (state, action) => {
     switch (action.type) {
       case 'FULL':
@@ -21,6 +24,12 @@ export default (props) => {
         throw new Error();
     }
   };
+
+  const hoverDepth = useSelector((state) => {
+    return state.hoverParams[0]
+  });
+  const hoverBreadth = useSelector((state) => state.hoverParams[1]);
+  const dispatchHoverParams = useDispatch();
 
   const floatingButtonsReducer = (state, action) => {
     switch (action.type) {
@@ -36,8 +45,8 @@ export default (props) => {
     width: null
   });
 
-  const [hoverParams, dispatchHoverParams] = useReducer(hoverParamsReducer, [null, null]);
-  // const [mobileBrowser, setMobileBrowser] = useState(null);
+  // const [hoverParams, dispatchHoverParams] = useReducer(hoverParamsReducer, [null, null]);
+
   const [smallWindow, setSmallWindow] = useState(null);
   // const [floatingButtonsPlacement, setFloatingButtonsPlacement] = useState('');
   const [floatingButtonsPlacement, dispatchFloatingButtons] = useReducer(floatingButtonsReducer, '');
@@ -58,17 +67,17 @@ export default (props) => {
   // }, []);
 
 
-  cursor: useEffect(() => {
-    if (mobileBrowser) {
-      window.removeEventListener("mousemove", handleMouseMove, true);
-      // If it exists remove it, if it doesn't exist (initial page load), skip...
-      if (document.getElementById('cursor')) {
-        document.getElementById('cursor').remove();
-      }
-    } else {
-      window.addEventListener("mousemove", handleMouseMove, true);
-    };
-  }, [mobileBrowser]);
+  // cursor: useEffect(() => {
+  //   if (mobileBrowser) {
+  //     window.removeEventListener("mousemove", handleMouseMove, true);
+  //     // If it exists remove it, if it doesn't exist (initial page load), skip...
+  //     if (document.getElementById('cursor')) {
+  //       document.getElementById('cursor').remove();
+  //     }
+  //   } else {
+  //     window.addEventListener("mousemove", handleMouseMove, true);
+  //   };
+  // }, [mobileBrowser]);
 
 
 
@@ -77,7 +86,7 @@ export default (props) => {
       setDimensions({
         height: window.innerHeight,
         width: window.innerWidth
-      })
+      });
     }, 500);
 
     window.addEventListener('resize', debouncedHandleResize);
@@ -110,9 +119,27 @@ export default (props) => {
 
     return () => { observer.disconnect() }
 
-  }, [])
+  }, []);
 
-  const onHandleHover = (indicator) => handleHover(indicator, hoverParams[1], dispatchHoverParams);
+  const handleHover = useCallback((indicator) => {
+    if (indicator === 'exit') return dispatchHoverParams({ type: 'FULL', payload: [null, null] })
+
+    let { target: { dataset: { depth, breadth, name } } } = event;
+
+    // The first condition prevents details from disappearing momentarily when the user hovers downards over the border between the section title and the details
+    // The second condition ensures that when the user goes to a new title, that the UI shows it, as there is no data-depth of publicColumnContainer between section and details but there is a data-depth in the empty space.
+    if (event.target.className === 'publicColumnContainer' && !event.target.dataset.depth) return;
+
+    // Setting hoverDepth------------------->
+    let newHoverParams = [].concat(Number(depth));
+
+    // setting hoverBreadth----------------->
+    if (depth === '0') return dispatchHoverParams({ type: 'FULL', payload: newHoverParams.concat(Number(breadth)) });
+
+    if (depth === '1' || event.target.className === 'publicColumnContainer') {
+      return dispatchHoverParams({ type: 'FULL', payload: newHoverParams.concat(breadth) });
+    }
+  }, [])
 
   const smileCallback = useCallback(() => {
     setSmileLoaded(true);
@@ -135,10 +162,9 @@ export default (props) => {
         <Resume
           smallWindow={smallWindow}
           mobileBrowser={mobileBrowser}
-          handleMobileResumeClick={onHandleHover}
-          handleHover={onHandleHover}
-          hoverDepth={hoverParams[0]}
-          hoverBreadth={hoverParams[1]}
+          handleHover={handleHover}
+          hoverDepth={hoverDepth}
+          hoverBreadth={hoverBreadth}
           {...props}
         />
         {(floatingButtonsPlacement === 'resume-root' && mobileBrowser === false) ? <FloatingButtons /> : null}

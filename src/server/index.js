@@ -14,6 +14,8 @@ import { getTopTimes } from 'Minesweeper/minesweeperControllers.js';
 import { getAllPortfolioItems } from 'Database/controllers/portfolio_controllers.js';
 import portfolioJSON from 'PortfolioJSON';
 import footerJSON from 'FooterJSON';
+import { Provider } from 'react-redux';
+import { combineReducers, createStore } from 'redux';
 const { htmlStart, htmlMid, htmlEnd } = templates;
 const app = express();
 
@@ -27,7 +29,20 @@ app.use(cors());
 app.use('*', (req, res, next) => {
   console.log(req.method, req.originalUrl)
   next();
-})
+});
+
+const hoverParams = (state = [null, null], action) => {
+  switch (action.type) {
+    case "FULL":
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+const rootReducer = combineReducers({ hoverParams })
+const store = createStore(rootReducer);
+
 
 // app.use(function (req, res, next) {
 //   res.set('Cache-control', 'public, max-age=300')
@@ -46,19 +61,24 @@ app.get("*", async (req, res) => {
   const context = {};
 
   const minesweeperTopTimes = req.url.indexOf('minesweeper') > -1 ? await getTopTimes() : null;
-
+  const {data: minesweeperGame} = await axios(`https://static.fullstackhrivnak.com/mines/build/public/public-bundle.js`);
   const activeResume = req.url === '/' ? await getResume() : null;
   // const portfolioJSON = req.url === '/' ? await getAllPortfolioItems() : null;
   const appStream = ReactDOMServer.renderToNodeStream(
-    <Router location={req.url} context={context}><AppRouter/></Router>
+    <Provider store={store}>
+      <Router location={req.url} context={context}>
+        <AppRouter />
+      </Router>
+    </Provider>
   );
-  const footerStream = ReactDOMServer.renderToNodeStream(<Footer/>);
+  const footerStream = ReactDOMServer.renderToNodeStream(<Footer />);
 
   res.write(htmlStart({
     portfolioJSON: portfolioJSON,
     footerJSON: footerJSON,
     topTimes: minesweeperTopTimes,
-    resumeData: activeResume
+    resumeData: activeResume,
+    game: minesweeperGame
   }));
 
   appStream.pipe(res, { end: false });

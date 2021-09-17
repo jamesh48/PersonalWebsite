@@ -92,7 +92,7 @@ const clientConfig = {
       "src/public/AppRouterRoot.js"
     ),
     "footer": path.resolve(__dirname, "src/public/FooterRoot.js"),
-    "minesweeper": path.resolve(__dirname, "src/public/components/MinesweeperComponents/Minesweeper_Proxy.js")
+    "minesweeper": path.resolve(__dirname, "src/public//MinesweeperRoot.js")
   },
   module: {
     rules: [js, css],
