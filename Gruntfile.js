@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'End of day commit- changed recurse containers to iterate containers and improved resume UI overall'
+          message: 'End of day commit- some small improved error handling'
         }
       }
     },

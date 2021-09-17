@@ -38,14 +38,14 @@ export default (props) => {
 
           {
             // For now mobile browser wont have this animation
-            (!prevTitle.current || (hoverDepth || hoverBreadth) || mobileBrowser) ?
+            (!prevTitle.current || (hoverDepth || hoverBreadth || hoverBreadth === 0) || mobileBrowser) ?
               (
 
                 <>
                   <div className={`publicColumnContainerTitle`}>
                     <PublicDisplayContainer
                       key={titleIndex}
-                      displayItem={title.title}
+                      displayItem={title?.title || ''}
                       breadth={titleIndex}
                       depth={0}
                     />
@@ -70,13 +70,13 @@ export default (props) => {
               )
 
               :
-              (!hoverDepth || !hoverBreadth) ?
+              ((!hoverDepth || !hoverBreadth) && hoverBreadth !== 0) ?
                 (
                   <>
                     < div className={`publicColumnContainerTitle ${prevTitle?.current?.dataset?.titleindex === String(titleIndex) ? 'collapseTitleContainer' : null}`}>
                       <PublicDisplayContainer
                         key={titleIndex}
-                        displayItem={title.title}
+                        displayItem={title?.title || ''}
                         breadth={titleIndex}
                         depth={0}
                       />
@@ -118,7 +118,7 @@ const iterateDisappearingSections = (props) => {
           <div className='publicColumnContainerSection'>
             <PublicDisplayContainer
               key={sectionIndex}
-              displayItem={section.title}
+              displayItem={section?.title || ''}
               depth={1}
             />
           </div>
@@ -144,7 +144,7 @@ const iterateSections = (props) => {
           <div className='publicColumnContainerSection'>
             <PublicDisplayContainer
               key={sectionIndex}
-              displayItem={section.title}
+              displayItem={section?.title || ''}
               breadth={hoveredIndex}
               depth={1}
             />
@@ -194,7 +194,7 @@ const iterateDetails = (props, ind) => {
           <div className='publicColumnContainerDetail'>
             <PublicDisplayContainer
               key={detailIndex}
-              displayItem={detail?.title}
+              displayItem={detail?.title || ''}
               breadth={hoveredIndex}
               depth={1}
             />
@@ -208,7 +208,7 @@ const iterateDetails = (props, ind) => {
 const iterateHighlights = (highlights) => {
   return highlights.reduce((resultHighlights, highlight, highlightIndex) => {
     return resultHighlights.concat(
-      <span className='minorItem'>{highlight.title}</span>
+      <span className='minorItem'>{highlight?.title || ''}</span>
     )
   }, [])
 
