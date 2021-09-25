@@ -3,7 +3,7 @@ const { cFLink } = process.env;
 export default [
   {
     "title": "Mini Games",
-    "imgUrl": `${cFLink}/main/main-images/minesweeperss.png`,
+    "imgUrl": `${cFLink}/main/main-images/beatminesweeperss.png`,
     "cssStyles": {
       "backgroundColor": "black",
       "color": "ivory"

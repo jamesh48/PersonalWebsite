@@ -31,22 +31,6 @@ app.use('*', (req, res, next) => {
   next();
 });
 
-const hoverParams = (state = [null, null], action) => {
-  switch (action.type) {
-    case "FULL":
-      return action.payload;
-    default:
-      return state;
-  }
-}
-
-
-
-
-// app.use(function (req, res, next) {
-//   res.set('Cache-control', 'public, max-age=300')
-//   next();
-// });
 
 // --> serves the Dist/Public Folder
 app.use("/static", express.static(path.resolve(__dirname, "../public")));
