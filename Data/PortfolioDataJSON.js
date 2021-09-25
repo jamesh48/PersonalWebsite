@@ -81,8 +81,22 @@ export default [
     "imgUrl": `${cFLink}/main/main-images/Strava_Results_Generator.jpg`,
     "github": [
       {
-        "title": "github",
+        "title": "main github",
         "link": "https://github.com/jamesh48/Strava-Report-Generator"
+      }
+    ]
+  },
+  {
+    "title": "Job Application Express",
+    "cssStyles": {
+      "backgroundColor": "ivory",
+      "color": "black",
+    },
+    "imgUrl": `${cfLink}/main/main-images/indeedautomation.png`,
+    "github": [
+      {
+        "title": "main github",
+        "link": "https://github.com/jamesh48/job-application-express"
       }
     ]
   },
@@ -95,7 +109,7 @@ export default [
     "imgUrl": `${cFLink}/main/main-images/GES.jpg`,
     "github": [
       {
-        "title": "This website! (github)",
+        "title": "This website! (main github)",
         "link": "https://github.com/jamesh48/PersonalWebsite"
       }
     ]
