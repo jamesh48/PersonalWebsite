@@ -11,7 +11,8 @@
     "serve": "webpack serve",
     "build": "webpack",
     "database": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate",
-    "deploy": "pm2 deploy ./src/server/ecosystem.config.js production",
+    "deploy": "grunt deploy-all",
+    "postdeploy": "pm2 deploy ./src/server/ecosystem.config.js production",
     "dev:start": "nodemon dist/server/index.js",
     "dev:build": "webpack && concurrently \"webpack --watch\" \"nodemon dist/server/index.js\"",
     "ip": "curl -4 icanhazip.com"
