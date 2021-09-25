@@ -92,7 +92,7 @@ export default [
       "backgroundColor": "ivory",
       "color": "black",
     },
-    "imgUrl": `${cfLink}/main/main-images/indeedautomation.png`,
+    "imgUrl": `${cFLink}/main/main-images/indeedautomation.png`,
     "github": [
       {
         "title": "main github",
