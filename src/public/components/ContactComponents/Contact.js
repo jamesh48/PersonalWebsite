@@ -1,8 +1,11 @@
 import React from 'react';
+// import AdminForm from '../AdminForm/adminForm.js';
+// import { AdminFormStoreProvider } from 'AdminFromStore';
 import './contact.scss';
 
 export default ({ mobileBrowser }) => {
   return (
+    <div>
     <div className={mobileBrowser ? `contact-root contact-root--Mobile` : `contact-root`}>
       <div className={`${'container'} ${'contactContainer'}`} id='contact-root'>
         <div className={'contactChildContainer'}>
@@ -24,6 +27,10 @@ export default ({ mobileBrowser }) => {
           <textarea className={'contactInput'} />
         </div>
       </div>
+    </div>
+    {/* <AdminFormStoreProvider>
+      <AdminForm/>
+    </AdminFormStoreProvider> */}
     </div>
   );
 }

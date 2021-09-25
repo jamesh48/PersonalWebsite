@@ -1,4 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { GlobalStoreProvider } from 'GlobalStore';
 import Footer from './components/FooterComponents/Footer.js';
-ReactDOM.hydrate(<Footer footerJSON={window.__INITIAL__DATA__.footerJSON} />, document.getElementById('footerroot'));
+
+ReactDOM.hydrate(
+  <GlobalStoreProvider>
+    <Footer footerJSON={window.__INITIAL__DATA__.footerJSON} />
+  </GlobalStoreProvider>
+  ,
+  document.getElementById('footerroot')
+);

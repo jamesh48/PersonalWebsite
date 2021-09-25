@@ -1,4 +1,5 @@
 export default ({ existing, hoverBreadth, hoveredIndex, itrDepth, hoverDepth, mobileBrowser, prevTitle }) => {
+
   const testedHoverBreadth = typeof hoverBreadth === 'string' ? hoverBreadth.split('_').map((x) => Number(x)) : hoverBreadth;
   const testedHoveredIndex = typeof hoveredIndex === 'string' ? hoveredIndex.split('_').map((y) => Number(y)) : hoveredIndex;
   const initTitleFadeInCondition = (

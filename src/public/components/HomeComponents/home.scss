@@ -1,12 +1,11 @@
 #root {
   // scroll-padding-bottom: 300px;
   // scroll-snap-type: y mandatory;
-
 }
 
-#resume-root, #portfolio-root {
+#resume-root,
+#portfolio-root {
   min-height: 90vh;
-
 }
 
 .homeContainer {
@@ -15,7 +14,7 @@
   margin: 0 auto;
   width: 75%;
   #about-me-root {
-    height: 90vh
+    height: 90vh;
   }
 }
 
@@ -28,9 +27,9 @@
     min-height: 90vh;
   }
 
- #portfolio-root {
-   padding-bottom: 0;
- }
+  #portfolio-root {
+    padding-bottom: 0;
+  }
 }
 
 .container {

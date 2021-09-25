@@ -119,8 +119,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-cloudfront-invalidate');
   grunt.loadNpmTasks('grunt-pm2-deploy');
 
-
-  grunt.registerTask('test', 'pm2deploy:production')
+  grunt.registerTask('test', 'pm2deploy:production');
   grunt.registerTask('cf_invalidate', 'cloudfront_invalidate');
   grunt.registerTask('bucketDeploy', 'aws_s3:dist');
   grunt.registerTask('build', 'webpack');

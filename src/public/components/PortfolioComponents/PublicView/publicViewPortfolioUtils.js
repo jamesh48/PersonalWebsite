@@ -1,10 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import Promise from 'bluebird';
 import regeneratorRuntime from 'regenerator-runtime';
-let exports = {}
 
-exports.handleContainerData = (inputArr, mobileBrowser, smallWindow, containerDataDispatch) => {
-  const containerData = inputArr?.reduce((total, item, index) => {
+const handleContainerData = (inputArr, mobileBrowser, smallWindow, indicator, dispatch) => {
+  const formattedContainerData = inputArr?.reduce((total, item, index) => {
     if (mobileBrowser || smallWindow) {
       total.push([item])
       return total;
@@ -13,51 +12,37 @@ exports.handleContainerData = (inputArr, mobileBrowser, smallWindow, containerDa
     return total;
   }, []);
 
-  containerDataDispatch({ type: 'full', payload: containerData });
+  if (indicator === 'outer') {
+    return dispatch({
+      type: 'FORMAT OUTER CONTAINER DATA',
+      payload: formattedContainerData
+    });
+  };
+
+  if (indicator === 'inner') {
+    return dispatch({
+      type: 'FORMAT NESTED CONTAINER DATA',
+      payload: formattedContainerData
+    });
+  }
 };
 
-
-exports.processImageArr = async (imageArr) => {
-  await Promise.each(imageArr, async ([{ imgUrl }]) => {
-    console.log(imgUrl)
-    await new Promise((resolve, reject) => {
-      let img = new Image();
-      img.onload = () => resolve('x');
-      // img.onerror =
-      img.src = imgUrl;
-    });
-  })
-  return;
-}
-
-
-exports.handleImageData = async (inputArr, imagesDispatch) => {
+const handleImageData = async (inputArr, portfolioDispatch) => {
   const processedImages = await Promise.reduce(inputArr, async (total, row) => {
     return [...total, await Promise.mapSeries(row, async (imgData) => {
       return new Promise((resolve, reject) => {
         let img = new Image();
         img.onload = () => resolve({ ...imgData });
-        img.onerror = () => {reject(new Error(`The ${imgData.title} image failed to load`))};
+        img.onerror = () => { reject(new Error(`The ${imgData.title} image failed to load`)) };
         img.src = imgData.imgUrl;
       });
     })]
   }, []);
 
-  imagesDispatch({ type: 'ALL_IMAGES_LOADED', payload: { allLoaded: true, imageArr: processedImages } });
+  portfolioDispatch({
+    type: 'ALL PORTFOLIO IMAGES LOADED',
+    payload: { allLoaded: true, imageArr: processedImages }
+  });
 };
 
-// https://www.robinwieruch.de/react-useeffect-only-on-update
-exports.useEffectOnlyOnUpdate = (callback, dependencies, args) => {
-  const didMount = useRef(false);
-
-  useEffect(() => {
-    if (didMount.current) {
-      callback(args);
-    } else {
-      didMount.current = true;
-    }
-  }, [...dependencies]);
-};
-
-
-export default exports;
+export { handleContainerData, handleImageData };

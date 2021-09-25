@@ -2,6 +2,33 @@ const { cFLink } = process.env;
 
 export default [
   {
+    "title": "Mini Games",
+    "imgUrl": `${cFLink}/main/main-images/minesweeperss.png`,
+    "cssStyles": {
+      "backgroundColor": "black",
+      "color": "ivory"
+    },
+    "github": [
+      {
+        "title": "beatminesweeper.app",
+        "link": "https://github.com/jamesh48/Mini-Games/tree/master/beatminesweeper"
+      },
+      {
+        "title": "bowling",
+        "link": "https://github.com/jamesh48/Mini-Games/tree/master/bowling",
+      },
+      {
+        "title": "connect 4",
+        "link": "https://github.com/jamesh48/Mini-Games/tree/master/connect-4"
+      },
+      {
+        "title": "tic-tac-toe",
+        "link": "https://github.com/jamesh48/Mini-Games/tree/master/tic-tac-toe"
+      }
+
+    ]
+  },
+  {
     "title": "Fjakeraven.com",
     "imgUrl": `${cFLink}/main/main-images/fec.jpg`,
     "cssStyles": {

@@ -14,8 +14,8 @@ import { getTopTimes } from 'Minesweeper/minesweeperControllers.js';
 import { getAllPortfolioItems } from 'Database/controllers/portfolio_controllers.js';
 import portfolioJSON from 'PortfolioJSON';
 import footerJSON from 'FooterJSON';
-import { Provider } from 'react-redux';
-import { combineReducers, createStore } from 'redux';
+import { GlobalStoreProvider } from 'GlobalStore';
+
 const { htmlStart, htmlMid, htmlEnd } = templates;
 const app = express();
 
@@ -40,8 +40,7 @@ const hoverParams = (state = [null, null], action) => {
   }
 }
 
-const rootReducer = combineReducers({ hoverParams })
-const store = createStore(rootReducer);
+
 
 
 // app.use(function (req, res, next) {
@@ -61,17 +60,21 @@ app.get("*", async (req, res) => {
   const context = {};
 
   const minesweeperTopTimes = req.url.indexOf('minesweeper') > -1 ? await getTopTimes() : null;
-  const {data: minesweeperGame} = await axios(`https://static.fullstackhrivnak.com/mines/build/public/public-bundle.js`);
+  const { data: minesweeperGame } = await axios(`https://static.fullstackhrivnak.com/mines/build/public/public-bundle.js`);
   const activeResume = req.url === '/' ? await getResume() : null;
   // const portfolioJSON = req.url === '/' ? await getAllPortfolioItems() : null;
   const appStream = ReactDOMServer.renderToNodeStream(
-    <Provider store={store}>
+    <GlobalStoreProvider>
       <Router location={req.url} context={context}>
         <AppRouter />
       </Router>
-    </Provider>
+    </GlobalStoreProvider>
   );
-  const footerStream = ReactDOMServer.renderToNodeStream(<Footer />);
+  const footerStream = ReactDOMServer.renderToNodeStream(
+    <GlobalStoreProvider>
+      <Footer />
+    </GlobalStoreProvider>
+  );
 
   res.write(htmlStart({
     portfolioJSON: portfolioJSON,

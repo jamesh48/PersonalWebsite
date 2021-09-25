@@ -1,58 +1,78 @@
 import React, { useState, useEffect, useCallback, useReducer } from 'react';
 import NestedGitHubLink from './NestedGithubLink.js';
-import PortfolioUtils from './publicViewPortfolioUtils.js';
-const { handleContainerData } = PortfolioUtils;
+import { handleContainerData } from './publicViewPortfolioUtils.js';
+import { useGlobalContext } from 'GlobalStore';
+import { usePortfolioContext } from 'PortfolioStore';
+import { useNestedPortfolioContext } from 'NestedPortfolioStore';
 
-export default ({ mobileBrowser, smallWindow, nestedIndicator, hovered, hoveredDispatch, appData, rowIndex, columnIndex }) => {
+export default ({ rowIndex, columnIndex }) => {
+  const [{ mobileBrowser, smallWindow }] = useGlobalContext();
+  const [{ outerContainerData }] = usePortfolioContext();
+  const [{ hovered: [hoveredColumn, hoveredRow], nestedContainerData, nestedIndicator }, nestedPortfolioDispatch] = useNestedPortfolioContext();
 
-  const containerDataReducer = (state, action) => {
-    switch (action.type) {
-      case "full":
-        return action.payload;
-      default:
-        throw new Error();
+  const { github, imgUrl, cssStyles: { backgroundColor } } = outerContainerData[rowIndex][columnIndex];
+
+  useEffect(() => {
+    if (rowIndex === hoveredColumn && columnIndex === hoveredRow) {
+      nestedPortfolioDispatch({ type: 'TOGGLE NESTED INDICATOR', payload: true });
+    } else {
+      nestedPortfolioDispatch({ type: 'TOGGLE NESTED INDICATOR', payload: false });
     }
-  }
+  }, [hoveredColumn, hoveredRow]);
 
-  const [nestedHovered, setNestedHovered] = useState(null);
-  const [appDataJSONRow, nestedContainerDataDispatch] = useReducer(containerDataReducer, []);
+  useEffect(() => {
+    handleContainerData(
+      github,
+      mobileBrowser,
+      smallWindow,
+      'inner',
+      nestedPortfolioDispatch
+    );
+  }, [smallWindow, mobileBrowser]);
 
-
-  useEffect(() => { handleContainerData(appData.github, mobileBrowser, smallWindow, nestedContainerDataDispatch) }, [mobileBrowser, smallWindow])
 
   return (
     <div
       className='applicationImgContainer'
-      onMouseLeave={nestedIndicator ? () => { hoveredDispatch({ type: 'empty' }) } : null}
-      onMouseOver={!nestedIndicator ? () => { hoveredDispatch({ type: 'full', payload: [rowIndex, columnIndex] }) } : null}
-      style={{ backgroundImage: `url(${appData.imgUrl})`, backgroundColor: appData.cssStyles.backgroundColor }}
+      onMouseLeave={
+        nestedIndicator ? () => {
+          nestedPortfolioDispatch(
+            { type: 'SET HOVERED NULL' }
+          )
+        } : null}
+      onMouseOver={!nestedIndicator ? () => {
+        nestedPortfolioDispatch({
+          type: 'SET HOVERED',
+          payload: [rowIndex, columnIndex]
+        })
+      } : null}
+      style={{
+        backgroundImage: `url(${imgUrl})`,
+        backgroundColor: backgroundColor
+      }}
     >
 
       {
-        nestedIndicator ?
-          appDataJSONRow.map((appRow, appRowIndex) => {
-            return (
-              <div className='nestedGithubRow' key={appRowIndex}>
-                {
-                  appRow.map((nestedGithub, nestedIndex) => {
-                    return (
-                      <NestedGitHubLink
-                        key={nestedIndex}
-                        setNestedHovered={setNestedHovered}
-                        mobileBrowser={mobileBrowser}
-                        nestedHovered={nestedHovered}
-                        appRowIndex={appRowIndex}
-                        index={nestedIndex}
-                        nestedGithub={nestedGithub}
-                        appData={appData}
-                      />
-                    );
-                  })
-                }
-              </div>
-            )
-          })
-          : null
+        nestedIndicator ? nestedContainerData?.map((appRow, nestedRowIndex) => {
+          return (
+            <div className='nestedGithubRow' key={nestedRowIndex}>
+              {
+                appRow.map((nestedGithub, nestedColumnIndex) => {
+                  return (
+                    <NestedGitHubLink
+                      key={nestedColumnIndex}
+                      nestedRowIndex={nestedRowIndex}
+                      nestedColumnIndex={nestedColumnIndex}
+                      outerRowIndex={rowIndex}
+                      outerColumnIndex={columnIndex}
+                    />
+                  );
+                })
+              }
+            </div>
+          )
+        }) : null
+
       }
 
     </div>

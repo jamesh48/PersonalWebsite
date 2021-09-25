@@ -3,7 +3,6 @@ const nodeExternals = require("webpack-node-externals");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require("path");
 require('dotenv').config({ path: './.env' });
-const GlobalUtils = require('./globalUtils.js');
 
 const css = {
   test: /\.(css|scss)$/,
@@ -31,13 +30,12 @@ const js = {
 };
 
 const serverConfig = {
-  mode: "production",
+  mode: "development",
   target: "node",
   plugins: [new MiniCssExtractPlugin(),
   new webpack.DefinePlugin({
     'process.env.cFLink': JSON.stringify(process.env.CLOUDFRONTLINK || 'development'),
-    'process.env.DEV_ENV': process.env.DEV_ENV,
-    'GlobalUtils': GlobalUtils
+    'process.env.DEV_ENV': process.env.DEV_ENV
   }),
   ],
   devtool: "source-map",
@@ -63,27 +61,45 @@ const serverConfig = {
       Public: path.resolve('src/public'),
       Server: path.resolve('src/server'),
       Minesweeper: path.resolve('src/server/Minesweeper'),
+      GlobalStore: path.resolve(__dirname, 'src/public/GlobalStore/globalStore.js'),
+      HomeStore: path.resolve(__dirname, 'src/public/components/HomeComponents/HomeStore/homeStore.js'),
+      MarqueeStore: path.resolve(__dirname, 'src/public/components/MarqueeComponents/MarqueeStore/marqueeStore.js'),
+      ResumeStore: path.resolve(__dirname, 'src/public/components/ResumeComponents/ResumeStore/resumeStore.js'),
+      PortfolioStore: path.resolve(__dirname, 'src/public/components/PortfolioComponents/PortfolioStore/portfolioStore.js'),
+      NestedPortfolioStore: path.resolve(__dirname, 'src/public/components/PortfolioComponents/NestedPortfolioStore/nestedPortfolioStore.js'),
+      AdminFormStore: path.resolve(__dirname, 'src/public/components/AdminForm/AdminFormStore/adminFormStore.js'),
+      GlobalUtils: path.resolve(__dirname, 'globalUtils.js'),
+
     },
   }
 };
 
 const clientConfig = {
-  mode: "production",
+  mode: "development",
   devtool: "source-map",
   // Req by webpack 5/ala dotenv-environment variables
-  // resolve: {
-  //   fallback: {
-  //     "fs": false,
-  //     "path": false,
-  //     "os": false
-  //   }
-  // },
+  resolve: {
+    //   fallback: {
+    //     "fs": false,
+    //     "path": false,
+    //     "os": false
+    //   }
+    alias: {
+      GlobalStore: path.resolve(__dirname, 'src/public/GlobalStore/globalStore.js'),
+      HomeStore: path.resolve(__dirname, 'src/public/components/HomeComponents/HomeStore/homeStore.js'),
+      AdminFormStore: path.resolve(__dirname, 'src/public/components/AdminForm/AdminFormStore/adminFormStore.js'),
+      MarqueeStore: path.resolve(__dirname, 'src/public/components/MarqueeComponents/MarqueeStore/marqueeStore.js'),
+      ResumeStore: path.resolve(__dirname, 'src/public/components/ResumeComponents/ResumeStore/resumeStore.js'),
+      PortfolioStore: path.resolve(__dirname, 'src/public/components/PortfolioComponents/PortfolioStore/portfolioStore.js'),
+      NestedPortfolioStore: path.resolve(__dirname, 'src/public/components/PortfolioComponents/NestedPortfolioStore/nestedPortfolioStore.js'),
+      GlobalUtils: path.resolve(__dirname, 'globalUtils.js'),
+    }
+  },
   target: "web",
   plugins: [new MiniCssExtractPlugin(),
   new webpack.DefinePlugin({
     'process.env.cFLink': JSON.stringify(process.env.CLOUDFRONTLINK || 'development'),
-    'process.env.DEV_ENV': process.env.DEV_ENV,
-    'GlobalUtils': GlobalUtils
+    'process.env.DEV_ENV': process.env.DEV_ENV
   }),
   ],
   entry: {

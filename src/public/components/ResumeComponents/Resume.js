@@ -1,12 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import utils from './utils.js';
+import { ResumeStoreProvider } from './ResumeStore/resumeStore.js';
+import { useGlobalContext } from 'GlobalStore';
 const { getResume, patchResume, patchActiveResume, postResume } = utils;
 import AdminResume from './AdminView/AdminResumeView.js';
 import PublicResume from './PublicView/PublicResumeView.js';
 import './resume.scss';
 
 export default (props) => {
-  const { admin } = props
+  const [{ admin }] = useGlobalContext();
   const [resume, setResume] = useState([]);
   const [resumeNames, setResumeNames] = useState([]);
   const mounted = useRef(true);
@@ -45,19 +47,19 @@ export default (props) => {
     setResume(activated);
   }
 
-  const handleView = () => {
-    return (!admin && resume?.resume_Name) ? (
-      // Public View
-      <PublicResume {...props} resume={resume} />
-    ) : admin ? (
-      <AdminResume resumeNames={resumeNames} resume={resume} patchResumeCallback={patchResumeCallback} patchActiveResumeCallback={patchActiveResumeCallback} postResumeCallback={postResumeCallback} />
-    ) : null;
-  };
-
   return !admin && resume?.resume_Name ? (
     // Public View
-    <PublicResume {...props} resume={resume} />
+    <ResumeStoreProvider>
+      <PublicResume {...props} resume={resume} />
+    </ResumeStoreProvider>
   ) : admin ? (
-    <AdminResume resumeNames={resumeNames} resumeX={resume} patchResumeCallback={patchResumeCallback} patchActiveResumeCallback={patchActiveResumeCallback} postResumeCallback={postResumeCallback} resumeData={props.resumeData} />
+    <AdminResume
+      resumeNames={resumeNames}
+      resumeX={resume}
+      patchResumeCallback={patchResumeCallback}
+      patchActiveResumeCallback={patchActiveResumeCallback}
+      postResumeCallback={postResumeCallback}
+      resumeData={props.resumeData}
+    />
   ) : null
 };

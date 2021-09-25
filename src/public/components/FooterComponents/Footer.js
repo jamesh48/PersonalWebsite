@@ -1,18 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import FooterItemContainer from './FooterItemContainer.js';
-import AppUtils from '../AppRouterComponents/AppUtils.js'
+import AppUtils from '../AppRouterComponents/AppUtils.js';
+import { useGlobalContext } from 'GlobalStore';
 const { mobileBrowserFunction } = AppUtils;
 import './footerStyles.scss';
 
 export default ({ footerJSON }) => {
   const [images, setImages] = useState([{ url: '', loaded: false, link: '' }]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [mobileBrowser, setMobileBrowser] = useState(null);
+  const [{ mobileBrowser }, globalDispatch] = useGlobalContext();
 
 
   set_mobile_browser: useEffect(() => {
     const mobileBrowserTest = mobileBrowserFunction();
-    setMobileBrowser(!!mobileBrowserTest);
+    globalDispatch({type: 'TOGGLE MOBILE BROWSER', payload: !!mobileBrowserTest});
   }, []);
 
 

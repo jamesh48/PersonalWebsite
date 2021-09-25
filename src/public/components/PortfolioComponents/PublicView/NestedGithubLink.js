@@ -1,12 +1,27 @@
 import React, { useState, useEffect } from 'react';
-const isEqual = (prevProps, nextProps) => {
-  if (prevProps.nestedHovered === nextProps.nestedHovered) {
-    return true;
-  }
-};
-export default React.memo(({ index, appData: { cssStyles }, nestedGithub: { link, title },  mobileBrowser, setNestedHovered, nestedHovered, appRowIndex }) => {
+import { usePortfolioContext } from 'PortfolioStore';
+import { useNestedPortfolioContext } from 'NestedPortfolioStore';
+import { useGlobalContext } from 'GlobalStore';
+
+export default React.memo(({
+  nestedColumnIndex,
+  nestedRowIndex,
+  outerRowIndex,
+  outerColumnIndex,
+}) => {
+
+  const [{ mobileBrowser }] = useGlobalContext();
+  const [{ outerContainerData }] = usePortfolioContext();
+  const [{ nestedHovered, nestedContainerData }, nestedPortfolioDispatch] = useNestedPortfolioContext();
+
+
   const [doubleClicked, setDoubleClicked] = useState(null);
+
+  const { cssStyles } = outerContainerData[outerRowIndex][outerColumnIndex];
+  const { link, title } = nestedContainerData[nestedRowIndex][nestedColumnIndex]
+
   useEffect(() => {
+
     if (mobileBrowser && doubleClicked) {
       return window.open(link)
     };
@@ -22,9 +37,16 @@ export default React.memo(({ index, appData: { cssStyles }, nestedGithub: { link
 
   return (
     <div
-      key={index}
+      key={nestedColumnIndex}
       className='nestedGithubLinks'
-      onMouseOver={() => { setNestedHovered((appRowIndex * 2) + index) }}
+
+      onMouseOver={() => {
+        nestedPortfolioDispatch({
+          type: 'NESTED PORTFOLIO HOVER',
+          payload: (nestedRowIndex * 2) + nestedColumnIndex
+        })
+      }}
+
       onClick={() => {
         setDoubleClicked((prev) => {
           if (mobileBrowser) {
@@ -40,7 +62,8 @@ export default React.memo(({ index, appData: { cssStyles }, nestedGithub: { link
             return true;
           }
         })
-      }}
+      }
+      }
       style={cssStyles}
     >
       {title}

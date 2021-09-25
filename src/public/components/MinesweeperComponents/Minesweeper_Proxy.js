@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import useScript from './customHook.jsx';
 import '../../main-styles/global.scss';
 import './minesweeperStyles.scss';
-import Utils from '../PortfolioComponents/PublicView/publicViewPortfolioUtils.js';
-const { useEffectOnlyOnUpdate } = Utils;
+import { useEffectOnlyOnUpdate } from 'GlobalUtils';
+
 export default ({ game, mobileBrowser }) => {
   let [leaderboard, setLeaderboard] = useState(null);
   let [toggled, setToggled] = useState(false);
@@ -23,7 +23,7 @@ export default ({ game, mobileBrowser }) => {
 
   return (
     <div className={mobileBrowser ? `minesweeper-proxy-root minesweeper-proxy-root--Mobile` : `minesweeper-proxy-root`} >
-      <div className={`container websiteMinesweeperAdjust`} id='minesweeper-root' onLoad={() => { console.log('hi') }}>
+      <div className={`container websiteMinesweeperAdjust`} id='minesweeper-root'>
 
         {game}
 

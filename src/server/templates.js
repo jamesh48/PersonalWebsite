@@ -33,7 +33,7 @@ export default {
               const [head] = document.getElementsByTagName('HEAD');
               let link = document.createElement('link');
               link.rel = 'stylesheet';
-              link.type - 'text/css';
+              link.type = 'text/css';
               link.href = devLink;
               head.appendChild(link);
             });
@@ -57,13 +57,13 @@ export default {
     <script>
       const devScriptArr = [
         '/static/appRouter.js',
-        '${cFLINK}/mines/build/public/public-bundle.js',
+        '${cFLink}/mines/build/public/public-bundle.js',
         '/static/footer.js'
       ];
 
       const prodScriptArr = [
         '${cFLink}/main/build/public/appRouter-bundle.js',
-        '${cFLINK}/mines/build/public/public-bundle.js',
+        '${cFLink}/mines/build/public/public-bundle.js',
         '${cFLink}/main/build/public/footer-bundle.js',
       ];
 
