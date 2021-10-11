@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'end of day commit- added two new items to portfolio'
+          message: 'updating minesweeper routes to play nice with graphql'
         }
       }
     },

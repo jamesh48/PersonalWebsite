@@ -10,7 +10,7 @@ module.exports = {
       return topResults;
     } catch(err) {
       console.log(err.message)
-      res.send(err.message);
+      return err.message;
     }
   }
 }

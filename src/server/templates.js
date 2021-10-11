@@ -1,8 +1,7 @@
 const { cFLink, DEV_ENV } = process.env;
 export default {
   htmlStart: (data) => {
-    const startingSection =
-      `<!DOCTYPE HTML>
+    const startingSection = `<!DOCTYPE HTML>
         <html>
           <head>
           <meta charset="utf-8">
@@ -19,13 +18,13 @@ export default {
             '${cFLink}/main/build/public/appRouter.min.css',
             '${cFLink}/main/build/public/footer.min.css',
             '${cFLink}/main/build/public/minesweeper.min.css',
-            '${cFLink}/mines/build/public/index.min.css'
+            '${cFLink}/mines/build/public/index.css'
           ];
 
           const devLinkArr =[
             '/static/appRouter.css',
             '/static/footer.css',
-            '${cFLink}/mines/build/public/index.min.css',
+            '${cFLink}/mines/build/public/index.css',
             '/static/minesweeper.css',
           ];
 
@@ -42,28 +41,30 @@ export default {
 
       <body>
 
-      <div id="root">`;
+
+
+      <div id="root">
+      ${data.minesweeperGame && "<div id='minesweeper-root'></div>"}
+      `;
     return startingSection;
   },
-  htmlMid:
-    `</div>
+  htmlMid: `</div>
 
     </body>
   <footer id='footerroot'>`,
 
-  htmlEnd:
-    `</footer>
+  htmlEnd: `</footer>
 
     <script>
       const devScriptArr = [
         '/static/appRouter.js',
-        '${cFLink}/mines/build/public/public-bundle.js',
+        'http://localhost:4000/static/index.js',
         '/static/footer.js'
       ];
 
       const prodScriptArr = [
         '${cFLink}/main/build/public/appRouter-bundle.js',
-        '${cFLink}/mines/build/public/public-bundle.js',
+        'https://beatminesweeper.app/static/minesweeper.js',
         '${cFLink}/main/build/public/footer-bundle.js',
       ];
 
@@ -79,6 +80,14 @@ export default {
 };
 
 // Live
-{/* <script src='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/appRouter-bundle.js'></script> */ }
+{
+  /* <script src='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/appRouter-bundle.js'></script> */
+}
 // <!-- For Dev... -->
-{/* <script src='/static/appRouter.js'/></script> */ }
+{
+  /* <script src='/static/appRouter.js'/></script> */
+}
+
+// '${cFLink}/mines/build/public/public-bundle.js',
+// '${cFLink}/mines/build/public/public-bundle.js',
+//

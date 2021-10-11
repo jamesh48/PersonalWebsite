@@ -21,13 +21,15 @@ export default ({ game, mobileBrowser }) => {
   }, [toggled])
 
 
+
   return (
     <div className={mobileBrowser ? `minesweeper-proxy-root minesweeper-proxy-root--Mobile` : `minesweeper-proxy-root`} >
       <div className={`container websiteMinesweeperAdjust`} id='minesweeper-root'>
-
         {game}
-
       </div>
+      {/* {useScript('http://static.fullstackhrivnak.com/mines/build/public/public-bundle.js')} */}
+
+
       {
         mobileBrowser ?
           <button onClick={() => { setToggled(x => !x) }}>{!toggled ? 'remove leaderboard' : 'add leaderboard'}</button> : null
@@ -36,4 +38,4 @@ export default ({ game, mobileBrowser }) => {
   );
 };
 
-{/* {useScript('http://static.fullstackhrivnak.com/mines/build/public/public-bundle.js')} */ }
+

@@ -103,10 +103,7 @@ const clientConfig = {
   }),
   ],
   entry: {
-    "appRouter": path.resolve(
-      __dirname,
-      "src/public/AppRouterRoot.js"
-    ),
+    "appRouter": path.resolve(__dirname, "src/public/AppRouterRoot.js"),
     "footer": path.resolve(__dirname, "src/public/FooterRoot.js"),
     "minesweeper": path.resolve(__dirname, "src/public//MinesweeperRoot.js")
   },

@@ -73,7 +73,7 @@ export default (props) => {
             <Home {...props} />
           </HomeStoreProvider>
         )} />
-        <Route path="/fullstack/minesweeper" render={() => (<Minesweeper mobileBrowser={mobileBrowser} />)} />
+        <Route path="/fullstack/minesweeper" render={() => (<Minesweeper game={props.game} mobileBrowser={mobileBrowser} />)} />
         <Route path="/fullstack/contact" render={() => (<Contact mobileBrowser={mobileBrowser} />)} />
       </Switch>
 

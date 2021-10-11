@@ -35,17 +35,29 @@ app.use('*', (req, res, next) => {
 // --> serves the Dist/Public Folder
 app.use("/static", express.static(path.resolve(__dirname, "../public")));
 
-// app.use('/static', staticRouter);
 app.use(/(resume)?/, resumeRouter);
 app.use(/(minesweeper)?/, minesweeperRouter);
 app.use(/(portfolio)?/, portfolioRouter);
 
 app.get("*", async (req, res) => {
   const context = {};
+  let activeResume, minesweeperTopTimes, minesweeperGame;
 
-  const minesweeperTopTimes = req.url.indexOf('minesweeper') > -1 ? await getTopTimes() : null;
-  const { data: minesweeperGame } = await axios(`https://static.fullstackhrivnak.com/mines/build/public/public-bundle.js`);
-  const activeResume = req.url === '/' ? await getResume() : null;
+  // Home Page
+  if (req.url === '/') {
+    context.activeResume = await getResume()
+  }
+
+  // Minesweeper
+  if (req.url.indexOf('minesweeper') > -1) {
+    // context.minesweeperTopTimes = req.url.indexOf('minesweeper') > -1 ? await getTopTimes() : null;
+    // const {data} = await axios(`https://static.fullstackhrivnak.com/mines/build/public/index.js`);
+    const {data} = await axios(`https://beatminesweeper.app/static/index.js`)
+    context.minesweeperGame = data;
+  }
+
+
+
   // const portfolioJSON = req.url === '/' ? await getAllPortfolioItems() : null;
   const appStream = ReactDOMServer.renderToNodeStream(
     <GlobalStoreProvider>
@@ -54,6 +66,7 @@ app.get("*", async (req, res) => {
       </Router>
     </GlobalStoreProvider>
   );
+
   const footerStream = ReactDOMServer.renderToNodeStream(
     <GlobalStoreProvider>
       <Footer />
@@ -63,7 +76,7 @@ app.get("*", async (req, res) => {
   res.write(htmlStart({
     portfolioJSON: portfolioJSON,
     footerJSON: footerJSON,
-    topTimes: minesweeperTopTimes,
+    // topTimes: minesweeperTopTimes,
     resumeData: activeResume,
     game: minesweeperGame
   }));
