@@ -64,7 +64,7 @@ export default {
 
       const prodScriptArr = [
         '${cFLink}/main/build/public/appRouter-bundle.js',
-        'https://beatminesweeper.app/static/minesweeper.js',
+        'https://beatminesweeper.app/static/index.js',
         '${cFLink}/main/build/public/footer-bundle.js',
       ];
 

@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'updating minesweeper routes to play nice with graphql'
+          message: 'decided to remove signin and high score functionality on proxied minesweeper'
         }
       }
     },
