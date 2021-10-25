@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'decided to remove signin and high score functionality on proxied minesweeper'
+          message: 'overwriting minesweeper overflow:hidden'
         }
       }
     },
