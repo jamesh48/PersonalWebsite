@@ -4,7 +4,9 @@ import regeneratorRuntime from 'regenerator-runtime';
 
 const handleContainerData = (inputArr, mobileBrowser, smallWindow, indicator, dispatch) => {
   const formattedContainerData = inputArr?.reduce((total, item, index) => {
-    if (mobileBrowser) {
+    // This is temporary until for the unforeseeable future until I can make tablet specific handling a global variable.
+    let isIPad = navigator.userAgent.match(/iPad/i);
+    if (mobileBrowser && !isIPad) {
       total.push([item])
       return total;
     }

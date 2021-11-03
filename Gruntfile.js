@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Commented out logrocket because it was causing minesweeper to not work in production '
+          message: 'Made ipad portfolio view 2x1'
         }
       }
     },
