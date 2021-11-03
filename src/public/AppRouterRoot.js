@@ -1,4 +1,5 @@
-import '../../LogRocketConfig/config.js';
+// This was causing minesweeper to not work, so removing for now
+// import '../../LogRocketConfig/config.js';
 import React from "react";
 import { Provider } from 'react-redux';
 import { GlobalStoreProvider } from 'GlobalStore';
