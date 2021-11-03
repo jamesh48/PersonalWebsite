@@ -42,14 +42,14 @@ export default ({ existing, hoverBreadth, hoveredIndex, itrDepth, hoverDepth, mo
         return existing + ' ' + 'faderOuter';
       };
 
-    } else if (hoverDepth === 1) {
+      // && testedHoveBreadth prevents an error from being thrown when the user hovers into the 1 depth from the right of the screen in mobile view, unclear why but this is a tempoary patch for the unforeseeable future.
+    } else if (hoverDepth === 1 && testedHoverBreadth) {
       // Base Title doesn't match
       const titleFadeOutConditionOnSectionChild = (testedHoverBreadth[0] !== testedHoveredIndex)
       if (titleFadeOutConditionOnSectionChild) {
         return existing + ' ' + 'faderOuter';
       };
 
-      // (hoverDepth === 1)
       const persistTitleConditionOnChild = true;
       if (persistTitleConditionOnChild) {
         return existing;

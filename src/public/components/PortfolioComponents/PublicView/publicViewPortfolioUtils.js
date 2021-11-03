@@ -4,7 +4,7 @@ import regeneratorRuntime from 'regenerator-runtime';
 
 const handleContainerData = (inputArr, mobileBrowser, smallWindow, indicator, dispatch) => {
   const formattedContainerData = inputArr?.reduce((total, item, index) => {
-    if (mobileBrowser || smallWindow) {
+    if (mobileBrowser) {
       total.push([item])
       return total;
     }

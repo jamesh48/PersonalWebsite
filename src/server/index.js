@@ -74,7 +74,7 @@ app.get("*", async (req, res) => {
       footerJSON: footerJSON,
       // topTimes: minesweeperTopTimes,
       resumeData: activeResume,
-      game: minesweeperGame,
+      game: context.minesweeperGame,
     })
   );
 
@@ -83,7 +83,10 @@ app.get("*", async (req, res) => {
     res.write(htmlMid);
     footerStream.pipe(res, { end: false });
     footerStream.on("end", () => {
-      res.write(htmlEnd);
+      if (context.minesweeperGame) {
+        res.write(htmlEnd(true))
+      }
+      res.write(htmlEnd());
 
       if (context.url) {
         res.writeHead(301, { Location: context.url });

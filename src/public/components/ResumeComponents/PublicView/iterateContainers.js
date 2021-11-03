@@ -163,7 +163,6 @@ export default (props) => {
 }
 
 const iterateDisappearingSections = (props) => {
-  console.log(props.prevTitle.current)
   const { sections } = props;
   return sections.reduce((resultSections, section, sectionIndex) => {
     const hoveredIndex = `${props.titleIndex}_${props.sectionIndex}`

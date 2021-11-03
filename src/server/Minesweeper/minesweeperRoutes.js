@@ -4,7 +4,7 @@ import axios from 'axios';
 
 minesweeper.all(/minesweeper-.*/, async ({ originalUrl, method }, res) => {
   try {
-    console.log('local minesweeper proxy')
+    // console.log('local minesweeper proxy')
     const { data: result } = await axios[method.toLowerCase()](`http://localhost:5000${originalUrl}`);
     res.send(result);
   } catch (err) {

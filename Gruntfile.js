@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'overwriting minesweeper overflow:hidden'
+          message: 'Minor Cleanups: Improvements to Resume, Portfolio Hovering, Navbar hovering, unnecessary console errors, also have a nicer (but still not functional) contact form'
         }
       }
     },

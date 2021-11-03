@@ -9,7 +9,6 @@ import ApplicationImgContainer from './ApplicationImgContainer.js';
 
 
 export default ({ portfolioJSON }) => {
-  console.log('rendering')
   const [{ mobileBrowser, smallWindow }] = useGlobalContext();
   const [{ outerContainerData, portfolioImages: { imageArr, allLoaded } }, portfolioDispatch] = usePortfolioContext();
 

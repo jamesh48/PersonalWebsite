@@ -2,7 +2,7 @@ const { cFLink, DEV_ENV } = process.env;
 export default {
   htmlStart: (data) => {
     const startingSection = `<!DOCTYPE HTML>
-        <html>
+        <html style="background-color: #1f2124">
           <head>
           <meta charset="utf-8">
           <title>James Hrivnak</title>
@@ -43,9 +43,10 @@ export default {
 
 
 
-      <div id="root">
-      ${data.minesweeperGame && "<div id='minesweeper-root'></div>"}
-      `;
+      <div id="root">`;
+      if (data.minesweeperGame) {
+        startingSection = startingSection.concat("<div id='minesweeper-root'></div>")
+      }
     return startingSection;
   },
   htmlMid: `</div>
@@ -53,41 +54,35 @@ export default {
     </body>
   <footer id='footerroot'>`,
 
-  htmlEnd: `</footer>
-
-    <script>
-      const devScriptArr = [
+  htmlEnd: (minesweeperIndicator) => {
+    const devScriptArr = minesweeperIndicator
+      ? `[
         '/static/appRouter.js',
-        'http://localhost:4000/static/index.js',
+        'https://beatminesweeper.app/static/index.js',
         '/static/footer.js'
-      ];
+      ]`
+      : `[
+      '/static/appRouter.js',
+      '/static/footer.js'
+      ]`
 
-      const prodScriptArr = [
+    const prodScriptArr = `[
         '${cFLink}/main/build/public/appRouter-bundle.js',
         'https://beatminesweeper.app/static/index.js',
         '${cFLink}/main/build/public/footer-bundle.js',
-      ];
+      ]`;
 
-      (${DEV_ENV} ? devScriptArr : prodScriptArr).forEach((scriptSrc) => {
+    return `</footer>
+
+    <script>
+
+      (${DEV_ENV} ? ${devScriptArr} : ${prodScriptArr}).forEach((scriptSrc) => {
         const [body] = document.getElementsByTagName('BODY');
         let script = document.createElement('script');
         script.src = scriptSrc;
         body.appendChild(script);
       });
     </script>
-  </html>
-`,
+  </html>`;
+  },
 };
-
-// Live
-{
-  /* <script src='https://d1y3bjxf7c78hf.cloudfront.net/main/build/public/appRouter-bundle.js'></script> */
-}
-// <!-- For Dev... -->
-{
-  /* <script src='/static/appRouter.js'/></script> */
-}
-
-// '${cFLink}/mines/build/public/public-bundle.js',
-// '${cFLink}/mines/build/public/public-bundle.js',
-//
