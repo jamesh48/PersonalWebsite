@@ -4,6 +4,19 @@
   margin: 0 auto;
   &--Mobile {
     width: 90%;
+    .contact-column-form-r {
+      .contact-column-form-container-r {
+        height: 100%;
+        .contact-column-form-ul-r {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          .contact-li-r {
+            flex: 1;
+          }
+        }
+      }
+    }
   }
   .contact-wrapper {
     box-sizing: border-box !important;

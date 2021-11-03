@@ -49,8 +49,16 @@ app.get("*", async (req, res) => {
 
   // Minesweeper
   if (req.url.indexOf("minesweeper") > -1) {
-    const { data } = await axios(`https://beatminesweeper.app/static/index.js`);
-    context.minesweeperGame = data;
+    console.log("requesting");
+    try {
+      const { data } = await axios(
+        `https://beatminesweeper.app/static/index.js`
+      );
+      context.minesweeperGame = data;
+    } catch (err) {
+      console.log(err.message);
+      // context.minesweeperGame = err.message
+    }
   }
 
   // const portfolioJSON = req.url === '/' ? await getAllPortfolioItems() : null;
@@ -72,7 +80,6 @@ app.get("*", async (req, res) => {
     htmlStart({
       portfolioJSON: portfolioJSON,
       footerJSON: footerJSON,
-      // topTimes: minesweeperTopTimes,
       resumeData: activeResume,
       game: context.minesweeperGame,
     })
@@ -84,7 +91,7 @@ app.get("*", async (req, res) => {
     footerStream.pipe(res, { end: false });
     footerStream.on("end", () => {
       if (context.minesweeperGame) {
-        res.write(htmlEnd(true))
+        res.write(htmlEnd(true));
       }
       res.write(htmlEnd());
 

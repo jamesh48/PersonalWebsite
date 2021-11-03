@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Improving Consistency of Minesweeper Game Proxy Loading and also changed cursor logic so that it does not fetch the image every mouse move'
+          message: 'Fixing contact view in mobile/tablet'
         }
       }
     },

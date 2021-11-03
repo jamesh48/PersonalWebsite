@@ -11,7 +11,7 @@ export default ({ mobileBrowser }) => {
     lastName: "",
     email: "",
     linkedin: "",
-    message: ""
+    message: "",
   });
 
   const valCallback = (indicator) => {
@@ -57,8 +57,8 @@ export default ({ mobileBrowser }) => {
               autoComplete="off"
               className="contact-column-form-r"
             >
-              <div>
-                <ul>
+              <div className="contact-column-form-container-r">
+                <ul className="contact-column-form-ul-r">
                   <ContactInput
                     labelName="First Name"
                     inputType="input"
