@@ -41,7 +41,7 @@ export default {
     return toMatch.some((toMatchItem) => {
       // Second condition works for ipads that display intel mac...
       return navigator.userAgent.match(toMatchItem)
-      // || (navigator.userAgent.indexOf('Macintosh') > -1 && 'ontouchend' in document);
+      || (navigator.userAgent.indexOf('Macintosh') > -1 && 'ontouchend' in document);
     });
   }
 }

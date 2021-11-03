@@ -24,6 +24,7 @@ export default ({ mobileBrowser }) => {
     event.preventDefault();
   };
 
+  console.log(mobileBrowser)
   return (
     <div>
       <div
