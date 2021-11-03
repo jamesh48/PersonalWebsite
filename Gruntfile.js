@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Made ipad portfolio view 2x1'
+          message: 'Improving Consistency of Minesweeper Game Proxy Loading and also changed cursor logic so that it does not fetch the image every mouse move'
         }
       }
     },

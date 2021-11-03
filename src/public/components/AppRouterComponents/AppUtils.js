@@ -5,6 +5,7 @@ export default {
     if (!document.getElementById('cursor')) {
       const newCursor = document.createElement('div');
       newCursor.id = 'cursor';
+      newCursor.style.backgroundImage = "url(https://static.fullstackhrivnak.com/main/main-images/cursor.png)";
       document.querySelector('body').appendChild(newCursor);
     };
     const scrollYOffset = window.scrollY;

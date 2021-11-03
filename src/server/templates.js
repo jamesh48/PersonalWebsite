@@ -45,7 +45,7 @@ export default {
 
       <div id="root">`;
       if (data.minesweeperGame) {
-        startingSection = startingSection.concat("<div id='minesweeper-root'></div>")
+        startingSection = startingSection.concat("<div><div id='minesweeper-root'><p>Loading...</p></div></div>")
       }
     return startingSection;
   },

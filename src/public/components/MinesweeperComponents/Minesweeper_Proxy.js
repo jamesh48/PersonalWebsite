@@ -6,34 +6,12 @@ import './minesweeperStyles.scss';
 import { useEffectOnlyOnUpdate } from 'GlobalUtils';
 
 export default ({ game, mobileBrowser }) => {
-  let [leaderboard, setLeaderboard] = useState(null);
-  let [toggled, setToggled] = useState(false);
-
-  useEffectOnlyOnUpdate(() => {
-    if (!leaderboard || toggled) {
-      if (!leaderboard) {
-        setLeaderboard(document.getElementById('leaderboard'));
-      }
-      document.getElementById('leaderboard').remove();
-    } else if (!toggled) {
-      return document.querySelector('.minesweeper-proxy-root--Mobile').appendChild(leaderboard)
-    }
-  }, [toggled])
-
-
 
   return (
     <div className={mobileBrowser ? `minesweeper-proxy-root minesweeper-proxy-root--Mobile` : `minesweeper-proxy-root`} >
       <div className={`container websiteMinesweeperAdjust`} id='minesweeper-root'>
-        {game}
+        {game ? game : <p>Loading...</p>}
       </div>
-      {/* {useScript('http://static.fullstackhrivnak.com/mines/build/public/public-bundle.js')} */}
-
-
-      {
-        mobileBrowser ?
-          <button onClick={() => { setToggled(x => !x) }}>{!toggled ? 'remove leaderboard' : 'add leaderboard'}</button> : null
-      }
     </div>
   );
 };
