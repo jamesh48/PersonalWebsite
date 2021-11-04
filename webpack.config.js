@@ -35,7 +35,8 @@ const serverConfig = {
   plugins: [new MiniCssExtractPlugin(),
   new webpack.DefinePlugin({
     'process.env.cFLink': JSON.stringify(process.env.CLOUDFRONTLINK || 'development'),
-    'process.env.DEV_ENV': process.env.DEV_ENV
+    'process.env.DEV_ENV': process.env.DEV_ENV,
+    'process.env.mandrillAPIKey': JSON.stringify(process.env.mandrillAPIKey)
   }),
   ],
   devtool: "source-map",

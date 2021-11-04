@@ -24,6 +24,8 @@ import resumeRouter from "./resumeRoutes.js";
 import portfolioRouter from "./portfolioRoutes.js";
 import minesweeperRouter from "Minesweeper/minesweeperRoutes.js";
 
+import { sendEmail } from "./mandrillConfig.js";
+
 app.use(cors());
 
 app.use("*", (req, res, next) => {
@@ -33,10 +35,20 @@ app.use("*", (req, res, next) => {
 
 // --> serves the Dist/Public Folder
 app.use("/static", express.static(path.resolve(__dirname, "../public")));
-
 app.use(/(resume)?/, resumeRouter);
 app.use(/(minesweeper)?/, minesweeperRouter);
 app.use(/(portfolio)?/, portfolioRouter);
+
+app.post("/api/sendEmail", (req, res) => {
+  const _name = req.query.firstname + " " + req.query.lastname;
+  const _email = req.query.email;
+  const _message = req.query.message;
+  const _subject = "test e-mail";
+
+  sendEmail(_name, _email, _subject, _message, (indicator) => {
+    res.send(indicator);
+  });
+});
 
 app.get("*", async (req, res) => {
   const context = {};
