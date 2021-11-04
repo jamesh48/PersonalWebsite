@@ -18,7 +18,7 @@ module.exports = {
       ref: "origin/main",
       repo: "git@github.com:jamesh48/PersonalWebsite.git",
       path: "/home/ubuntu/PersonalWebsite",
-      "post-deploy": "npm install && npm run build && pm2 startOrRestart ./src/server/ecosystem.config.js && pm2 save"
+      "post-deploy": "npm install && npm run build && pm2 save"
     }
   }
 }

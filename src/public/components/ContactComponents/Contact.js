@@ -1,6 +1,7 @@
 import React from "react";
 // import AdminForm from '../AdminForm/adminForm.js';
 // import { AdminFormStoreProvider } from 'AdminFromStore';
+import axios from "axios";
 import ContactDescription from "./ContactDescription";
 import ContactInput from "./ContactInput.js";
 import "./contact.scss";
@@ -9,6 +10,7 @@ export default ({ mobileBrowser }) => {
   const [formValues, setFormValues] = React.useState({
     firstName: "",
     lastName: "",
+    phoneNumber: "",
     email: "",
     linkedin: "",
     message: "",
@@ -20,11 +22,14 @@ export default ({ mobileBrowser }) => {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     event.preventDefault();
+    const { data: serverResponse } = await axios.post("/api/sendemail", null, {
+      params: formValues,
+    });
+    console.log(serverResponse);
   };
 
-  console.log(mobileBrowser)
   return (
     <div>
       <div
@@ -73,6 +78,13 @@ export default ({ mobileBrowser }) => {
                     localValue={formValues.lastName}
                     valCallback={valCallback}
                     indicator="lastName"
+                  />
+                  <ContactInput
+                    labelName="Phone Number"
+                    inputType="input"
+                    localValue={formValues.phoneNumber}
+                    valCallback={valCallback}
+                    indicator="phoneNumber"
                   />
                   <ContactInput
                     labelName="Email Address"

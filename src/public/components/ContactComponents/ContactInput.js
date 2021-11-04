@@ -32,16 +32,7 @@ export default ({ labelName, inputType, valCallback, indicator, localValue }) =>
         ) : (
           <textarea
             className={`contact-input-r contact-input-r-textarea`}
-            placeholder={
-    `
-
-    This form isn't hooked up yet and doesn't work.
-
-    It is only presentational for now.
-
-    Pardon my dust.
-
-    -James`}
+            // placeholder={}
             onFocus={handleFocus}
             onBlur={handleBlur}
             onChange={() => valCallback('message')}

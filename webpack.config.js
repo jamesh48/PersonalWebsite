@@ -36,7 +36,7 @@ const serverConfig = {
   new webpack.DefinePlugin({
     'process.env.cFLink': JSON.stringify(process.env.CLOUDFRONTLINK || 'development'),
     'process.env.DEV_ENV': process.env.DEV_ENV,
-    'process.env.mandrillAPIKey': JSON.stringify(process.env.mandrillAPIKey)
+    'process.env.SENDGRID_API_KEY': JSON.stringify(process.env.sendGridAPIKey)
   }),
   ],
   devtool: "source-map",

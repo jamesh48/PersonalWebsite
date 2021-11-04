@@ -10,6 +10,7 @@
     "start": "nodemon dist/server/index.js",
     "serve": "webpack serve",
     "build": "webpack",
+    "postbuild": "pm2 restart Personal_Website",
     "database": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate",
     "deploy": "grunt deploy-all",
     "postdeploy": "pm2 deploy ./src/server/ecosystem.config.js production",
@@ -24,6 +25,7 @@
   "author": "James Hrivnak",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^7.6.0",
     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",

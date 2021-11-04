@@ -62,9 +62,9 @@
           ul {
             border-left: 1px solid ivory;
             .contact-li-r {
-              margin-top: 16px;
+              margin-top: .25em;
+              padding-right: .25em;
               padding-top: 0;
-              padding-right: 16px;
               clear: both;
               text-indent: 1rem;
               .contact-label-r {
@@ -90,26 +90,27 @@
 
                 .contact-input-r-textarea {
                   resize: none;
-                  min-height: 13.5rem;
-                  max-height: 13.5rem;
+                  min-height: 11rem;
+                  max-height: 11rem;
                 }
               }
             }
 
             .contact-li-submit {
               display: flex;
-              margin-top: 12.5px;
+              margin-top: .75rem;
               .contact-submit-r {
                 color: #b7b7b7;
                 border: none;
-                padding: 5px 4px;
-                border-bottom: 4px solid rgba(183, 183, 183, 0.3);
+                padding: .3rem .2rem;
+                width: 50%;
+                border-bottom: 1.5px solid rgba(183, 183, 183, 0.3);
                 background-color: transparent;
 
                 &:hover {
                   background-color: ivory;
                   color: darkslategray;
-                  border-bottom: 4px solid #b7b7b7;
+                  border-bottom: 3.5px solid #b7b7b7;
                 }
               }
               justify-content: center;

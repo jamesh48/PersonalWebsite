@@ -24,7 +24,7 @@ import resumeRouter from "./resumeRoutes.js";
 import portfolioRouter from "./portfolioRoutes.js";
 import minesweeperRouter from "Minesweeper/minesweeperRoutes.js";
 
-import { sendEmail } from "./mandrillConfig.js";
+import { sendEmail } from "./sendGridConfig.js";
 
 app.use(cors());
 
@@ -40,12 +40,25 @@ app.use(/(minesweeper)?/, minesweeperRouter);
 app.use(/(portfolio)?/, portfolioRouter);
 
 app.post("/api/sendEmail", (req, res) => {
-  const _name = req.query.firstname + " " + req.query.lastname;
-  const _email = req.query.email;
-  const _message = req.query.message;
-  const _subject = "test e-mail";
+  const name = req.query.firstName + " " + req.query.lastName;
+  const _subject = `New Message from FSH.com - [${name}]`;
 
-  sendEmail(_name, _email, _subject, _message, (indicator) => {
+  const incomingMessage = req.query.message;
+
+  // Follow up Contact Details
+  const linkedIn = req.query.linkedin.trim('') ? req.query.linkedin : 'not provided';
+  const email = req.query.email.trim('') ? req.query.email : 'not provided';
+  const phoneNumber = req.query.phoneNumber.trim('') ? req.query.phoneNumber : 'not provided'
+  const _message = req.query.message.concat(
+    `
+
+    phone: ${phoneNumber}
+    email: ${email},
+    linkedIn: ${linkedIn}
+    `
+  );
+
+  sendEmail(_subject, _message, (indicator) => {
     res.send(indicator);
   });
 });
