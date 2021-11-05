@@ -47,7 +47,7 @@ export default ({ footerJSON }) => {
 
   return isLoaded ? (
     <div id='footerContainer' className={mobileBrowser ? `footer-container footer-container--Mobile` : `footer-container`}>
-      <div id='footerItemsContainer'>
+      <div id='footer-items-container'>
         {images.map((iconData, iconIndex) => {
           return <FooterItemContainer key={iconIndex} iconData={iconData} />
         })}

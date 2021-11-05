@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Made responsive text using vw units on font-size, finished up contact form integration, began implementing a linkedin recommendations API call, and fixed some minor css'
+          message: 'Trivial/Minor CSS improvements- including fixing the submit button being underneath the footer bar in laptop view'
         }
       }
     },

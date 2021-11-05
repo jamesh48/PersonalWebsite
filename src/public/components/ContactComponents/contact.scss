@@ -67,20 +67,15 @@
             display: flex;
             flex-direction: column;
             .contact-li-r {
-              // margin-top: .25em;
               padding-right: .25em;
               padding-top: 0;
-              clear: both;
-              text-indent: 1rem;
-              flex: 1;
+              text-indent: .75em;
               .contact-label-r {
                 color: #b7b7b7;
                 display: block;
-                line-height: 2.5;
                 font-size: 1.25vw;
                 font-weight: 200;
                 text-rendering: geometricPrecision;
-                clear: both;
                 transform: translate(.5em, 2em);
                 transition: all 0.4s ease-in-out;
               }
@@ -93,45 +88,52 @@
                   border-bottom: 4px solid rgba(183, 183, 183, 0.3);
                   width: 90%;
                   color: #b7b7b7;
-                  padding: 1em;
-                  height: 2rem;
+                  padding: 2em 1em;
+                  height: 0;
                   font-size: 1.25vw;
                 }
 
                 .contact-input-r-textarea {
                   resize: none;
-                  min-height: 11rem;
-                  max-height: 11rem;
-                  font-size: 1vw;
+                  min-height: 12rem;
+                  max-height: 12rem;
+                  font-size: 1.1vw;
                 }
               }
             }
 
             .contact-li-submit {
               display: flex;
-              // margin-top: .75rem;
-              max-height: 5%;
+              height: 100%;
+              align-items: center;
+
+
               .contact-submit-r {
                 color: #b7b7b7;
                 border: none;
-                padding: .3rem .2rem;
-                width: 50%;
+                height: 2.5em;
+                width: 35%;
                 border-bottom: 1.5px solid rgba(183, 183, 183, 0.3);
+                border-bottom-left-radius: 15%;
+                border-bottom-right-radius: 15%;
                 background-color: transparent;
 
                 &:hover {
                   background-color: ivory;
+                  opacity: 0.75;
                   color: darkslategray;
-                  border-bottom: 3.5px solid #b7b7b7;
+                  border-bottom: 3px inset #b7b7b7;
+                  border-radius: 0;
                 }
               }
               justify-content: center;
             }
 
             .contact-li-r-is-active {
+              margin-top: .75em;
               .contact-label-r {
                 transform: translate(0);
-                font-size: 1vw !important;
+                font-size: 1.05vw !important;
               }
 
               .contact-child-container-r {

@@ -58,7 +58,7 @@ export default {
     const devScriptArr = minesweeperIndicator
       ? `[
         '/static/appRouter.js',
-        'https://beatminesweeper.app/static/index.js',
+        '${cFLink}/mines/build/public/index.js',
         '/static/footer.js'
       ]`
       : `[
@@ -68,7 +68,7 @@ export default {
 
     const prodScriptArr = minesweeperIndicator ? `[
         '${cFLink}/main/build/public/appRouter-bundle.js',
-        'https://beatminesweeper.app/static/index.js',
+        '${cFLink}/mines/build/public/index.js',
         '${cFLink}/main/build/public/footer-bundle.js',
       ]` :
       `[

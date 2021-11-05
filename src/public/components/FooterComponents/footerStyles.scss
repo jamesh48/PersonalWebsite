@@ -12,10 +12,11 @@ footer {
       width: 90%;
     }
 
-    #footerItemsContainer {
+    #footer-items-container {
       display: flex;
       width: 100%;
-      border: 1px solid rgb(255, 255, 240);
+      border: 3px outset darkslategray;
+      border-bottom: none;
       background-color: rgb(255, 255, 240);
       border-radius: 0.7% / 25%;
       border-bottom-left-radius: 0;

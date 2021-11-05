@@ -22,13 +22,15 @@
     background-color: ivory;
     align-items: center;
     padding: 0.5em 0;
+    border: 3px solid darkslategray;
+    border-top: none;
 
     // When hovered over the padding is removed so that the header links can fill the space
     &:hover {
       padding: 0;
       a {
         // Shift the padding to the links
-        padding: 0.65em 0;
+        padding: .65em 0;
       }
     }
 
@@ -44,11 +46,6 @@
   a:last-child {
     border-left: none;
     border-right: none;
-    &:hover {
-      border-radius: 1% / 15%;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-    }
   }
   // The first header link does not have a border-bottom-right-radius
   a:first-child {
