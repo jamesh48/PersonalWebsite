@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Fixing contact view in mobile/tablet pt 2'
+          message: 'Made responsive text using vw units on font-size, finished up contact form integration, began implementing a linkedin recommendations API call, and fixed some minor css'
         }
       }
     },

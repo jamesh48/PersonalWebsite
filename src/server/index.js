@@ -15,6 +15,7 @@ import { getAllPortfolioItems } from "Database/controllers/portfolio_controllers
 import portfolioJSON from "PortfolioJSON";
 import footerJSON from "FooterJSON";
 import { GlobalStoreProvider } from "GlobalStore";
+import { requestRecommendations } from "./recommendations.js";
 
 const { htmlStart, htmlMid, htmlEnd } = templates;
 const app = express();
@@ -40,15 +41,19 @@ app.use(/(minesweeper)?/, minesweeperRouter);
 app.use(/(portfolio)?/, portfolioRouter);
 
 app.post("/api/sendEmail", (req, res) => {
-  const name = req.query.firstName + " " + req.query.lastName;
+  const name = req.query.fullName;
   const _subject = `New Message from FSH.com - [${name}]`;
 
   const incomingMessage = req.query.message;
 
   // Follow up Contact Details
-  const linkedIn = req.query.linkedin.trim('') ? req.query.linkedin : 'not provided';
-  const email = req.query.email.trim('') ? req.query.email : 'not provided';
-  const phoneNumber = req.query.phoneNumber.trim('') ? req.query.phoneNumber : 'not provided'
+  const linkedIn = req.query.linkedin.trim("")
+    ? req.query.linkedin
+    : "not provided";
+  const email = req.query.email.trim("") ? req.query.email : "not provided";
+  const phoneNumber = req.query.phoneNumber.trim("")
+    ? req.query.phoneNumber
+    : "not provided";
   const _message = req.query.message.concat(
     `
 
@@ -63,6 +68,16 @@ app.post("/api/sendEmail", (req, res) => {
   });
 });
 
+app.get('/api/recommendations', async (req, res) => {
+  console.log(requestRecommendations)
+  try {
+    const recommendations = await requestRecommendations();
+    res.json(recommendations);
+  } catch(err) {
+    res.send("Recommendations request didn't work")
+  }
+})
+
 app.get("*", async (req, res) => {
   const context = {};
   let activeResume, minesweeperTopTimes, minesweeperGame;
@@ -74,7 +89,7 @@ app.get("*", async (req, res) => {
 
   // Minesweeper
   if (req.url.indexOf("minesweeper") > -1) {
-    console.log("requesting");
+    console.log("requesting minesweeper...");
     try {
       const { data } = await axios(
         `https://beatminesweeper.app/static/index.js`

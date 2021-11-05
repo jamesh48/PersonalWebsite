@@ -25,6 +25,7 @@ export default ({ labelName, inputType, valCallback, indicator, localValue }) =>
           <input
             className="contact-input-r"
             type="text"
+            value={localValue}
             onFocus={handleFocus}
             onBlur={handleBlur}
             onChange={() => valCallback(indicator)}
@@ -32,7 +33,7 @@ export default ({ labelName, inputType, valCallback, indicator, localValue }) =>
         ) : (
           <textarea
             className={`contact-input-r contact-input-r-textarea`}
-            // placeholder={}
+            value={localValue}
             onFocus={handleFocus}
             onBlur={handleBlur}
             onChange={() => valCallback('message')}

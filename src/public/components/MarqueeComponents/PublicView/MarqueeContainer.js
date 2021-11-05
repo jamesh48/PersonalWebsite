@@ -42,7 +42,7 @@ export default ({ smileCallback }) => {
     <div className={(mobileBrowser || smallWindow) ? `marqueeContainer marqueeContainer--Mobile portfolioFader` : `marqueeContainer portfolioFader`}>
       <div className='aboutMeMarqueeDetails'>
         <h4 className='aboutMeMarqueeTitle'>James Hrivnak</h4>
-        <div>
+        <div className='marqueeContentContainer'>
           <span className='marqueeContents'>
             <div className='marqueeParagraphs'>
               <p className='aboutMeMarqueeDescription'>

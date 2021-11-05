@@ -36,7 +36,11 @@ const serverConfig = {
   new webpack.DefinePlugin({
     'process.env.cFLink': JSON.stringify(process.env.CLOUDFRONTLINK || 'development'),
     'process.env.DEV_ENV': process.env.DEV_ENV,
-    'process.env.SENDGRID_API_KEY': JSON.stringify(process.env.sendGridAPIKey)
+    'process.env.SENDGRID_API_KEY': JSON.stringify(process.env.sendGridAPIKey),
+    'process.env.sendGridToEmail': JSON.stringify(process.env.sendGridToEmail),
+    'process.env.sendGridFromEmail': JSON.stringify(process.env.sendGridFromEmail),
+    'process.env.nubelaAPIToken': JSON.stringify(process.env.nubelaAPIToken),
+    'process.env.nubelaRoute': JSON.stringify(process.env.nubelaRoute)
   }),
   ],
   devtool: "source-map",
@@ -123,3 +127,4 @@ const clientConfig = {
 };
 
 module.exports = [serverConfig, clientConfig];
+

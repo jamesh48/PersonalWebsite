@@ -9,13 +9,14 @@
   .resumeContainer {
     // height: 90vh;
     text-rendering: geometricPrecision;
-    font-weight: 250;
+    font-weight: 150;
     display: flex;
     flex-direction: column;
     flex: 1;
     .resumeContainerTitle {
       align-self: center;
       padding: 5% 0;
+      font-size: 2.5vw;
     }
     .resumeUIContainer {
       margin: 1% 0;
@@ -42,13 +43,27 @@
           }
         }
 
+        .publicColumnContainerTitle {
+          h6 {
+            font-size: 1.5vw;
+          }
+        }
+        .publicColumnContainerSection {
+          h6 {
+            font-size: 1.4vw;
+          }
+        }
+        .publicColumnContainerDetail {
+          h6 {
+            font-size: 1.3vw;
+          }
+        }
+
         // Default View
-        .publicResponsiveRowX {
-          width: 35%;
+        .publicParentContainerRow {
           .publicColumnContainerTitle {
-            width: 100%;
             h6 {
-              // line-height: 3;
+              text-align: center;
               padding: 5% 0;
             }
           }
@@ -98,7 +113,6 @@
                     display: flex;
                     justify-content: center;
                     align-items: middle;
-                    font-size: 20px;
                     padding: 1% 0;
                     color: ivory;
                   }
@@ -117,15 +131,17 @@
                   }
                 }
                 .minorContainer {
-                  // .minorContainerTitle {
+                  .minorContainerTitle {
+                    font-size: 1.2vw;
                   //   // text-decoration: underline;
-                  // }
+                  }
                   .minorHighlights {
                     margin: 0 1%;
                     .minorItem {
                       display: inline-flex;
                       margin: 0 1%;
                       color: ivory;
+                      font-size: 1vw;
                     }
                   }
                 }
@@ -154,7 +170,7 @@
 
     &--Mobile {
       .resumeContainerTitle {
-        font-size: 4em;
+        font-size: 2.5vw;
         margin-bottom: 5%;
       }
 

@@ -8,8 +8,7 @@ import "./contact.scss";
 
 export default ({ mobileBrowser }) => {
   const [formValues, setFormValues] = React.useState({
-    firstName: "",
-    lastName: "",
+    fullName: "",
     phoneNumber: "",
     email: "",
     linkedin: "",
@@ -22,12 +21,36 @@ export default ({ mobileBrowser }) => {
     });
   };
 
+  const handleRecommendations = async () => {
+    const { data: serverRecommendationsResponse } = await axios.get(
+      "/api/recommendations"
+    );
+    console.log(JSON.stringify(serverRecommendationsResponse));
+  };
+
   const handleSubmit = async () => {
     event.preventDefault();
-    const { data: serverResponse } = await axios.post("/api/sendemail", null, {
-      params: formValues,
+    try {
+      const { data: serverResponse } = await axios.post(
+        "/api/sendemail",
+        null,
+        {
+          params: formValues,
+        }
+      );
+      console.log("submitted");
+    } catch (err) {
+      console.log(err);
+    }
+    setFormValues(() => {
+      return {
+        fullName: "",
+        phoneNumber: "",
+        email: "",
+        linkedin: "",
+        message: "",
+      };
     });
-    console.log(serverResponse);
   };
 
   return (
@@ -66,18 +89,11 @@ export default ({ mobileBrowser }) => {
               <div className="contact-column-form-container-r">
                 <ul className="contact-column-form-ul-r">
                   <ContactInput
-                    labelName="First Name"
+                    labelName="Name"
                     inputType="input"
-                    localValue={formValues.firstName}
+                    localValue={formValues.fullName}
                     valCallback={valCallback}
-                    indicator="firstName"
-                  />
-                  <ContactInput
-                    labelName="Last Name"
-                    inputType="input"
-                    localValue={formValues.lastName}
-                    valCallback={valCallback}
-                    indicator="lastName"
+                    indicator="fullName"
                   />
                   <ContactInput
                     labelName="Phone Number"
@@ -107,6 +123,9 @@ export default ({ mobileBrowser }) => {
                     valCallback={valCallback}
                     indicator="message"
                   />
+                  {/* <li className={`contact-li-r contact-li-submit`}>
+                    <input type='button' value='test' onClick={handleRecommendations}/>
+                  </li> */}
                   <li className={`contact-li-r contact-li-submit`}>
                     <input type="submit" className="contact-submit-r" />
                   </li>
