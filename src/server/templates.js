@@ -1,6 +1,6 @@
 const { cFLink, DEV_ENV } = process.env;
 export default {
-  htmlStart: (data, minesweeperGame) => {
+  htmlStart: (data) => {
     let startingSection = `<!DOCTYPE HTML>
         <html style="background-color: #1f2124">
           <head>
@@ -45,16 +45,26 @@ export default {
 
       <div id="root">`;
 
-      if (data.minesweeperGame) {
-        startingSection = startingSection.concat(`<div><div id='minesweeper-root'>${minesweeperGame}</div></div>`)
-      }
+    if (data.minesweeperGame) {
+      startingSection = startingSection.concat(
+        `<div><div id='hello'></div></div>`
+      );
+    }
 
     return startingSection;
   },
-  htmlMid: `</div>
+  htmlMid: (game) => {
+    if (game) {
+      return `</div>
+        <div id='minesweeper-root'></div>
+      </body>
+    <footer id='footerroot'>`;
+    }
 
+    return `</div>
     </body>
-  <footer id='footerroot'>`,
+  <footer id='footerroot'>`;
+  },
 
   htmlEnd: (minesweeperIndicator) => {
     const devScriptArr = minesweeperIndicator
@@ -66,17 +76,18 @@ export default {
       : `[
       '/static/appRouter.js',
       '/static/footer.js'
-      ]`
+      ]`;
 
-    const prodScriptArr = minesweeperIndicator ? `[
+    const prodScriptArr = minesweeperIndicator
+      ? `[
         '${cFLink}/main/build/public/appRouter-bundle.js',
         '${cFLink}/mines/build/public/public-bundle.js',
         '${cFLink}/main/build/public/footer-bundle.js',
-      ]` :
-      `[
+      ]`
+      : `[
         '${cFLink}/main/build/public/appRouter-bundle.js',
         '${cFLink}/main/build/public/footer-bundle.js',
-      ]`
+      ]`;
 
     return `</footer>
 

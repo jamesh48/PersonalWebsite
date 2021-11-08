@@ -5,7 +5,7 @@ const { mobileBrowserFunction } = AppUtils;
 import "../../main-styles/global.scss";
 import "./minesweeperStyles.scss";
 
-export const Minesweeper_Proxy = () => {
+export const Minesweeper_Proxy = ({game}) => {
   const [isIPad, setIsIPad] = React.useState(false);
   const [mobileBrowser, setMobileBrowser] = React.useState(false);
 
@@ -29,8 +29,9 @@ export const Minesweeper_Proxy = () => {
     >
       <div
         className={`container websiteMinesweeperAdjust`}
-        id="minesweeper-root"
+        id='minesweeper-root'
       >
+        {game}
         <p className='loading-indicator'>Loading...</p>
       </div>
     </div>

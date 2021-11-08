@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Minified minesweeper introduced an React error- took the easy road of attaching the minesweeper code directly to the server response instead of passing it down as window.__INITIAL__DATA__, hopefully works deployed'
+          message: 'Had to switch back to hydrate strategy, unclear if minesweeper can really be server side rendered'
         }
       }
     },

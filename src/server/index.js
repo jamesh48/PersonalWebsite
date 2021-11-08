@@ -118,14 +118,14 @@ app.get("*", async (req, res) => {
       portfolioJSON: portfolioJSON,
       footerJSON: footerJSON,
       resumeData: activeResume,
+      minesweeperGame: context.minesweeperGame
     },
-    context.minesweeperGame
     )
   );
 
   appStream.pipe(res, { end: false });
   appStream.on("end", () => {
-    res.write(htmlMid);
+    res.write(htmlMid(context.minesweeperGame));
     footerStream.pipe(res, { end: false });
     footerStream.on("end", () => {
       if (context.minesweeperGame) {
