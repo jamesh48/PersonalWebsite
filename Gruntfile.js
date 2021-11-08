@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Had to switch back to hydrate strategy, unclear if minesweeper can really be server side rendered'
+          message: 'It doesnt appear I can have the loading indicator for the time being'
         }
       }
     },

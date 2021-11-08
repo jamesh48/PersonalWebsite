@@ -45,12 +45,6 @@ export default {
 
       <div id="root">`;
 
-    if (data.minesweeperGame) {
-      startingSection = startingSection.concat(
-        `<div><div id='hello'></div></div>`
-      );
-    }
-
     return startingSection;
   },
   htmlMid: (game) => {
