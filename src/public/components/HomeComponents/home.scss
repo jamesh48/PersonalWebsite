@@ -13,10 +13,11 @@
   flex-direction: column;
   margin: 0 auto;
   width: 75%;
-  #about-me-root {
+  .about-me-root {
     height: 90vh;
     &--Small {
-      min-height: 90vh;
+      height: unset;
+      min-height: 180vh;
     }
   }
 }
@@ -26,10 +27,13 @@
   flex-direction: column;
   margin: 0 auto;
   width: 90%;
-  #about-me-root {
+  .about-me-root {
     min-height: 90vh;
     display: flex;
     align-items: center;
+    &--Small {
+        min-height: 90vh;
+    }
   }
 
   #portfolio-root {
@@ -73,7 +77,7 @@
   padding-bottom: 5%;
 }
 
-#about-me-root {
+.about-me-root {
   padding-bottom: 5%;
 }
 

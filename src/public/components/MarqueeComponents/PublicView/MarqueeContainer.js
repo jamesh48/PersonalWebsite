@@ -10,7 +10,7 @@ import MCLandscape from "./MarqueeContainers/MCLandscape";
 
 export const MarqueeContainer = ({ smileCallback }) => {
   const [{ smileImage }, marqueeDispatch] = useMarqueeContext();
-  const [{ portrait, smallWindow }] = useGlobalContext();
+  const [{ portrait, smallWindow, mobileBrowser }] = useGlobalContext();
 
   const handleSmileImage = async (smileImage) => {
     smileImage = await new Promise((resolve, reject) => {
@@ -46,7 +46,10 @@ export const MarqueeContainer = ({ smileCallback }) => {
 
   const paragraphTwo = `I am kind, compassionate, empathetic and a good listener. I have a background in secular Buddhism, and have worked on compassionate and mindful teams in eldercare for the past two years. I value self care but I also like going in hard. I’ve trained for and have run a marathon, and I was also a competitive swimmer in college and now. I also have lived in two foreign countries and have visited 32 others.`;
 
-  return smileImage.loaded && (portrait || smallWindow) ? (
+  // Load Portrait mode if its a mobileBrowser and is in portrait orientation
+  // OR--
+  // Load Portrait mode if its a browser and a small window
+  return smileImage.loaded && ((mobileBrowser && portrait) || (!mobileBrowser && smallWindow)) ? (
     <MCPortrait
       smileImage={smileImage}
       paragraphOne={paragraphOne}

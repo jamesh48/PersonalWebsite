@@ -105,7 +105,7 @@ export const Home = (props) => {
       { threshold: [1] }
     );
 
-    observer.observe(document.querySelector("#about-me-root"));
+    observer.observe(document.querySelector(".about-me-root"));
     observer.observe(document.querySelector("#resume-root"));
     observer.observe(document.querySelector("#portfolio-root"));
 
@@ -120,7 +120,7 @@ export const Home = (props) => {
 
   return (
     <div className={mobileBrowser ? "homeContainer--Mobile" : "homeContainer"}>
-      <div id={smallWindow ? `about-me-root--Small` : `about-me-root`} data-name="About Me" className="container">
+      <div className={smallWindow ? `about-me-root about-me-root--Small container` : `about-me-root container`} data-name="About Me">
         <MarqueeStoreProvider>
           <MarqueeContainer smileCallback={smileCallback} />
         </MarqueeStoreProvider>
