@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect, useCallback, useRef } from 'react';
+import React from 'react';
 import { useGlobalContext } from 'GlobalStore';
 import { usePortfolioContext } from 'PortfolioStore';
 import { NestedPortfolioStoreProvider } from 'NestedPortfolioStore';
@@ -8,14 +8,15 @@ import './publicPortfolio.scss';
 import ApplicationImgContainer from './ApplicationImgContainer.js';
 
 
-export default ({ portfolioJSON }) => {
-  const [{ mobileBrowser, smallWindow }] = useGlobalContext();
+export const Portfolio = ({ portfolioJSON }) => {
+
+  const [{ smallWindow, mobileBrowser, portrait }] = useGlobalContext();
   const [{ outerContainerData, portfolioImages: { imageArr, allLoaded } }, portfolioDispatch] = usePortfolioContext();
 
   // When PortfolioJSON comes down, format it into containerData
   useEffectOnlyOnUpdate((args) => {
     handleContainerData(...args)
-  }, [mobileBrowser, smallWindow],
+  }, [mobileBrowser, smallWindow, portrait],
     [portfolioJSON, mobileBrowser, smallWindow, 'outer', portfolioDispatch]
   );
 
@@ -26,9 +27,12 @@ export default ({ portfolioJSON }) => {
     // Dependencies
     [outerContainerData],
     // Arguments
-    [outerContainerData, portfolioDispatch]
+    [portrait ? outerContainerData[0] : outerContainerData[1], portfolioDispatch]
   );
 
+  // if (allLoaded) {
+  //   console.log(imageArr)
+  // }
   return allLoaded ? (
     <div className={`portfolioContainer portfolioFader`}>
 
@@ -62,5 +66,5 @@ export default ({ portfolioJSON }) => {
       </div>
     </div >
 
-  ) : null
+  ) : (<h4>Loading Portfolio...</h4>)
 };

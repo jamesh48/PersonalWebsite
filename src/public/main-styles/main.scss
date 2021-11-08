@@ -8,11 +8,6 @@
   height: 5vh;
   margin: 0 auto;
 
-  &--Mobile {
-    width: 90%;
-  }
-
-
   ul {
     display: flex;
     width: 100%;
@@ -22,7 +17,7 @@
     background-color: ivory;
     align-items: center;
     padding: 0.5em 0;
-    border: 3px solid darkslategray;
+    border: 3px outset darkslategray;
     border-top: none;
 
     // When hovered over the padding is removed so that the header links can fill the space
@@ -30,7 +25,7 @@
       padding: 0;
       a {
         // Shift the padding to the links
-        padding: .65em 0;
+        padding: 0.65em 0;
       }
     }
 
@@ -83,6 +78,39 @@
       //     color: inherit;
       //   }
       // }
+    }
+  }
+
+  // Mobile Styles
+  &--Mobile {
+    width: 90%;
+
+    @media screen and (orientation: portrait) {
+    ul {
+      .routerLink {
+        display: flex;
+        align-items: center;
+          font-size: 1.5vh;
+          height: 50%;
+        }
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      height: 7.5vh;
+      ul {
+        &:hover {
+          padding: 0;
+          a {
+            padding: 0;
+          }
+        }
+        .routerLink {
+          font-size: 1.75vw;
+          height: 95%;
+          align-items: center;
+        }
+      }
     }
   }
 }

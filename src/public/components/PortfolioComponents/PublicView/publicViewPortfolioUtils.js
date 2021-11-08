@@ -1,49 +1,68 @@
-import React, { useEffect, useRef } from 'react';
-import Promise from 'bluebird';
-import regeneratorRuntime from 'regenerator-runtime';
+import Promise from "bluebird";
+import "regenerator-runtime";
 
-const handleContainerData = (inputArr, mobileBrowser, smallWindow, indicator, dispatch) => {
-  const formattedContainerData = inputArr?.reduce((total, item, index) => {
-    // This is temporary until for the unforeseeable future until I can make tablet specific handling a global variable.
-    let isIPad = navigator.userAgent.match(/iPad/i);
-    if (mobileBrowser && !isIPad) {
-      total.push([item])
-      return total;
-    }
-    if (index % 2 === 0) { total.push([item]) } else { total[total.length - 1].push(item) };
+const handleContainerData = (
+  inputArr,
+  mobileBrowser,
+  smallWindow,
+  indicator,
+  dispatch,
+) => {
+
+  const portraitContainerData = inputArr?.reduce((total, item) => {
+    total.push([item]);
     return total;
   }, []);
 
-  if (indicator === 'outer') {
-    return dispatch({
-      type: 'FORMAT OUTER CONTAINER DATA',
-      payload: formattedContainerData
-    });
-  };
 
-  if (indicator === 'inner') {
+  const landscapeContainerData = inputArr?.reduce((total, item, index) => {
+    if (index % 2 === 0) {
+      total.push([item]);
+    } else {
+      total[total.length - 1].push(item);
+    }
+    return total;
+  }, []);
+
+  if (indicator === "outer") {
     return dispatch({
-      type: 'FORMAT NESTED CONTAINER DATA',
-      payload: formattedContainerData
+      type: "FORMAT OUTER CONTAINER DATA",
+      payload: [portraitContainerData, landscapeContainerData],
+    });
+  }
+
+  if (indicator === "inner") {
+    return dispatch({
+      type: "FORMAT NESTED CONTAINER DATA",
+      payload: [portraitContainerData, landscapeContainerData]
     });
   }
 };
 
 const handleImageData = async (inputArr, portfolioDispatch) => {
-  const processedImages = await Promise.reduce(inputArr, async (total, row) => {
-    return [...total, await Promise.mapSeries(row, async (imgData) => {
-      return new Promise((resolve, reject) => {
-        let img = new Image();
-        img.onload = () => resolve({ ...imgData });
-        img.onerror = () => { reject(new Error(`The ${imgData.title} image failed to load`)) };
-        img.src = imgData.imgUrl;
-      });
-    })]
-  }, []);
+  const processedImages = await Promise.reduce(
+    inputArr,
+    async (total, row) => {
+      return [
+        ...total,
+        await Promise.mapSeries(row, async (imgData) => {
+          return new Promise((resolve, reject) => {
+            let img = new Image();
+            img.onload = () => resolve({ ...imgData });
+            img.onerror = () => {
+              reject(new Error(`The ${imgData.title} image failed to load`));
+            };
+            img.src = imgData.imgUrl;
+          });
+        }),
+      ];
+    },
+    []
+  );
 
   portfolioDispatch({
-    type: 'ALL PORTFOLIO IMAGES LOADED',
-    payload: { allLoaded: true, imageArr: processedImages }
+    type: "ALL PORTFOLIO IMAGES LOADED",
+    payload: { allLoaded: true, imageArr: processedImages },
   });
 };
 

@@ -63,3 +63,59 @@
     }
   }
 }
+/*
+  Mobile
+*/
+.minesweeper-proxy-root--Mobile {
+  @media screen and (orientation: landscape) {
+    width: 90%;
+    #main-space-container {
+      height: 99% !important;
+      // #total-board {
+
+      // }
+      #total-board.beginner, #total-board.intermediate, #total-board.advanced {
+        height: 90%;
+        width: 100%;
+      }
+
+      .milli-second-timer-container {
+        padding: 0;
+        padding-top: .2em;
+        #milli-second-timer {
+          font-size: 1.5vw;
+        }
+      }
+    }
+  }
+
+  @media screen and (orientation: portrait) {
+    .beginner, .intermediate, .advanced {
+      width: unset;
+    }
+    width: 100%;
+
+    .websiteMinesweeperAdjust {
+      display: flex;
+      align-items: center;
+
+      #milli-second-timer {
+        font-size: 2.5vh;
+      }
+
+      #skill-level-selector {
+        button {
+          font-size: 1.5vh;
+          padding: 1.5% 15%;
+        }
+      }
+
+      #main-space-container {
+        #total-board {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+}

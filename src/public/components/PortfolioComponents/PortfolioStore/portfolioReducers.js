@@ -1,10 +1,11 @@
-
-const combineReducers = (slices) => (state, action) => Object.keys(slices).reduce((acc, prop) => ({
-  ...acc,
-  [prop]: slices[prop](acc[prop], action),
-}),
-  state
-);
+const combineReducers = (slices) => (state, action) =>
+  Object.keys(slices).reduce(
+    (acc, prop) => ({
+      ...acc,
+      [prop]: slices[prop](acc[prop], action),
+    }),
+    state
+  );
 
 const outerContainerData = (state = [], action) => {
   switch (action.type) {
@@ -15,13 +16,16 @@ const outerContainerData = (state = [], action) => {
   }
 };
 
-const portfolioImages = (state = { allLoaded: false, imageArr: [] }, { type, payload }) => {
+const portfolioImages = (
+  state = { allLoaded: false, imageArr: [] },
+  { type, payload }
+) => {
   switch (type) {
-    case 'ALL PORTFOLIO IMAGES LOADED':
+    case "ALL PORTFOLIO IMAGES LOADED":
       return payload;
     default:
       return state;
   }
 };
 
-export default combineReducers({ outerContainerData, portfolioImages })
+export default combineReducers({ outerContainerData, portfolioImages });

@@ -81,7 +81,7 @@ const serverConfig = {
 
 const clientConfig = {
   mode: "development",
-  devtool: "source-map",
+  devtool: "eval-source-map",
   // Req by webpack 5/ala dotenv-environment variables
   resolve: {
     //   fallback: {

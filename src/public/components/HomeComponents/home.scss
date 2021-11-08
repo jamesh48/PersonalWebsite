@@ -25,6 +25,8 @@
   width: 90%;
   #about-me-root {
     min-height: 90vh;
+    display: flex;
+    align-items: center;
   }
 
   #portfolio-root {

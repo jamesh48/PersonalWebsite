@@ -4,7 +4,7 @@ import { useResumeContext } from 'ResumeStore';
 import hFCN from '../handleFadingClassNames';
 
 
-export default ({ detail, detailIndex, hoveredIndex, prevTitle, ind }) => {
+const DetailContainer = ({ detail, detailIndex, hoveredIndex, prevTitle, ind }) => {
 
   const [{ hoverParams: [hoverDepth, hoverBreadth], mobileBrowser }] = useResumeContext();
 
@@ -31,3 +31,5 @@ export default ({ detail, detailIndex, hoveredIndex, prevTitle, ind }) => {
     </div>
   )
 }
+
+export default DetailContainer;

@@ -1,24 +1,24 @@
-.marqueeContainer {
+.marquee-container {
   display: flex;
   height: 90%;
   align-items: center;
-  .aboutMeMarqueeDetails {
+  .about-me-marquee-details {
     height: 100%;
-    .aboutMeMarqueeTitle {
+    .about-me-marquee-title {
       display: flex;
       justify-content: center;
       font-size: 2.5vw;
       height: 25%;
       align-items: center;
     }
-    .marqueeContentContainer {
-    .marqueeContents {
+    .marquee-content-container {
+    .marquee-contents {
       display: flex;
-      .marqueeParagraphs {
+      .marquee-paragraphs {
         display: flex;
         flex-direction: column;
         flex: 0.9;
-        .aboutMeMarqueeDescription {
+        .about-me-marquee-description {
           text-rendering: geometricPrecision;
           width: 97.5%;
           line-height: 1.95;
@@ -30,7 +30,7 @@
     }
   }
 
-    .smileContainer {
+    .smile-container {
       // min-height: 30rem;
       max-width: 50%;
       min-width: 27.5%;
@@ -59,24 +59,38 @@
   }
 
   // Mobile View is a column rather than rows...
-  &--Mobile {
+  &--Portrait {
+    @media screen and (orientation: portrait) {
+      height: 90vh;
+    }
+
+    @media screen and (orientation: landscape) {
+      min-height: 90vh;
+    }
     display: flex;
     flex-direction: column;
-    margin-bottom: 10%;
     text-align: center;
-    .aboutMeMarqueeDetails {
-      .aboutMeMarqueeTitle {
-        font-size: 4.5em;
+    .about-me-marquee-details {
+      .about-me-marquee-title {
+        @media screen and (orientation: portrait) {
+          height: 15%;
+          font-size: 4.5vh;
+        }
+
+        @media screen and (orientation: landscape) {
+          // height: 4;
+          font-size: 4.5vw;
+        }
       }
-      .marqueeContents {
+      .marquee-contents {
         display: flex;
         flex-direction: column;
-        .marqueeParagraphs {
+        .marquee-paragraphs {
           text-align: center;
-          .aboutMeMarqueeDescription {
+          .about-me-marquee-description {
             font-size: 1.9em !important;
           }
-          .smileContainer {
+          .smile-container {
             margin: 2.5% auto;
             min-height: 25rem;
             width: 50%;

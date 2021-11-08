@@ -14,14 +14,14 @@ export const sendEmail = (_subject, _message, callback) => {
 
   sgMail
   .send(msg)
-  .then((response) => {
+  .then(() => {
     callback('message sent')
   }, error => {
     console.error(error);
 
     if (error.response) {
       console.error(error.response.body)
-      res.send(error.response.body);
+      callback('message not sent')
     }
   });
 }

@@ -7,7 +7,8 @@ const GlobalStoreContext = React.createContext();
 const initialState = {
   mobileBrowser: null,
   smallWindow: null,
-  admin: false
+  admin: false,
+  portrait: false
 };
 
 const GlobalStoreProvider = ({ children }) => {

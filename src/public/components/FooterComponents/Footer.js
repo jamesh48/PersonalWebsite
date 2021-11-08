@@ -1,58 +1,69 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import FooterItemContainer from './FooterItemContainer.js';
-import AppUtils from '../AppRouterComponents/AppUtils.js';
-import { useGlobalContext } from 'GlobalStore';
+import React, { useState, useEffect } from "react";
+import { FooterItemContainer } from "./FooterItemContainer.js";
+import AppUtils from "../AppRouterComponents/AppUtils.js";
+import { useGlobalContext } from "GlobalStore";
 const { mobileBrowserFunction } = AppUtils;
-import './footerStyles.scss';
+import "./footerStyles.scss";
 
-export default ({ footerJSON }) => {
-  const [images, setImages] = useState([{ url: '', loaded: false, link: '' }]);
+export default function Footer({ footerJSON }) {
+  const [images, setImages] = useState([{ url: "", loaded: false, link: "" }]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [{ mobileBrowser }, globalDispatch] = useGlobalContext();
 
-
-  set_mobile_browser: useEffect(() => {
+  //Set Mobile Browser
+  useEffect(() => {
     const mobileBrowserTest = mobileBrowserFunction();
-    globalDispatch({type: 'TOGGLE MOBILE BROWSER', payload: !!mobileBrowserTest});
+    globalDispatch({
+      type: "TOGGLE MOBILE BROWSER",
+      payload: !!mobileBrowserTest,
+    });
   }, []);
 
-
   const incrementImageLoad = (i) => {
-    setImages(x => { x[i].loaded = true; return [...x] });
+    setImages((x) => {
+      x[i].loaded = true;
+      return [...x];
+    });
   };
 
   useEffect(() => {
-    if (images.every(image => image.loaded)) {
-      setIsLoaded(true)
+    if (images.every((image) => image.loaded)) {
+      setIsLoaded(true);
     }
   }, [images]);
 
   useEffect(() => {
-    setImages(footerJSON.map(({ imageUrl, iconLink }, loadedIndex) => {
-      let img = new Image();
-      img.onload = () => incrementImageLoad(loadedIndex);
-      img.src = imageUrl;
+    setImages(
+      footerJSON.map(({ imageUrl, iconLink }, loadedIndex) => {
+        let img = new Image();
+        img.onload = () => incrementImageLoad(loadedIndex);
+        img.src = imageUrl;
 
-      return {
-        iconLink: iconLink,
-        url: imageUrl,
-        loaded: false
-      }
-    }));
+        return {
+          iconLink: iconLink,
+          url: imageUrl,
+          loaded: false,
+        };
+      })
+    );
   }, []);
 
-  useEffect(() => {
-
-  }, [])
+  useEffect(() => {}, []);
 
   return isLoaded ? (
-    <div id='footerContainer' className={mobileBrowser ? `footer-container footer-container--Mobile` : `footer-container`}>
-      <div id='footer-items-container'>
+    <div
+      id="footerContainer"
+      className={
+        mobileBrowser
+          ? `footer-container footer-container--Mobile`
+          : `footer-container`
+      }
+    >
+      <div id="footer-items-container">
         {images.map((iconData, iconIndex) => {
-          return <FooterItemContainer key={iconIndex} iconData={iconData} />
+          return <FooterItemContainer key={iconIndex} iconData={iconData} />;
         })}
       </div>
     </div>
-
-  ) : null
-};
+  ) : null;
+}

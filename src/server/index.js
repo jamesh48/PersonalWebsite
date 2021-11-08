@@ -6,12 +6,10 @@ import cors from "cors";
 import ReactDOMServer from "react-dom/server";
 import { StaticRouter as Router } from "react-router-dom";
 import AppRouter from "Public/components/AppRouterComponents/AppRouter.js";
-import Minesweeper from "Public/components/MinesweeperComponents/Minesweeper_Proxy.js";
 import Footer from "Public/components/FooterComponents/Footer.js";
 import templates from "Server/templates.js";
 import { getResume } from "Database/resume_controllers.js";
-import { getTopTimes } from "Minesweeper/minesweeperControllers.js";
-import { getAllPortfolioItems } from "Database/controllers/portfolio_controllers.js";
+// import { getAllPortfolioItems } from "Database/controllers/portfolio_controllers.js";
 import portfolioJSON from "PortfolioJSON";
 import footerJSON from "FooterJSON";
 import { GlobalStoreProvider } from "GlobalStore";
@@ -20,7 +18,7 @@ import { requestRecommendations } from "./recommendations.js";
 const { htmlStart, htmlMid, htmlEnd } = templates;
 const app = express();
 
-import staticRouter from "./staticRoutes.js";
+// import staticRouter from "./staticRoutes.js";
 import resumeRouter from "./resumeRoutes.js";
 import portfolioRouter from "./portfolioRoutes.js";
 import minesweeperRouter from "Minesweeper/minesweeperRoutes.js";
@@ -54,7 +52,7 @@ app.post("/api/sendEmail", (req, res) => {
   const phoneNumber = req.query.phoneNumber.trim("")
     ? req.query.phoneNumber
     : "not provided";
-  const _message = req.query.message.concat(
+  const _message = incomingMessage.concat(
     `
 
     phone: ${phoneNumber}
@@ -68,19 +66,19 @@ app.post("/api/sendEmail", (req, res) => {
   });
 });
 
-app.get('/api/recommendations', async (req, res) => {
-  console.log(requestRecommendations)
+app.get("/api/recommendations", async (req, res) => {
+  console.log(requestRecommendations);
   try {
     const recommendations = await requestRecommendations();
     res.json(recommendations);
-  } catch(err) {
-    res.send("Recommendations request didn't work")
+  } catch (err) {
+    res.send("Recommendations request didn't work");
   }
-})
+});
 
 app.get("*", async (req, res) => {
   const context = {};
-  let activeResume, minesweeperTopTimes, minesweeperGame;
+  let activeResume;
 
   // Home Page
   if (req.url === "/") {

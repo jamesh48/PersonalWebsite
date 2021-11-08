@@ -2,8 +2,8 @@ import React from "react";
 // import AdminForm from '../AdminForm/adminForm.js';
 // import { AdminFormStoreProvider } from 'AdminFromStore';
 import axios from "axios";
-import ContactDescription from "./ContactDescription";
-import ContactInput from "./ContactInput.js";
+import { ContactDescription } from "./ContactDescription";
+import { ContactInput } from "./ContactInput.js";
 import "./contact.scss";
 
 export default ({ mobileBrowser }) => {
@@ -21,24 +21,24 @@ export default ({ mobileBrowser }) => {
     });
   };
 
-  const handleRecommendations = async () => {
-    const { data: serverRecommendationsResponse } = await axios.get(
-      "/api/recommendations"
-    );
-    console.log(JSON.stringify(serverRecommendationsResponse));
-  };
+  // const handleRecommendations = async () => {
+  //   const { data: serverRecommendationsResponse } = await axios.get(
+  //     "/api/recommendations"
+  //   );
+  //   console.log(JSON.stringify(serverRecommendationsResponse));
+  // };
 
   const handleSubmit = async () => {
     event.preventDefault();
     try {
-      const { data: serverResponse } = await axios.post(
+      const { data: serverSubmitResponse } = await axios.post(
         "/api/sendemail",
         null,
         {
           params: formValues,
         }
       );
-      console.log("submitted");
+      console.log("serverReponse-> ", serverSubmitResponse);
     } catch (err) {
       console.log(err);
     }

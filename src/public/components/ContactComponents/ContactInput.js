@@ -1,6 +1,6 @@
 import React from "react";
 
-export default ({ labelName, inputType, valCallback, indicator, localValue }) => {
+export const ContactInput = ({ labelName, inputType, valCallback, indicator, localValue }) => {
   const [isFocused, setIsFocused] = React.useState(false);
 
   const handleFocus = () => {

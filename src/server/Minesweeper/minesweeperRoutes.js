@@ -10,7 +10,7 @@ minesweeper.all(/minesweeper-.*/, async ({ originalUrl, method }, res) => {
   } catch (err) {
     console.log(err.message);
     res.send(err)
-  };
+  }
 });
 
 export default minesweeper;

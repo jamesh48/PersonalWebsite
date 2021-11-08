@@ -1,63 +1,83 @@
-import React, { useState, useEffect, useCallback, useReducer } from 'react';
-import NestedGitHubLink from './NestedGithubLink.js';
-import { handleContainerData } from './publicViewPortfolioUtils.js';
-import { useGlobalContext } from 'GlobalStore';
-import { usePortfolioContext } from 'PortfolioStore';
-import { useNestedPortfolioContext } from 'NestedPortfolioStore';
+import React from "react";
+import NestedGitHubLink from "./NestedGithubLink.js";
+import { handleContainerData } from "./publicViewPortfolioUtils.js";
+import { useGlobalContext } from "GlobalStore";
+import { useNestedPortfolioContext } from "NestedPortfolioStore";
 
-export default ({ rowIndex, columnIndex }) => {
-  const [{ mobileBrowser, smallWindow }] = useGlobalContext();
-  const [{ outerContainerData }] = usePortfolioContext();
-  const [{ hovered: [hoveredColumn, hoveredRow], nestedContainerData, nestedIndicator }, nestedPortfolioDispatch] = useNestedPortfolioContext();
+const ApplicationImgContainer = ({ rowIndex, columnIndex, appData }) => {
+  const [{ mobileBrowser, smallWindow, portrait }] = useGlobalContext();
+  const [
+    {
+      hovered: [hoveredColumn, hoveredRow],
+      nestedContainerData,
+      nestedIndicator,
+    },
+    nestedPortfolioDispatch,
+  ] = useNestedPortfolioContext();
 
-  const { github, imgUrl, cssStyles: { backgroundColor } } = outerContainerData[rowIndex][columnIndex];
+  const {
+    github,
+    imgUrl,
+    cssStyles: { backgroundColor },
+  } = appData
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (rowIndex === hoveredColumn && columnIndex === hoveredRow) {
-      nestedPortfolioDispatch({ type: 'TOGGLE NESTED INDICATOR', payload: true });
+      nestedPortfolioDispatch({
+        type: "TOGGLE NESTED INDICATOR",
+        payload: true,
+      });
     } else {
-      nestedPortfolioDispatch({ type: 'TOGGLE NESTED INDICATOR', payload: false });
+      nestedPortfolioDispatch({
+        type: "TOGGLE NESTED INDICATOR",
+        payload: false,
+      });
     }
   }, [hoveredColumn, hoveredRow]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     handleContainerData(
       github,
       mobileBrowser,
       smallWindow,
-      'inner',
-      nestedPortfolioDispatch
+      "inner",
+      nestedPortfolioDispatch,
     );
   }, [smallWindow, mobileBrowser]);
+
+  let test = portrait ? nestedContainerData[0] : nestedContainerData[1];
 
 
   return (
     <div
-      className='applicationImgContainer'
+      className="applicationImgContainer"
       onMouseLeave={
-        nestedIndicator ? () => {
-          nestedPortfolioDispatch(
-            { type: 'SET HOVERED NULL' }
-          )
-        } : null}
-      onMouseOver={!nestedIndicator ? () => {
-        nestedPortfolioDispatch({
-          type: 'SET HOVERED',
-          payload: [rowIndex, columnIndex]
-        })
-      } : null}
+        nestedIndicator
+          ? () => {
+              nestedPortfolioDispatch({ type: "SET HOVERED NULL" });
+            }
+          : null
+      }
+      onMouseOver={
+        !nestedIndicator
+          ? () => {
+              nestedPortfolioDispatch({
+                type: "SET HOVERED",
+                payload: [rowIndex, columnIndex],
+              });
+            }
+          : null
+      }
       style={{
         backgroundImage: `url(${imgUrl})`,
-        backgroundColor: backgroundColor
+        backgroundColor: backgroundColor,
       }}
     >
-
-      {
-        nestedIndicator ? nestedContainerData?.map((appRow, nestedRowIndex) => {
-          return (
-            <div className='nestedGithubRow' key={nestedRowIndex}>
-              {
-                appRow.map((nestedGithub, nestedColumnIndex) => {
+      {nestedIndicator
+        ? test?.map((appRow, nestedRowIndex) => {
+            return (
+              <div className="nestedGithubRow" key={nestedRowIndex}>
+                {appRow.map((nestedGithub, nestedColumnIndex) => {
                   return (
                     <NestedGitHubLink
                       key={nestedColumnIndex}
@@ -65,16 +85,17 @@ export default ({ rowIndex, columnIndex }) => {
                       nestedColumnIndex={nestedColumnIndex}
                       outerRowIndex={rowIndex}
                       outerColumnIndex={columnIndex}
+                      outerData={appData}
+                      nestedGithub={nestedGithub}
                     />
                   );
-                })
-              }
-            </div>
-          )
-        }) : null
-
-      }
-
+                })}
+              </div>
+            );
+          })
+        : null}
     </div>
-  )
-}
+  );
+};
+
+export default ApplicationImgContainer;

@@ -35,7 +35,7 @@ const nestedIndicator = (state = [], { type, payload }) => {
       return payload;
     default:
       return state;
-  };
+  }
 };
 
 const hovered = (state = [null, null], action) => {
@@ -46,7 +46,7 @@ const hovered = (state = [null, null], action) => {
       return action.payload;
     default:
       return state;
-  };
+  }
 };
 
 export default combineReducers({ nestedHovered, nestedContainerData, nestedIndicator, hovered });

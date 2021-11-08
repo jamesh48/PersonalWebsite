@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import PublicContainers from './publicUtils.js';
+import React  from 'react';
+import PublicContainers from './ResumeUIContainer';
 import { useGlobalContext } from 'GlobalStore';
 
-export default (props) => {
-  const [{ mobileBrowser }] = useGlobalContext();
+const PublicResumeView = (props) => {
+  const [{ portrait  }] = useGlobalContext();
 
   return (
-    <div className={(mobileBrowser || props.smallWindow) ? `resumeContainer resumeContainer--Mobile` : `resumeContainer`}>
+    <div className={portrait ? `resumeContainer resumeContainer--Mobile` : `resumeContainer`}>
       <h4 className='resumeContainerTitle'>Resume {/*resume.resume_Name*/}</h4>
       <PublicContainers {...props} />
     </div>
   )
 };
+
+export default PublicResumeView;

@@ -1,10 +1,9 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import DetailContainer from './Containers/DetailContainer.js';
 import PublicDisplayContainer from './PublicDisplayContainer.js';
 import hFCN from './handleFadingClassNames.js';
 // import { useEffectOnlyOnUpdate } from '../../PortfolioComponents/PublicView/publicViewPortfolioUtils.js';
 import { useEffectOnlyOnUpdate } from 'GlobalUtils';
-import AppUtils from '../../AppRouterComponents/AppUtils.js';
 import { useResumeContext } from 'ResumeStore';
 
 
@@ -16,7 +15,7 @@ export default (props) => {
   const handleHover = (indicator) => {
     if (indicator === 'exit') return resumeDispatch({ type: 'EXIT HOVER PARAMS', payload: [null, null] })
 
-    let { target: { dataset: { depth, breadth, name } } } = event;
+    let { target: { dataset: { depth, breadth } } } = event;
 
     // The first condition prevents details from disappearing momentarily when the user hovers downards over the border between the section title and the details
     // The second condition ensures that when the user goes to a new title, that the UI shows it, as there is no data-depth of publicColumnContainer between section and details but there is a data-depth in the empty space.
@@ -30,7 +29,7 @@ export default (props) => {
 
     if (depth === '1' || event.target.className === 'publicColumnContainer') {
       return resumeDispatch({ type: 'UPDATE HOVER PARAMS', payload: newHoverParams.concat(breadth) });
-    };
+    }
   };
 
   const { resumeDetails, mobileBrowser } = props;
@@ -45,7 +44,7 @@ export default (props) => {
     if (hoverDepth === 1) {
       setHoverDebouncer(false);
 
-      setTimeout(() => {
+      const timeout = setTimeout(() => {
         setHoverDebouncer(true)
       }, 500);
 
@@ -100,7 +99,7 @@ export default (props) => {
                     onTouchStart={() => {
                       if (mobileBrowser) {
                         setTouchStartPosition(window.scrollY);
-                      };
+                      }
                     }}
                     onTouchEnd={() => {
                       if (mobileBrowser) {
@@ -266,7 +265,7 @@ const iterateDetails = (props, ind) => {
 }
 
 const iterateHighlights = (highlights) => {
-  return highlights.reduce((resultHighlights, highlight, highlightIndex) => {
+  return highlights.reduce((resultHighlights, highlight) => {
     return resultHighlights.concat(
       <span className='minorItem'>{highlight?.title || ''}</span>
     )

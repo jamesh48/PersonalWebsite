@@ -77,7 +77,6 @@ const recurseContainers = ({ resumeDetails, mobileBrowser, hoverDepth, hoverBrea
 
             // This condition triggers the previous section if hovering upwards...
             // const isOpening = typeof hoverBreadth === 'string' ? (Number(hoverBreadth.split('_')[0]) !== 0) : false;
-            // console.log(depth, hoverDepth, currentIndex)
             // if (depth === 1 && hoverDepth === 1 && currentIndex === 0) {
             //   console.log(prevIndex, JSON.stringify(breadthArr))
             // }

@@ -1,34 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { usePortfolioContext } from 'PortfolioStore';
 import { useNestedPortfolioContext } from 'NestedPortfolioStore';
 import { useGlobalContext } from 'GlobalStore';
 
-export default React.memo(({
+const NestedGithubLink = ({
   nestedColumnIndex,
   nestedRowIndex,
-  outerRowIndex,
-  outerColumnIndex,
+  outerData,
+  nestedGithub
 }) => {
 
+  // This mobileBrowser variable signifies if the links need to be double pressed or not.
   const [{ mobileBrowser }] = useGlobalContext();
-  const [{ outerContainerData }] = usePortfolioContext();
-  const [{ nestedHovered, nestedContainerData }, nestedPortfolioDispatch] = useNestedPortfolioContext();
+
+  const [{ nestedHovered }, nestedPortfolioDispatch] = useNestedPortfolioContext();
 
 
   const [doubleClicked, setDoubleClicked] = useState(null);
 
-  const { cssStyles } = outerContainerData[outerRowIndex][outerColumnIndex];
-  const { link, title } = nestedContainerData[nestedRowIndex][nestedColumnIndex]
+  const { cssStyles } = outerData;
+  const { link, title } = nestedGithub;
 
   useEffect(() => {
 
     if (mobileBrowser && doubleClicked) {
       return window.open(link)
-    };
+    }
 
     if (doubleClicked === true) {
       window.open(link)
-    };
+    }
   }, [doubleClicked]);
 
   useEffect(() => {
@@ -69,4 +69,6 @@ export default React.memo(({
       {title}
     </div >
   )
-})
+}
+
+export default React.memo(NestedGithubLink);

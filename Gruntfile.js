@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Trivial/Minor CSS improvements- including fixing the submit button being underneath the footer bar in laptop view'
+          message: 'Cleaning up mobile view UX, especially font-size also making standard portrait view vs landscape view'
         }
       }
     },

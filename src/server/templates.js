@@ -1,7 +1,7 @@
 const { cFLink, DEV_ENV } = process.env;
 export default {
   htmlStart: (data) => {
-    const startingSection = `<!DOCTYPE HTML>
+    let startingSection = `<!DOCTYPE HTML>
         <html style="background-color: #1f2124">
           <head>
           <meta charset="utf-8">
@@ -44,9 +44,11 @@ export default {
 
 
       <div id="root">`;
+
       if (data.minesweeperGame) {
         startingSection = startingSection.concat("<div><div id='minesweeper-root'><p>Loading...</p></div></div>")
       }
+
     return startingSection;
   },
   htmlMid: `</div>
