@@ -1,6 +1,12 @@
 .marquee-container {
   display: flex;
-  height: 90%;
+  @media screen and (orientation: portrait) {
+    height: 90%;
+  }
+
+  @media screen and (orientation: landscape) {
+    height: 90vh;
+  }
   align-items: center;
   .about-me-marquee-details {
     height: 100%;
@@ -61,7 +67,8 @@
   // Mobile View is a column rather than rows...
   &--Portrait {
     @media screen and (orientation: portrait) {
-      height: 90vh;
+      height: 100%;
+      min-height: 90vh;
     }
 
     @media screen and (orientation: landscape) {
@@ -73,7 +80,7 @@
     .about-me-marquee-details {
       .about-me-marquee-title {
         @media screen and (orientation: portrait) {
-          height: 15%;
+          padding: 4% 0;
           font-size: 4.5vh;
         }
 

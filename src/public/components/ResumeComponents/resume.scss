@@ -133,7 +133,7 @@
                 .minorContainer {
                   .minorContainerTitle {
                     font-size: 1.2vw;
-                  //   // text-decoration: underline;
+                    //   // text-decoration: underline;
                   }
                   .minorHighlights {
                     margin: 0 1%;
@@ -170,8 +170,15 @@
 
     &--Mobile {
       .resumeContainerTitle {
-        font-size: 2.5vw;
-        margin-bottom: 5%;
+        @media screen and (orientation: landscape) {
+          font-size: 2.5vw;
+          margin-bottom: 5%;
+        }
+
+        @media screen and (orientation: portrait) {
+          padding-bottom: 0;
+          font-size: 2.5vh;
+        }
       }
 
       .resumeUIContainer {
@@ -244,7 +251,6 @@
                       color: ivory;
                       height: 5rem;
                       align-items: center;
-
                     }
                   }
                   .publicColumnContainer {

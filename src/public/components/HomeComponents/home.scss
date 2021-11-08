@@ -15,6 +15,9 @@
   width: 75%;
   #about-me-root {
     height: 90vh;
+    &--Small {
+      min-height: 90vh;
+    }
   }
 }
 

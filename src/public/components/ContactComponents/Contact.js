@@ -4,7 +4,9 @@ import React from "react";
 import axios from "axios";
 import { ContactDescription } from "./ContactDescription";
 import { ContactInput } from "./ContactInput.js";
-import "./contact.scss";
+import "./ContactStyles/contact.scss";
+import "./ContactStyles/contact-mobile-portrait.scss";
+import "./ContactStyles/contact-mobile-landscape.scss";
 
 export default ({ mobileBrowser }) => {
   const [formValues, setFormValues] = React.useState({

@@ -1,0 +1,26 @@
+@media screen and (orientation: landscape) {
+  .contact-root--Mobile {
+    height: unset;
+    .contact-column-form-r {
+      .contact-column-form-container-r {
+        .contact-column-form-ul-r {
+          // height: 100vh !important;
+          .contact-input-r {
+            font-size: 1.25vw;
+          }
+
+          .contact-input-r-textarea {
+            padding: 0 !important;
+            min-height: unset !important;
+            max-height: unset !important;
+            height: 37vh !important;
+          }
+
+          .contact-li-submit {
+            height: 11vh !important;
+          }
+        }
+      }
+    }
+  }
+}

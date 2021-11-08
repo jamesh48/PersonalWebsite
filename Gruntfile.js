@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Cleaning up mobile view UX, especially font-size also making standard portrait view vs landscape view'
+          message: 'Cleaning up mobile view UX pt2'
         }
       }
     },

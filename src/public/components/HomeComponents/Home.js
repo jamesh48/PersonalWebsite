@@ -120,7 +120,7 @@ export const Home = (props) => {
 
   return (
     <div className={mobileBrowser ? "homeContainer--Mobile" : "homeContainer"}>
-      <div id="about-me-root" data-name="About Me" className="container">
+      <div id={smallWindow ? `about-me-root--Small` : `about-me-root`} data-name="About Me" className="container">
         <MarqueeStoreProvider>
           <MarqueeContainer smileCallback={smileCallback} />
         </MarqueeStoreProvider>
