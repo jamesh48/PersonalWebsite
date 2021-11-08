@@ -6,6 +6,14 @@ export const Minesweeper_Proxy = ({ game, mobileBrowser }) => {
   const [isIPad, setIsIPad] = React.useState(false);
 
   React.useEffect(() => {
+    let cursor = document.getElementById('cursor');
+
+    if (mobileBrowser && cursor) {
+      cursor.remove();
+    }
+  }, [mobileBrowser]);
+
+  React.useEffect(() => {
     if (navigator.userAgent.match(/iPad/i)) {
       setIsIPad(true)
     }

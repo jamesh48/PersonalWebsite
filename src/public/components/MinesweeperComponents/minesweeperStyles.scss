@@ -11,10 +11,15 @@
   }
 
   .websiteMinesweeperAdjust {
+    // These four rules put the loading indicator in the center of the page
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
     .loading-indicator {
       text-rendering: geometricPrecision;
       font-weight: 150;
-      font-size: 2.5vw;
+      font-size: 2.5vmax;
     }
 
     #smiley-bar {
@@ -22,21 +27,21 @@
       #flags-remaining {
         text-rendering: geometricPrecision;
         font-weight: 300;
-        font-size: 1.4vw;
+        font-size: 1.4vmax;
         padding-left: 0.5em;
       }
     }
 
     #milli-second-timer {
-      font-size: 2.5vw;
+      font-size: 2.5vmax;
       text-rendering: geometricPrecision;
       border: none;
       border-top: 1px solid ivory;
-      letter-spacing: .05vw;
+      letter-spacing: .05vmax;
     }
     #skill-level-selector {
       button {
-        font-size: 1vw;
+        font-size: 1vmax;
         width: 100%;
         padding: .5% 0;
         color: black;
@@ -52,6 +57,9 @@
     #total-board {
       height: 70%;
       width: 65%;
+      .sweep-square {
+        font-size: 1.5vmax;
+      }
     }
 
     #total-board.intermediate, #total-board.advanced {

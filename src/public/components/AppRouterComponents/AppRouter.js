@@ -7,6 +7,7 @@ import { Minesweeper_Proxy } from "../MinesweeperComponents/Minesweeper_Proxy.js
 import { Home } from "../HomeComponents/Home.js";
 import { HomeStoreProvider } from "HomeStore";
 import AppUtils from "./AppUtils.js";
+import {useEffectOnlyOnUpdate} from 'GlobalUtils';
 const { handleMouseMove, mobileBrowserFunction } = AppUtils;
 
 import "../../main-styles/cursor.css";
@@ -17,16 +18,6 @@ import "../../main-styles/main.scss";
 const AppRouter = (props) => {
   const [{ mobileBrowser }, globalDispatch] = useGlobalContext();
   const [admin] = useState(false);
-  // const [_, setAdminPass] = useState("");
-
-  // const handleAdminSubmit = () => {
-  //   event.preventDefault();
-  //   setAdmin(true);
-  // };
-
-  // const handleAdminChange = () => {
-  //   setAdminPass(event.target.value);
-  // };
 
   // Set Mobile Browser
   useEffect(() => {
@@ -38,7 +29,8 @@ const AppRouter = (props) => {
   }, [admin]);
 
   // Cursor
-  useEffect(() => {
+  // Only on update prevents two events listeners from being added on initial render
+  useEffectOnlyOnUpdate(() => {
     if (mobileBrowser) {
       window.removeEventListener("mousemove", handleMouseMove, true);
       // If it exists remove it, if it doesn't exist (initial page load), skip...

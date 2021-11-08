@@ -1,5 +1,3 @@
-import React, { useEffect } from 'react';
-
 export default {
   handleMouseMove: () => {
     if (!document.getElementById('cursor')) {
@@ -7,7 +5,8 @@ export default {
       newCursor.id = 'cursor';
       newCursor.style.backgroundImage = "url(https://static.fullstackhrivnak.com/main/main-images/cursor.png)";
       document.querySelector('body').appendChild(newCursor);
-    };
+    }
+
     const scrollYOffset = window.scrollY;
     // Gets the x,y position of the mouse cursor
     const x = event.clientX;
@@ -20,9 +19,9 @@ export default {
   },
   debounce: (fn, ms) => {
     let timer
-    return _ => {
+    return () => {
       clearTimeout(timer)
-      timer = setTimeout(_ => {
+      timer = setTimeout(() => {
         timer = null
         fn.apply(this, arguments)
       }, ms)
