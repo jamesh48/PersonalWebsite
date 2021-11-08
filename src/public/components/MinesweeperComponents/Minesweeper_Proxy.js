@@ -1,31 +1,38 @@
-import React from 'react';
-import '../../main-styles/global.scss';
-import './minesweeperStyles.scss';
+import React from "react";
+import AppUtils from "../AppRouterComponents/AppUtils";
+const { mobileBrowserFunction } = AppUtils;
 
-export const Minesweeper_Proxy = ({ game, mobileBrowser }) => {
+import "../../main-styles/global.scss";
+import "./minesweeperStyles.scss";
+
+export const Minesweeper_Proxy = () => {
   const [isIPad, setIsIPad] = React.useState(false);
+  const [mobileBrowser, setMobileBrowser] = React.useState(false);
 
   React.useEffect(() => {
-    let cursor = document.getElementById('cursor');
-
-    if (mobileBrowser && cursor) {
-      cursor.remove();
-    }
-  }, [mobileBrowser]);
+    setMobileBrowser(!!mobileBrowserFunction());
+  }, []);
 
   React.useEffect(() => {
     if (navigator.userAgent.match(/iPad/i)) {
-      setIsIPad(true)
+      setIsIPad(true);
     }
-  }, [])
+  }, []);
 
   return (
-    <div className={mobileBrowser && !isIPad ? `minesweeper-proxy-root minesweeper-proxy-root--Mobile` : `minesweeper-proxy-root`} >
-      <div className={`container websiteMinesweeperAdjust`} id='minesweeper-root'>
-        {game ? <div>{game}</div> : <p className='loading-indicator'>Loading...</p>}
+    <div
+      className={
+        mobileBrowser && !isIPad
+          ? `minesweeper-proxy-root minesweeper-proxy-root--Mobile`
+          : `minesweeper-proxy-root`
+      }
+    >
+      <div
+        className={`container websiteMinesweeperAdjust`}
+        id="minesweeper-root"
+      >
+        <p className='loading-indicator'>Loading...</p>
       </div>
     </div>
   );
 };
-
-

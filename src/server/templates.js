@@ -1,6 +1,6 @@
 const { cFLink, DEV_ENV } = process.env;
 export default {
-  htmlStart: (data) => {
+  htmlStart: (data, minesweeperGame) => {
     let startingSection = `<!DOCTYPE HTML>
         <html style="background-color: #1f2124">
           <head>
@@ -46,7 +46,7 @@ export default {
       <div id="root">`;
 
       if (data.minesweeperGame) {
-        startingSection = startingSection.concat("<div><div id='minesweeper-root'><p>Loading...</p></div></div>")
+        startingSection = startingSection.concat(`<div><div id='minesweeper-root'>${minesweeperGame}</div></div>`)
       }
 
     return startingSection;
@@ -70,7 +70,7 @@ export default {
 
     const prodScriptArr = minesweeperIndicator ? `[
         '${cFLink}/main/build/public/appRouter-bundle.js',
-        '${cFLink}/mines/build/public/index.js',
+        '${cFLink}/mines/build/public/public-bundle.js',
         '${cFLink}/main/build/public/footer-bundle.js',
       ]` :
       `[

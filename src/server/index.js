@@ -118,8 +118,9 @@ app.get("*", async (req, res) => {
       portfolioJSON: portfolioJSON,
       footerJSON: footerJSON,
       resumeData: activeResume,
-      game: context.minesweeperGame,
-    })
+    },
+    context.minesweeperGame
+    )
   );
 
   appStream.pipe(res, { end: false });
@@ -129,8 +130,9 @@ app.get("*", async (req, res) => {
     footerStream.on("end", () => {
       if (context.minesweeperGame) {
         res.write(htmlEnd(true));
+      } else {
+        res.write(htmlEnd());
       }
-      res.write(htmlEnd());
 
       if (context.url) {
         res.writeHead(301, { Location: context.url });

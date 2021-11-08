@@ -11,7 +11,6 @@ export const requestRecommendations = async () => {
     },
   };
 
-  console.log(config)
   try {
     const { data: response } = await axios(config);
     return response.recommendations;
