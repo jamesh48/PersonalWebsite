@@ -1,3 +1,4 @@
+const {cFLink} = process.env;
 import express from "express";
 import axios from "axios";
 import path from "path";
@@ -67,7 +68,6 @@ app.post("/api/sendEmail", (req, res) => {
 });
 
 app.get("/api/recommendations", async (req, res) => {
-  console.log(requestRecommendations);
   try {
     const recommendations = await requestRecommendations();
     res.json(recommendations);
@@ -90,11 +90,10 @@ app.get("*", async (req, res) => {
     console.log("requesting minesweeper...");
     try {
       const { data } = await axios(
-        `https://beatminesweeper.app/static/index.js`
+        `${cFLink}/mines/build/public/public-bundle.js`
       );
       context.minesweeperGame = data;
     } catch (err) {
-      console.log(err.message);
       // context.minesweeperGame = err.message
     }
   }

@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Fixed removal of cursor in mobile view'
+          message: 'Deploying with a link to a minified/production minesweeper game- loads faster'
         }
       }
     },

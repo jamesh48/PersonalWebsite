@@ -60,7 +60,7 @@ export default {
     const devScriptArr = minesweeperIndicator
       ? `[
         '/static/appRouter.js',
-        '${cFLink}/mines/build/public/index.js',
+        '${cFLink}/mines/build/public/public-bundle.js',
         '/static/footer.js'
       ]`
       : `[
