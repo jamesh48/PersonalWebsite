@@ -6,8 +6,9 @@ const { getResume, patchResume, patchActiveResume, postResume } = utils;
 import AdminResume from './AdminView/AdminResumeView.js';
 import PublicResume from './PublicView/PublicResumeView.js';
 import './resume.scss';
+import './mobile-resume.scss';
 
-export default (props) => {
+const Resume = (props) => {
   const [{ admin }] = useGlobalContext();
   const [resume, setResume] = useState([]);
   const [resumeNames, setResumeNames] = useState([]);
@@ -63,3 +64,5 @@ export default (props) => {
     />
   ) : null
 };
+
+export default Resume;

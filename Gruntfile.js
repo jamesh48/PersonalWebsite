@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Cleaning up mobile view UX pt4'
+          message: 'Cleaning up mobile view UX pt5'
         }
       }
     },

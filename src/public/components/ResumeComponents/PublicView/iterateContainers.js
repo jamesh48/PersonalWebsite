@@ -267,7 +267,7 @@ const iterateDetails = (props, ind) => {
 const iterateHighlights = (highlights) => {
   return highlights.reduce((resultHighlights, highlight) => {
     return resultHighlights.concat(
-      <span className='minorItem'>{highlight?.title || ''}</span>
+      <span className='minor-item'>{highlight?.title || ''}</span>
     )
   }, [])
 
