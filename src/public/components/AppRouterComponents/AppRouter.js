@@ -70,11 +70,11 @@ const AppRouter = (props) => {
         />
         <Route
           path="/fullstack/minesweeper"
-          render={() => (
-            <Minesweeper_Proxy
-              mobileBrowser={mobileBrowser}
-            />
-          )}
+          // render={() => (
+          //   <Minesweeper_Proxy
+          //     mobileBrowser={mobileBrowser}
+          //   />
+          // )}
         />
         <Route
           path="/fullstack/contact"
