@@ -39,14 +39,9 @@ export default {
           </script>
 
 
-      <body><div id='root'></div><div id='minesweeper-root'></div></body>`;
+      <body><div id='root'></div><div class='minesweeper-proxy-root'><div id='minesweeper-root' class='container websiteMinesweeperAdjust'><p class='loading-indicator'>Loading...</p></div></div></body>`;
     return startingSection;
   },
-  // htmlMid: () => {
-  //   return `
-  //   </body>
-  // <footer id='footerroot'>`;
-  // },
 
   htmlEnd: (minesweeperIndicator) => {
     const devScriptArr = minesweeperIndicator
