@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'It doesnt appear I can have the loading indicator for the time being'
+          message: 'still trying to get minesweeper proxy to work'
         }
       }
     },

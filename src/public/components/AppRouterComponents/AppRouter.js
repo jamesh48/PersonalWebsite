@@ -6,9 +6,7 @@ import Contact from "../ContactComponents/Contact.js";
 import { Minesweeper_Proxy } from "../MinesweeperComponents/Minesweeper_Proxy.js";
 import { Home } from "../HomeComponents/Home.js";
 import { HomeStoreProvider } from "HomeStore";
-import AppUtils from "./AppUtils.js";
-import {useEffectOnlyOnUpdate} from 'GlobalUtils';
-const { handleMouseMove, mobileBrowserFunction } = AppUtils;
+import { handleMouseMove, mobileBrowserFunction, useEffectOnlyOnUpdate } from "GlobalUtils";
 
 import "../../main-styles/cursor.css";
 import "../../main-styles/reset.scss";
@@ -20,7 +18,7 @@ const AppRouter = (props) => {
   const [admin] = useState(false);
 
   // Set Mobile Browser
-  useEffect(() => {
+  React.useEffect(() => {
     const mobileBrowserTest = mobileBrowserFunction();
     globalDispatch({
       type: "TOGGLE MOBILE BROWSER",
@@ -73,7 +71,9 @@ const AppRouter = (props) => {
         <Route
           path="/fullstack/minesweeper"
           render={() => (
-            <Minesweeper_Proxy game={props.game} mobileBrowser={mobileBrowser} />
+            <Minesweeper_Proxy
+              mobileBrowser={mobileBrowser}
+            />
           )}
         />
         <Route

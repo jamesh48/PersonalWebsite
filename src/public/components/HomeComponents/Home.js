@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React from "react";
 import "./home.scss";
 import "../../main-styles/global.scss";
 
@@ -12,8 +12,7 @@ import { AdminFormStoreProvider } from "AdminFormStore";
 import FloatingButtons from "./Home_Components/FloatingButtons.js";
 import { Portfolio } from "../PortfolioComponents/PublicView/Portfolio.js";
 import AdminPortfolio from "../PortfolioComponents/AdminView/AdminPortfolio.js";
-import Utils from "../AppRouterComponents/AppUtils.js";
-const { debounce } = Utils;
+import { debounce } from "GlobalUtils";
 import Resume from "../ResumeComponents/Resume.js";
 
 export const Home = (props) => {
@@ -21,15 +20,15 @@ export const Home = (props) => {
     useGlobalContext();
   const [{ floatingButtonsPlacement }, homeDispatch] = useHomeContext();
 
-  const [dimensions, setDimensions] = useState({
+  const [dimensions, setDimensions] = React.useState({
     height: null,
     width: null,
   });
 
-  const [smileLoaded, setSmileLoaded] = useState(false);
+  const [smileLoaded, setSmileLoaded] = React.useState(false);
 
   // Initial Page Render
-  useEffect(() => {
+  React.useEffect(() => {
     // Initial Page Render is correct and doesn't wait for a resize to adjust.
     if (mobileBrowser === null) {
       if (window.innerWidth >= 1150) {
@@ -41,7 +40,7 @@ export const Home = (props) => {
   }, []);
 
   // Debounce
-  useEffect(() => {
+  React.useEffect(() => {
     const debouncedHandleResize = debounce(() => {
       setDimensions({
         height: window.innerHeight,
@@ -56,29 +55,29 @@ export const Home = (props) => {
     };
   }, []);
 
-  useEffect(() => {
-    const initPortraitTest = window.matchMedia('(orientation: portrait)');
+  React.useEffect(() => {
+    const initPortraitTest = window.matchMedia("(orientation: portrait)");
     if (initPortraitTest.matches) {
-      globalDispatch({type: 'SET PORTRAIT'})
+      globalDispatch({ type: "SET PORTRAIT" });
     } else {
-      globalDispatch({type: 'UNSET PORTRAIT'})
+      globalDispatch({ type: "UNSET PORTRAIT" });
     }
   }, []);
 
-  useEffect(() => {
-    const mediaQueryList = window.matchMedia('(orientation: portrait)');
-    mediaQueryList.addEventListener('change', (event) => {
+  React.useEffect(() => {
+    const mediaQueryList = window.matchMedia("(orientation: portrait)");
+    mediaQueryList.addEventListener("change", (event) => {
       const portraitMode = event.matches;
       if (portraitMode) {
-        globalDispatch({type: 'SET PORTRAIT'});
+        globalDispatch({ type: "SET PORTRAIT" });
       } else {
-        globalDispatch({type: 'UNSET PORTRAIT'});
+        globalDispatch({ type: "UNSET PORTRAIT" });
       }
-    })
-  }, [])
+    });
+  }, []);
 
   // Window Resize
-  useEffect(() => {
+  React.useEffect(() => {
     if (dimensions.width) {
       if (window.innerWidth >= 1150) {
         globalDispatch({ type: "TOGGLE SMALL WINDOW", payload: false });
@@ -90,7 +89,7 @@ export const Home = (props) => {
 
   // This useEffect moves the floatingButtons depending on what element is in view.
   // Set Marquee Buttons
-  useEffect(() => {
+  React.useEffect(() => {
     var observer = new IntersectionObserver(
       function (entries) {
         entries.forEach((entry) => {
@@ -114,13 +113,20 @@ export const Home = (props) => {
     };
   }, []);
 
-  const smileCallback = useCallback(() => {
+  const smileCallback = React.useCallback(() => {
     setSmileLoaded(true);
   });
 
   return (
     <div className={mobileBrowser ? "homeContainer--Mobile" : "homeContainer"}>
-      <div className={smallWindow ? `about-me-root about-me-root--Small container` : `about-me-root container`} data-name="About Me">
+      <div
+        className={
+          smallWindow
+            ? `about-me-root about-me-root--Small container`
+            : `about-me-root container`
+        }
+        data-name="About Me"
+      >
         <MarqueeStoreProvider>
           <MarqueeContainer smileCallback={smileCallback} />
         </MarqueeStoreProvider>

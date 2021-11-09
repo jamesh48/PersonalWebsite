@@ -39,26 +39,14 @@ export default {
           </script>
 
 
-      <body>
-
-
-
-      <div id="root">`;
-
+      <body><div id='root'></div><div id='minesweeper-root'></div></body>`;
     return startingSection;
   },
-  htmlMid: (game) => {
-    if (game) {
-      return `</div>
-        <div id='minesweeper-root'></div>
-      </body>
-    <footer id='footerroot'>`;
-    }
-
-    return `</div>
-    </body>
-  <footer id='footerroot'>`;
-  },
+  // htmlMid: () => {
+  //   return `
+  //   </body>
+  // <footer id='footerroot'>`;
+  // },
 
   htmlEnd: (minesweeperIndicator) => {
     const devScriptArr = minesweeperIndicator
@@ -75,15 +63,15 @@ export default {
     const prodScriptArr = minesweeperIndicator
       ? `[
         '${cFLink}/main/build/public/appRouter-bundle.js',
-        '${cFLink}/mines/build/public/public-bundle.js',
         '${cFLink}/main/build/public/footer-bundle.js',
+        '${cFLink}/mines/build/public/public-bundle.js'
       ]`
       : `[
         '${cFLink}/main/build/public/appRouter-bundle.js',
-        '${cFLink}/main/build/public/footer-bundle.js',
+        '${cFLink}/main/build/public/footer-bundle.js'
       ]`;
 
-    return `</footer>
+    return `<footer id='footerroot'></footer>
 
     <script>
 

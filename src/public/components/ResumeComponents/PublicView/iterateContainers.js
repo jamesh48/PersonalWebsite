@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import DetailContainer from './Containers/DetailContainer.js';
 import PublicDisplayContainer from './PublicDisplayContainer.js';
 import hFCN from './handleFadingClassNames.js';
-// import { useEffectOnlyOnUpdate } from '../../PortfolioComponents/PublicView/publicViewPortfolioUtils.js';
 import { useEffectOnlyOnUpdate } from 'GlobalUtils';
 import { useResumeContext } from 'ResumeStore';
 

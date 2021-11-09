@@ -1,17 +1,10 @@
 import React from "react";
-import AppUtils from "../AppRouterComponents/AppUtils";
-const { mobileBrowserFunction } = AppUtils;
 
 import "../../main-styles/global.scss";
 import "./minesweeperStyles.scss";
 
-export const Minesweeper_Proxy = ({ game }) => {
+export const Minesweeper_Proxy = ({mobileBrowser}) => {
   const [isIPad, setIsIPad] = React.useState(false);
-  const [mobileBrowser, setMobileBrowser] = React.useState(false);
-
-  React.useEffect(() => {
-    setMobileBrowser(!!mobileBrowserFunction());
-  }, []);
 
   React.useEffect(() => {
     if (navigator.userAgent.match(/iPad/i)) {
@@ -27,11 +20,8 @@ export const Minesweeper_Proxy = ({ game }) => {
           : `minesweeper-proxy-root`
       }
     >
-      <div
-        className={`container websiteMinesweeperAdjust`}
-        id="minesweeper-root"
-      >
-        {game}
+      <div className="container websiteMinesweeperAdjust" id='minesweeper-root'>
+        <p className="loading-indicator">Loading...</p>
       </div>
     </div>
   );

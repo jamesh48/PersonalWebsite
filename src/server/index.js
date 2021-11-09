@@ -1,4 +1,4 @@
-const {cFLink} = process.env;
+const { cFLink } = process.env;
 import express from "express";
 import axios from "axios";
 import path from "path";
@@ -91,6 +91,7 @@ app.get("*", async (req, res) => {
     try {
       const { data } = await axios(
         `${cFLink}/mines/build/public/public-bundle.js`
+        // `https://www.beatminesweeper.app`
       );
       context.minesweeperGame = data;
     } catch (err) {
@@ -114,22 +115,25 @@ app.get("*", async (req, res) => {
   );
 
   res.write(
-    htmlStart({
-      portfolioJSON: portfolioJSON,
-      footerJSON: footerJSON,
-      resumeData: activeResume,
-      minesweeperGame: context.minesweeperGame
-    },
+    htmlStart(
+      {
+        portfolioJSON: portfolioJSON,
+        footerJSON: footerJSON,
+        resumeData: activeResume,
+        minesweeperGame: context.minesweeperGame,
+      }
     )
   );
 
-  appStream.pipe(res, { end: false });
-  appStream.on("end", () => {
-    res.write(htmlMid(context.minesweeperGame));
+  const minesweeperIndicator = !!(req.url.indexOf("minesweeper") > -1);
+
+  // appStream.pipe(res, { end: false });
+  // appStream.on("end", () => {
+    // res.write(htmlMid(context.minesweeperGame));
     footerStream.pipe(res, { end: false });
     footerStream.on("end", () => {
-      if (context.minesweeperGame) {
-        res.write(htmlEnd(true));
+      if (minesweeperIndicator) {
+        res.write(htmlEnd(minesweeperIndicator));
       } else {
         res.write(htmlEnd());
       }
@@ -142,7 +146,7 @@ app.get("*", async (req, res) => {
       }
     });
   });
-});
+// });
 
 const port = 3000;
 

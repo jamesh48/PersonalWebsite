@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { FooterItemContainer } from "./FooterItemContainer.js";
-import AppUtils from "../AppRouterComponents/AppUtils.js";
+import { mobileBrowserFunction } from "GlobalUtils";
 import { useGlobalContext } from "GlobalStore";
-const { mobileBrowserFunction } = AppUtils;
 import "./footerStyles.scss";
 
 export default function Footer({ footerJSON }) {
-  const [images, setImages] = useState([{ url: "", loaded: false, link: "" }]);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [images, setImages] = React.useState([
+    { url: "", loaded: false, link: "" },
+  ]);
+  const [isLoaded, setIsLoaded] = React.useState(false);
   const [{ mobileBrowser }, globalDispatch] = useGlobalContext();
 
   //Set Mobile Browser
-  useEffect(() => {
+  React.useEffect(() => {
     const mobileBrowserTest = mobileBrowserFunction();
     globalDispatch({
       type: "TOGGLE MOBILE BROWSER",
@@ -26,13 +27,13 @@ export default function Footer({ footerJSON }) {
     });
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (images.every((image) => image.loaded)) {
       setIsLoaded(true);
     }
   }, [images]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     setImages(
       footerJSON.map(({ imageUrl, iconLink }, loadedIndex) => {
         let img = new Image();
@@ -47,8 +48,6 @@ export default function Footer({ footerJSON }) {
       })
     );
   }, []);
-
-  useEffect(() => {}, []);
 
   return isLoaded ? (
     <div

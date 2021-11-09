@@ -30,7 +30,7 @@ const js = {
 };
 
 const serverConfig = {
-  mode: "development",
+  mode: "production",
   target: "node",
   plugins: [new MiniCssExtractPlugin(),
   new webpack.DefinePlugin({
@@ -73,14 +73,14 @@ const serverConfig = {
       PortfolioStore: path.resolve(__dirname, 'src/public/components/PortfolioComponents/PortfolioStore/portfolioStore.js'),
       NestedPortfolioStore: path.resolve(__dirname, 'src/public/components/PortfolioComponents/NestedPortfolioStore/nestedPortfolioStore.js'),
       AdminFormStore: path.resolve(__dirname, 'src/public/components/AdminForm/AdminFormStore/adminFormStore.js'),
-      GlobalUtils: path.resolve(__dirname, 'globalUtils.js'),
+      GlobalUtils: path.resolve(__dirname, 'src/public/globalUtils.js'),
 
     },
   }
 };
 
 const clientConfig = {
-  mode: "development",
+  mode: "production",
   devtool: "eval-source-map",
   // Req by webpack 5/ala dotenv-environment variables
   resolve: {
@@ -97,7 +97,7 @@ const clientConfig = {
       ResumeStore: path.resolve(__dirname, 'src/public/components/ResumeComponents/ResumeStore/resumeStore.js'),
       PortfolioStore: path.resolve(__dirname, 'src/public/components/PortfolioComponents/PortfolioStore/portfolioStore.js'),
       NestedPortfolioStore: path.resolve(__dirname, 'src/public/components/PortfolioComponents/NestedPortfolioStore/nestedPortfolioStore.js'),
-      GlobalUtils: path.resolve(__dirname, 'globalUtils.js'),
+      GlobalUtils: path.resolve(__dirname, 'src/public/globalUtils.js')
     }
   },
   target: "web",
@@ -109,8 +109,7 @@ const clientConfig = {
   ],
   entry: {
     "appRouter": path.resolve(__dirname, "src/public/AppRouterRoot.js"),
-    "footer": path.resolve(__dirname, "src/public/FooterRoot.js"),
-    "minesweeper": path.resolve(__dirname, "src/public//MinesweeperRoot.js")
+    "footer": path.resolve(__dirname, "src/public/FooterRoot.js")
   },
   module: {
     rules: [js, css],
