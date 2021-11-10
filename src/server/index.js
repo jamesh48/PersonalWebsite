@@ -86,13 +86,13 @@ app.get("*", async (req, res) => {
   }
 
   // const portfolioJSON = req.url === '/' ? await getAllPortfolioItems() : null;
-  // const appStream = ReactDOMServer.renderToNodeStream(
-  //   <GlobalStoreProvider>
-  //     <Router location={req.url} context={context}>
-  //       <AppRouter />
-  //     </Router>
-  //   </GlobalStoreProvider>
-  // );
+  const appStream = ReactDOMServer.renderToNodeStream(
+    <GlobalStoreProvider>
+      <Router location={req.url} context={context}>
+        <AppRouter />
+      </Router>
+    </GlobalStoreProvider>
+  );
 
   const footerStream = ReactDOMServer.renderToNodeStream(
     <GlobalStoreProvider>
@@ -113,26 +113,25 @@ app.get("*", async (req, res) => {
     )
   );
 
+  appStream.pipe(res, { end: false });
+  appStream.on("end", () => {
+    footerStream.pipe(res, { end: false });
+    footerStream.on("end", () => {
+      if (minesweeperIndicator) {
+        res.write(htmlEnd(minesweeperIndicator));
+      } else {
+        res.write(htmlEnd());
+      }
 
-  // appStream.pipe(res, { end: false });
-  // appStream.on("end", () => {
-  footerStream.pipe(res, { end: false });
-  footerStream.on("end", () => {
-    if (minesweeperIndicator) {
-      res.write(htmlEnd(minesweeperIndicator));
-    } else {
-      res.write(htmlEnd());
-    }
-
-    if (context.url) {
-      res.writeHead(301, { Location: context.url });
-      res.end();
-    } else {
-      res.end();
-    }
+      if (context.url) {
+        res.writeHead(301, { Location: context.url });
+        res.end();
+      } else {
+        res.end();
+      }
+    });
   });
 });
-// });
 
 const port = 3000;
 

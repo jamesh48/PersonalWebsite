@@ -9,6 +9,11 @@ import "./ContactStyles/contact-mobile-portrait.scss";
 import "./ContactStyles/contact-mobile-landscape.scss";
 
 export default ({ mobileBrowser }) => {
+
+  React.useEffect(() => {
+    document.getElementById('minesweeper-proxy-root')?.remove()
+  }, [])
+
   const [formValues, setFormValues] = React.useState({
     fullName: "",
     phoneNumber: "",

@@ -1,6 +1,6 @@
 const { cFLink, DEV_ENV } = process.env;
 export default {
-  htmlStart: (data, minesweeper) => {
+  htmlStart: (data) => {
     let startingSection = `<!DOCTYPE HTML>
         <html style="background-color: #1f2124">
           <head>
@@ -39,7 +39,7 @@ export default {
           </script>
 
 
-      <body><div id='root'></div>${minesweeper && "<div class='minesweeper-proxy-root'><div id='minesweeper-root' class='container websiteMinesweeperAdjust'><p class='loading-indicator'>Loading...</p></div></div>" || ""}</body>`;
+      <body><div id='root'>`;
     return startingSection;
   },
 
@@ -66,7 +66,7 @@ export default {
         '${cFLink}/main/build/public/footer-bundle.js'
       ]`;
 
-    return `<footer id='footerroot'></footer>
+    return `</div>${minesweeperIndicator && "<div class='minesweeper-proxy-root' id='minesweeper-proxy-root'><div id='minesweeper-root' class='container websiteMinesweeperAdjust'><p class='loading-indicator'>Loading...</p></div></div>" || ""}</body><footer id='footerroot'></footer>
 
     <script>
 
