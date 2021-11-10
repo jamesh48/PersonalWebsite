@@ -85,28 +85,14 @@ app.get("*", async (req, res) => {
     context.activeResume = await getResume();
   }
 
-  // Minesweeper
-  if (req.url.indexOf("minesweeper") > -1) {
-    console.log("requesting minesweeper...");
-    try {
-      const { data } = await axios(
-        `${cFLink}/mines/build/public/public-bundle.js`
-        // `https://www.beatminesweeper.app`
-      );
-      context.minesweeperGame = data;
-    } catch (err) {
-      // context.minesweeperGame = err.message
-    }
-  }
-
   // const portfolioJSON = req.url === '/' ? await getAllPortfolioItems() : null;
-  const appStream = ReactDOMServer.renderToNodeStream(
-    <GlobalStoreProvider>
-      <Router location={req.url} context={context}>
-        <AppRouter />
-      </Router>
-    </GlobalStoreProvider>
-  );
+  // const appStream = ReactDOMServer.renderToNodeStream(
+  //   <GlobalStoreProvider>
+  //     <Router location={req.url} context={context}>
+  //       <AppRouter />
+  //     </Router>
+  //   </GlobalStoreProvider>
+  // );
 
   const footerStream = ReactDOMServer.renderToNodeStream(
     <GlobalStoreProvider>
@@ -114,38 +100,38 @@ app.get("*", async (req, res) => {
     </GlobalStoreProvider>
   );
 
+  const minesweeperIndicator = !!(req.url.indexOf("minesweeper") > -1);
+
   res.write(
     htmlStart(
       {
         portfolioJSON: portfolioJSON,
         footerJSON: footerJSON,
         resumeData: activeResume,
-        minesweeperGame: context.minesweeperGame,
-      }
+      },
+      minesweeperIndicator
     )
   );
 
-  const minesweeperIndicator = !!(req.url.indexOf("minesweeper") > -1);
 
   // appStream.pipe(res, { end: false });
   // appStream.on("end", () => {
-    // res.write(htmlMid(context.minesweeperGame));
-    footerStream.pipe(res, { end: false });
-    footerStream.on("end", () => {
-      if (minesweeperIndicator) {
-        res.write(htmlEnd(minesweeperIndicator));
-      } else {
-        res.write(htmlEnd());
-      }
+  footerStream.pipe(res, { end: false });
+  footerStream.on("end", () => {
+    if (minesweeperIndicator) {
+      res.write(htmlEnd(minesweeperIndicator));
+    } else {
+      res.write(htmlEnd());
+    }
 
-      if (context.url) {
-        res.writeHead(301, { Location: context.url });
-        res.end();
-      } else {
-        res.end();
-      }
-    });
+    if (context.url) {
+      res.writeHead(301, { Location: context.url });
+      res.end();
+    } else {
+      res.end();
+    }
   });
+});
 // });
 
 const port = 3000;

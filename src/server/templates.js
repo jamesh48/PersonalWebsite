@@ -1,6 +1,6 @@
 const { cFLink, DEV_ENV } = process.env;
 export default {
-  htmlStart: (data) => {
+  htmlStart: (data, minesweeper) => {
     let startingSection = `<!DOCTYPE HTML>
         <html style="background-color: #1f2124">
           <head>
@@ -39,7 +39,7 @@ export default {
           </script>
 
 
-      <body><div id='root'></div><div class='minesweeper-proxy-root'><div id='minesweeper-root' class='container websiteMinesweeperAdjust'><p class='loading-indicator'>Loading...</p></div></div></body>`;
+      <body><div id='root'></div>${minesweeper && "<div class='minesweeper-proxy-root'><div id='minesweeper-root' class='container websiteMinesweeperAdjust'><p class='loading-indicator'>Loading...</p></div></div>" || ""}</body>`;
     return startingSection;
   },
 
