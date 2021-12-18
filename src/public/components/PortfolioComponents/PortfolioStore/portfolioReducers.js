@@ -7,8 +7,17 @@ const combineReducers = (slices) => (state, action) =>
     state
   );
 
+const outerContainerDataTest = (existingState, update) => {
+  existingState = existingState.concat([update])
+  return existingState;
+}
+
+// state = []
+// state = [   [   portraitData, [{}, {}, {}, {}]]   ], [portraitData, [{}, {}]]   ]
 const outerContainerData = (state = [], action) => {
   switch (action.type) {
+    case "FORMAT OUTER CONTAINER DATA TEST":
+      return outerContainerDataTest(state.slice(0), action.payload);
     case "FORMAT OUTER CONTAINER DATA":
       return action.payload;
     default:
@@ -16,13 +25,18 @@ const outerContainerData = (state = [], action) => {
   }
 };
 
+const portfolioImagesDataTest = (existingState, update) => {
+  let newImageArr = existingState.imageArr.concat([update]);
+  return {allLoaded: true, imageArr: newImageArr};
+}
+
 const portfolioImages = (
-  state = { allLoaded: false, imageArr: [] },
+  state = { allLoaded: false, imageArr: []},
   { type, payload }
 ) => {
   switch (type) {
     case "ALL PORTFOLIO IMAGES LOADED":
-      return payload;
+      return portfolioImagesDataTest(Object.assign({}, state), payload.imageArr);
     default:
       return state;
   }

@@ -26,7 +26,7 @@ const handleContainerData = (
 
   if (indicator === "outer") {
     return dispatch({
-      type: "FORMAT OUTER CONTAINER DATA",
+      type: "FORMAT OUTER CONTAINER DATA TEST",
       payload: [portraitContainerData, landscapeContainerData],
     });
   }

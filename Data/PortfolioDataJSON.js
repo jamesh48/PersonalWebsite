@@ -2,7 +2,21 @@ const { cFLink } = process.env;
 
 export default [
   {
-    "title": "Mini Games",
+    "title": "fullstackhrivnak.com",
+    "cssStyles": {
+      "backgroundColor": "ivory",
+      "color": "black"
+    },
+    "imgUrl": `${cFLink}/main/main-images/GES.jpg`,
+    "github": [
+      {
+        "title": "Github",
+        "link": "https://github.com/jamesh48/PersonalWebsite"
+      }
+    ]
+  },
+  {
+    "title": "Beatminesweeper.app",
     "imgUrl": `${cFLink}/main/main-images/beatminesweeperss.png`,
     "cssStyles": {
       "backgroundColor": "black",
@@ -10,39 +24,30 @@ export default [
     },
     "github": [
       {
-        "title": "beatminesweeper.app",
+        "title": "Deployed Website",
+        "link": "https://www.beatminesweeper.app"
+      },
+      {
+        "title": "Github",
         "link": "https://github.com/jamesh48/Mini-Games/tree/master/beatminesweeper"
-      },
-      {
-        "title": "bowling",
-        "link": "https://github.com/jamesh48/Mini-Games/tree/master/bowling",
-      },
-      {
-        "title": "connect 4",
-        "link": "https://github.com/jamesh48/Mini-Games/tree/master/connect-4"
-      },
-      {
-        "title": "tic-tac-toe",
-        "link": "https://github.com/jamesh48/Mini-Games/tree/master/tic-tac-toe"
       }
-
     ]
   },
   {
-    "title": "Fjakeraven.com",
-    "imgUrl": `${cFLink}/main/main-images/fec.jpg`,
+    "title": "Strava Results Generator",
     "cssStyles": {
       "backgroundColor": "ivory",
       "color": "black"
     },
+    "imgUrl": `${cFLink}/main/main-images/Strava_Results_Generator.jpg`,
     "github": [
       {
-        "title": "Fjakeraven Proxy Server",
-        "link": "https://github.com/rpt26-fec-tianwen/james-proxy-server"
+        "title": "Deployed Website",
+        "link": "https://www.stravareportgenerator.app"
       },
       {
-        "title": "Product Details Service",
-        "link": "https://github.com/rpt26-fec-tianwen/james-service-1"
+        "title": "Github",
+        "link": "https://github.com/jamesh48/Strava-Report-Generator"
       }
     ]
   },
@@ -73,16 +78,20 @@ export default [
     ]
   },
   {
-    "title": "Strava Results Generator",
+    "title": "Fjakeraven.com",
+    "imgUrl": `${cFLink}/main/main-images/fec.jpg`,
     "cssStyles": {
       "backgroundColor": "ivory",
       "color": "black"
     },
-    "imgUrl": `${cFLink}/main/main-images/Strava_Results_Generator.jpg`,
     "github": [
       {
-        "title": "main github",
-        "link": "https://github.com/jamesh48/Strava-Report-Generator"
+        "title": "Fjakeraven Proxy Server",
+        "link": "https://github.com/rpt26-fec-tianwen/james-proxy-server"
+      },
+      {
+        "title": "Product Details Service",
+        "link": "https://github.com/rpt26-fec-tianwen/james-service-1"
       }
     ]
   },
@@ -95,22 +104,8 @@ export default [
     "imgUrl": `${cFLink}/main/main-images/indeedautomation.png`,
     "github": [
       {
-        "title": "main github",
+        "title": "Github",
         "link": "https://github.com/jamesh48/job-application-express"
-      }
-    ]
-  },
-  {
-    "title": "fullstackhrivnak.com",
-    "cssStyles": {
-      "backgroundColor": "ivory",
-      "color": "black"
-    },
-    "imgUrl": `${cFLink}/main/main-images/GES.jpg`,
-    "github": [
-      {
-        "title": "This website! (main github)",
-        "link": "https://github.com/jamesh48/PersonalWebsite"
       }
     ]
   }

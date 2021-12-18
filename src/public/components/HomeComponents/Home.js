@@ -10,7 +10,8 @@ import { PortfolioStoreProvider } from "PortfolioStore";
 import AdminForm from "../AdminForm/AdminForm.js";
 import { AdminFormStoreProvider } from "AdminFormStore";
 import FloatingButtons from "./Home_Components/FloatingButtons.js";
-import { Portfolio } from "../PortfolioComponents/PublicView/Portfolio.js";
+// import Portfolio  from "../PortfolioComponents/PublicView/Portfolio.js";
+import PortfolioCarousel from '../PortfolioComponents/PublicView/ProfileCarousel/Carousel';
 import AdminPortfolio from "../PortfolioComponents/AdminView/AdminPortfolio.js";
 import { debounce } from "GlobalUtils";
 import Resume from "../ResumeComponents/Resume.js";
@@ -156,7 +157,8 @@ export const Home = (props) => {
       <div data-name="Portfolio" className="container" id="portfolio-root">
         {!admin ? (
           <PortfolioStoreProvider>
-            <Portfolio portfolioJSON={props.portfolioJSON} />
+            <PortfolioCarousel portfolioJSON={props.portfolioJSON}/>
+            {/* <Portfolio portfolioJSON={props.portfolioJSON} /> */}
 
             {floatingButtonsPlacement === "portfolio-root" &&
             mobileBrowser === false ? (

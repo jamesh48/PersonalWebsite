@@ -1,5 +1,5 @@
 // https://stackoverflow.com/questions/59200785/react-usereducer-how-to-combine-multiple-reducers
-import React, { useReducer } from 'react';
+import React from 'react';
 import CombinedReducers from './portfolioReducers.js';
 
 const PortfolioStoreContext = React.createContext();

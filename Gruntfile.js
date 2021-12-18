@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'cleaning up minesweeper proxy pt3'
+          message: 'Small Improvements, notably to the porfolio section now has a slider.'
         }
       }
     },

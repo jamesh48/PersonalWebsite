@@ -62,8 +62,6 @@
     "grunt-contrib-cssmin": "^4.0.0",
     "grunt-contrib-uglify": "^5.0.1",
     "grunt-git": "^1.1.1",
-    "grunt-pm2-deploy": "^0.2.0",
-    "grunt-uncss": "^0.10.1",
     "grunt-webpack": "^4.0.3",
     "mini-css-extract-plugin": "^2.2.0",
     "node-sass": "^6.0.1",

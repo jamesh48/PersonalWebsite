@@ -3,9 +3,10 @@
   // scroll-snap-type: y mandatory;
 }
 
-#resume-root,
-#portfolio-root {
+#resume-root, #portfolio-root {
+  // Switching to height over min height to accomodate the carousel ?
   min-height: 90vh;
+  // height: 90vh;
 }
 
 .homeContainer {
@@ -42,7 +43,7 @@
 }
 
 .container {
-  scroll-snap-align: center none;
+  // scroll-snap-align: center none;
 
   width: 100%;
   margin: 0 auto;

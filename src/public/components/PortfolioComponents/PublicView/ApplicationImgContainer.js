@@ -45,8 +45,7 @@ const ApplicationImgContainer = ({ rowIndex, columnIndex, appData }) => {
     );
   }, [smallWindow, mobileBrowser]);
 
-  let test = portrait ? nestedContainerData[0] : nestedContainerData[1];
-
+  let landScapeOrPortraitRenderData = portrait ? nestedContainerData[0] : nestedContainerData[1];
 
   return (
     <div
@@ -74,7 +73,7 @@ const ApplicationImgContainer = ({ rowIndex, columnIndex, appData }) => {
       }}
     >
       {nestedIndicator
-        ? test?.map((appRow, nestedRowIndex) => {
+        ? landScapeOrPortraitRenderData?.map((appRow, nestedRowIndex) => {
             return (
               <div className="nestedGithubRow" key={nestedRowIndex}>
                 {appRow.map((nestedGithub, nestedColumnIndex) => {
@@ -97,5 +96,6 @@ const ApplicationImgContainer = ({ rowIndex, columnIndex, appData }) => {
     </div>
   );
 };
+
 
 export default ApplicationImgContainer;

@@ -30,7 +30,7 @@ const js = {
 };
 
 const serverConfig = {
-  mode: "production",
+  mode: "development",
   target: "node",
   plugins: [new MiniCssExtractPlugin(),
   new webpack.DefinePlugin({
@@ -80,7 +80,7 @@ const serverConfig = {
 };
 
 const clientConfig = {
-  mode: "production",
+  mode: "development",
   devtool: "eval-source-map",
   // Req by webpack 5/ala dotenv-environment variables
   resolve: {
