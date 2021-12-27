@@ -5,9 +5,9 @@ html {
   overflow-y: scroll;
   background-color: #1f2124;
 
-  @media (min-width: 1250px) {
-    scroll-snap-type: y proximity;
-  }
+  // @media (min-width: 1250px) {
+  //   scroll-snap-type: y proximity;
+  // }
 
   body {
     // min-height: 100%;

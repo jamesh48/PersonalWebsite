@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     gitcommit: {
       task: {
         options: {
-          message: 'Small Improvements, notably to the porfolio section now has a slider.'
+          message: 'Footer Icon links now actually open the right page (bug fix)'
         }
       }
     },

@@ -1,10 +1,10 @@
 import React from 'react'
 
-export const FooterItemContainer = ({ iconData: { url, link } }) => {
+export const FooterItemContainer = ({ iconData: { url, iconLink } }) => {
   return (
     <span
       className='footerItemContainer'
-      onClick={() => { window.open(link) }}
+      onClick={() => { window.open(iconLink) }}
     >
       <div style={{ backgroundImage: `url(${url})` }}>
       </div>
