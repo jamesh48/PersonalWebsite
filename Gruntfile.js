@@ -1,32 +1,39 @@
-const path = require('path');
+const path = require("path");
 module.exports = function (grunt) {
-  require('time-grunt')(grunt);
+  require("time-grunt")(grunt);
 
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-    aws: grunt.file.readJSON('aws-keys.json'),
+    pkg: grunt.file.readJSON("package.json"),
+    aws: grunt.file.readJSON("aws-keys.json"),
     aws_s3: {
       options: {
-        accessKeyId: '<%= aws.AWSAccessKeyId %>',
-        secretAccessKey: '<%= aws.AWSSecretKey %>',
-        region: '<%= aws.region %>'
+        accessKeyId: "<%= aws.AWSAccessKeyId %>",
+        secretAccessKey: "<%= aws.AWSSecretKey %>",
+        region: "<%= aws.region %>",
       },
       dist: {
         options: {
-          bucket: '<%= aws.AWSBucketName %>'
+          bucket: "<%= aws.AWSBucketName %>",
         },
         files: [
           {
             expand: true,
-            cwd: 'dist/public/aws',
-            src: ['appRouter-bundle.js', 'appRouter.min.css', 'footer-bundle.js', 'footer.min.css', 'minesweeper-bundle.js', 'minesweeper.min.css'],
-            dest: 'main/build/public'
+            cwd: "dist/public/aws",
+            src: [
+              "appRouter-bundle.js",
+              "appRouter.min.css",
+              "footer-bundle.js",
+              "footer.min.css",
+              "minesweeper-bundle.js",
+              "minesweeper.min.css",
+            ],
+            dest: "main/build/public",
           },
           {
             expand: true,
-            cwd: 'dist/server/aws',
-            src: ['index.min.css', 'index-bundle.js'],
-            dest: 'main/build/server'
+            cwd: "dist/server/aws",
+            src: ["index.min.css", "index-bundle.js"],
+            dest: "main/build/server",
           },
           // {
           //   expand: true,
@@ -35,15 +42,15 @@ module.exports = function (grunt) {
           //   // src: ['ges-favicon.png']
           //   dest: 'main/main-images'
           // }
-        ]
-      }
+        ],
+      },
     },
     cloudfront_invalidate: {
       options: {
-        accessKeyId: '<%= aws.AWSAccessKeyId %>',
-        secretAccessKey: '<%= aws.AWSSecretKey %>',
-        distributionId: '<%= aws.AWSDistributionID %>',
-        path: '/*',
+        accessKeyId: "<%= aws.AWSAccessKeyId %>",
+        secretAccessKey: "<%= aws.AWSSecretKey %>",
+        distributionId: "<%= aws.AWSDistributionID %>",
+        path: "/*",
         // debug: true
       },
       your_target: {
@@ -51,86 +58,87 @@ module.exports = function (grunt) {
       },
     },
     webpack: {
-      myConfig: require('./webpack.config.js')
+      myConfig: require("./webpack.config.js"),
     },
     uglify: {
       my_target: {
         files: {
-          'dist/public/aws/appRouter-bundle.js': ['dist/public/appRouter.js'],
-          'dist/public/aws/footer-bundle.js': ['dist/public/footer.js'],
-          'dist/public/aws/minesweeper-bundle.js': ['dist/public/minesweeper.js'],
-          'dist/server/aws/index-bundle.js': ['dist/server/index.js']
-        }
-      }
+          "dist/public/aws/appRouter-bundle.js": ["dist/public/appRouter.js"],
+          "dist/public/aws/footer-bundle.js": ["dist/public/footer.js"],
+          "dist/public/aws/minesweeper-bundle.js": ["dist/public/minesweeper.js"],
+          "dist/server/aws/index-bundle.js": ["dist/server/index.js"],
+        },
+      },
     },
     cssmin: {
       options: {
         level: {
           1: {
-            specialComments: 0
-          }
-        }
+            specialComments: 0,
+          },
+        },
       },
       target: {
         files: [
           {
             expand: true,
-            cwd: 'dist/public',
-            src: ['*.css', '!*.min.css'],
-            dest: 'dist/public/aws',
-            ext: '.min.css'
-          }, {
+            cwd: "dist/public",
+            src: ["*.css", "!*.min.css"],
+            dest: "dist/public/aws",
+            ext: ".min.css",
+          },
+          {
             expand: true,
-            cwd: 'dist/server',
-            src: ['*.css', '!*.min.css'],
-            dest: 'dist/server/aws',
-            ext: '.min.css'
-          }
-        ]
-      }
+            cwd: "dist/server",
+            src: ["*.css", "!*.min.css"],
+            dest: "dist/server/aws",
+            ext: ".min.css",
+          },
+        ],
+      },
     },
     gitadd: {
       task: {
         options: {
-          all: true
-        }
-      }
+          all: true,
+        },
+      },
     },
     gitcommit: {
       task: {
         options: {
-          message: 'Footer Icon links now actually open the right page (bug fix)'
-        }
-      }
+          message: "Upgrade version and test deployment on new computer",
+        },
+      },
     },
     gitpush: { your_target: {} },
     pm2deploy: {
       options: {
-        ecosystemFile: path.resolve('src/server/ecosystem.config.js')
-      }
-    }
+        ecosystemFile: path.resolve("src/server/ecosystem.config.js"),
+      },
+    },
   });
 
-  grunt.loadNpmTasks('grunt-webpack');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-aws-s3');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-git');
-  grunt.loadNpmTasks('grunt-cloudfront-invalidate');
-  grunt.loadNpmTasks('grunt-pm2-deploy');
+  grunt.loadNpmTasks("grunt-webpack");
+  grunt.loadNpmTasks("grunt-contrib-uglify");
+  grunt.loadNpmTasks("grunt-aws-s3");
+  grunt.loadNpmTasks("grunt-contrib-cssmin");
+  grunt.loadNpmTasks("grunt-git");
+  grunt.loadNpmTasks("grunt-cloudfront-invalidate");
+  grunt.loadNpmTasks("grunt-pm2-deploy");
 
-  grunt.registerTask('test', 'pm2deploy:production');
-  grunt.registerTask('cf_invalidate', 'cloudfront_invalidate');
-  grunt.registerTask('bucketDeploy', 'aws_s3:dist');
-  grunt.registerTask('build', 'webpack');
-  grunt.loadNpmTasks('grunt-uncss');
+  grunt.registerTask("test", "pm2deploy:production");
+  grunt.registerTask("cf_invalidate", "cloudfront_invalidate");
+  grunt.registerTask("bucketDeploy", "aws_s3:dist");
+  grunt.registerTask("build", "webpack");
+  grunt.loadNpmTasks("grunt-uncss");
 
   // Deploy To AWS First
-  grunt.registerTask('deploy', ['build', 'uglify', 'cssmin', 'bucketDeploy', 'cf_invalidate']);
+  grunt.registerTask("deploy", ["build", "uglify", "cssmin", "bucketDeploy", "cf_invalidate"]);
   // Push to Github
-  grunt.registerTask('git', ['gitadd', 'gitcommit', 'gitpush']);
+  grunt.registerTask("git", ["gitadd", "gitcommit", "gitpush"]);
   // Nuclear Option
-  grunt.registerTask('deploy-all', ['deploy', 'git']);
+  grunt.registerTask("deploy-all", ["deploy", "git"]);
 };
 
 // https://github.com/uncss/grunt-uncss
